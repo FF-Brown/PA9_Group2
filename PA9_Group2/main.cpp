@@ -3,22 +3,15 @@ Authors: Derek Henderson, Koji Nastuhara, Nathan Brown, Sammy West
 Description: Epic tower defense game
 */
 
-#include <iostream>
-
+#include "PA9.h"
 
 
 int main()
 {
-	//asdflkjlaksd
-	//leCode
+	
 	std::cout << "Tower Defense!" << std::endl;
 
-
-	//test update
-	//yet another test update
-	//leTest
-
-	//leOtherTest
+	//last test i promise, then i'll delete this
 
 	return 0;
 }
