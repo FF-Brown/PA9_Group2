@@ -7,17 +7,23 @@ using namespace std;
 
 
 // May have to redo. Might need to be a collection of squares instead of a collection of lines
+// Also this is a crap function, not gonna leave it here. Just needed somewhere to stuff it
+// May make a grid class
 void createGrid(double width, double height, double cellSize) {
-    double windowWidth = 501;
-    double windowHeight = 501;
-    double cellWidth = 72;
+
+    double windowWidth = width;
+    double windowHeight = height;
+    double cellWidth = cellSize;
     int i = 0;
+    //Number of vertical/horizontal lines
     int verticals = windowWidth / cellWidth + 1;
     int horizontals = windowHeight / cellWidth + 1;
+    //Number of vertical/horizontal points
     int vertPoints = 2 * verticals;
     int horizPoints = 2 * horizontals;
+    //Shift slightly so 1st line is visible
     int offset = 1;
-    int midpoint = verticals * 2;
+    int midpoint = vertPoints; //Will be replaced
 
     sf::VertexArray grid(sf::Lines, vertPoints + horizPoints);
 
