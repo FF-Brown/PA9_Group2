@@ -4,14 +4,12 @@ Description: Epic tower defense game
 */
 
 #include "PA9.h"
-#include "Grid.h"
+#include "Board.h"
 
 
 int main()
 {
-    double windowWidth = 501;
-    double windowHeight = 501;
-    double cellSize = 50;
+    double windowWidth = 501, windowHeight = 501, cellSize = 50;
 	
 	std::cout << "Tower Defense!" << std::endl;
 
