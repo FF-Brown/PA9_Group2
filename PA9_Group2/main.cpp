@@ -8,17 +8,20 @@ Description: Epic tower defense game
 
 int main()
 {
+    double windowWidth = 501;
+    double windowHeight = 501;
 	
 	std::cout << "Tower Defense!" << std::endl;
 
-    //IF THIS PRINTS OUT A GREEN CIRCLE, SFML IS WORKING
-
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "SFML works!");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
+
+
     while (window.isOpen())
     {
+        //Close window
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -26,6 +29,7 @@ int main()
                 window.close();
         }
 
+        //Redraw 
         window.clear();
         window.draw(shape);
         window.display();
