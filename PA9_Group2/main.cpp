@@ -4,12 +4,14 @@ Description: Epic tower defense game
 */
 
 #include "PA9.h"
+#include "Grid.h"
 
 
 int main()
 {
     double windowWidth = 501;
     double windowHeight = 501;
+    double cellSize = 50;
 	
 	std::cout << "Tower Defense!" << std::endl;
 
@@ -17,7 +19,7 @@ int main()
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
-
+    sf::VertexArray grid = createGrid(windowWidth, windowHeight, cellSize);
 
     while (window.isOpen())
     {
@@ -32,6 +34,7 @@ int main()
         //Redraw 
         window.clear();
         window.draw(shape);
+        window.draw(grid);
         window.display();
     }
 

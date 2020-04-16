@@ -158,12 +158,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PA9.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="PA9.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tower.h" />
