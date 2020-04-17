@@ -1,56 +1,32 @@
-/*
-Authors: Derek Henderson, Koji Nastuhara, Nathan Brown, Sammy West
-Description: Epic tower defense game
-*/
+
+//Main File
 
 #include "PA9.h"
+using namespace std;
 
 
-int main()
+int main(void)
 {
-    bool exit;
+    MainMenuOption option;
     do
     {
-        exit = main_menu();
+        display_main_menu();
+        option = get_main_menu_option();
 
-        Game game;
-
-        game.run();
-
-        game.display_results();
-    } while (!exit);
-    
-    //close window
-
-
-    
-    //Example code
-    /*double windowWidth = 501;
-    double windowHeight = 501;
-	
-	std::cout << "Tower Defense!" << std::endl;
-
-    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-
-
-    while (window.isOpen())
-    {
-        //Close window
-        sf::Event event;
-        while (window.pollEvent(event))
+        switch (option)
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        case INSTRUCTIONS:
+            display_instructions();
+            break;
 
-        //Redraw 
-        window.clear();
-        window.draw(shape);
-        window.display();
-    }*/
+        case PLAY_GAME:
+            play_game();
+            break;
+
+        case EXIT:
+            break;
+        }
+    } while (option != EXIT);
 
 	return 0;
 }
