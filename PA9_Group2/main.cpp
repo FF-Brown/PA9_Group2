@@ -19,7 +19,7 @@ int main()
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
-    //Drawing grid
+    //Drawing grid 
     sf::RectangleShape* squareGrid = createGrid(gridWidth, gridHeight, cellSize);
     int numSquares = ((int)(gridWidth / cellSize) * (int)(gridHeight / cellSize));
 
