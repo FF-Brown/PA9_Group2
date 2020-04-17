@@ -5,7 +5,7 @@
 using namespace std;
 
 
-void display_main_menu(void)
+void display_main_menu(sf::RenderWindow& mainMenuWindow)
 {
     //Title
     //Menu choices
@@ -20,7 +20,7 @@ MainMenuOption get_main_menu_option(void)
 
 void display_instructions(void)
 {
-    
+    sf::RenderWindow instructionsWindow(...);
     //Adapt from Sammy's menu code
 
 }

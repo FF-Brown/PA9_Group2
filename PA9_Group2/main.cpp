@@ -7,10 +7,12 @@ using namespace std;
 
 int main(void)
 {
+    sf::RenderWindow mainMenuWindow(...);
+
     MainMenuOption option;
     do
     {
-        display_main_menu();
+        display_main_menu(mainMenuWindow);
         option = get_main_menu_option();
 
         switch (option)
@@ -28,5 +30,5 @@ int main(void)
         }
     } while (option != EXIT);
 
-	return 0;
+    return 0;
 }

@@ -14,6 +14,15 @@ private:
     int score = 0;
 
 public:
+    //Returns: true if the player is alive | false otherwise
+    bool is_alive(void)
+    {
+        if (health > 0)
+            return true;
+        else
+            return false;
+    }
+
     //Returns the player's health
     int get_health(void)
     {
