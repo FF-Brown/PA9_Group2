@@ -159,11 +159,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="main_menu.cpp" />
     <ClCompile Include="PA9.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="main_menu.h" />
     <ClInclude Include="PA9.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Tower.h" />

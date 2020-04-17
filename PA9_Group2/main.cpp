@@ -8,7 +8,24 @@ Description: Epic tower defense game
 
 int main()
 {
-    double windowWidth = 501;
+    bool exit;
+    do
+    {
+        exit = main_menu();
+
+        Game game;
+
+        game.run();
+
+        game.display_results();
+    } while (!exit);
+    
+    //close window
+
+
+    
+    //Example code
+    /*double windowWidth = 501;
     double windowHeight = 501;
 	
 	std::cout << "Tower Defense!" << std::endl;
@@ -33,7 +50,7 @@ int main()
         window.clear();
         window.draw(shape);
         window.display();
-    }
+    }*/
 
 	return 0;
 }
