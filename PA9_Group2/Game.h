@@ -25,7 +25,7 @@ private:
     GUI towerMenu;
     Player player;
 
-    sf::RenderWindow gameWindow(...);
+    sf::RenderWindow gameWindow(sf::VideoMode(500, 500), "Game Window");
 
     int currentRound = 1;
 

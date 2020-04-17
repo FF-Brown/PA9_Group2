@@ -14,6 +14,11 @@
 #include <string>
 
 
+//Main Window Dimensions
+#define MAIN_WINDOW_HEIGHT 500
+#define MAIN_WINDOW_WIDTH  500
+
+
 //Contains an option from the main menu
 enum MainMenuOption
 {

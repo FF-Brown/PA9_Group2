@@ -7,7 +7,7 @@ using namespace std;
 
 int main(void)
 {
-    sf::RenderWindow mainMenuWindow(...);
+    sf::RenderWindow mainMenuWindow(sf::VideoMode(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT), "Menu Window");
 
     MainMenuOption option;
     do

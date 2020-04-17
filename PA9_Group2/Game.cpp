@@ -45,12 +45,12 @@ void Game::run(void)
     
 }
 
-void user_input_handler(void)
+void Game::user_input_handler(void)
 {
 
 }
 
-void collision_handler(void)
+void Game::collision_handler(void)
 {
 
 }
