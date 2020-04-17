@@ -1,22 +1,34 @@
 
-#include "main_menu.h"
+//Main Menu source File
 
-bool main_menu(void)
-{
-    display_main_menu();
+#include "PA9.h"
+using namespace std;
 
-    //Get input
-
-    switch (option)
-    {
-    case INSTRUCTIONS: display_instructions();
-                       break;
-    case PLAY_GAME:    return false;
-    case EXIT:         return true;
-    }
-}
 
 void display_main_menu(void)
 {
+    //Title
+    //Menu choices
 
+}
+//Put Sammy's menu code here ^ v
+//*Change to mouse click input?
+MainMenuOption get_main_menu_option(void)
+{
+
+}
+
+void display_instructions(void)
+{
+    
+    //Adapt from Sammy's menu code
+
+}
+
+void play_game(void)
+{
+    Game game;
+
+    game.run();
+    game.display_results();
 }

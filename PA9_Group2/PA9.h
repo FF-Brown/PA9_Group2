@@ -1,13 +1,46 @@
 
+//Main Header File
+
 #pragma once
 
+//Included Project Files
 #include "main_menu.h"
 #include "Game.h"
 #include "Board.h"
 
-//misc. functions?? definitely game menu or menus
-#include <iostream>
+//Included SFML Libraries
 #include <SFML/Graphics.hpp>
+
+//Included Std Libraries
+#include <iostream>
 #include <string>
 
-using namespace std;
+
+//Contains an option from the main menu
+enum MainMenuOption
+{
+    INSTRUCTIONS,
+    PLAY_GAME,
+    EXIT
+};
+
+
+//Main Menu Functions
+
+//Displays the main menu
+void display_main_menu(void);
+
+//Gets the users selection from the main menu
+//Returns option
+MainMenuOption get_main_menu_option(void);
+
+//Displays the game instructions
+void display_instructions(void);
+
+//Runs the game
+void play_game(void);
+
+
+//Miscellaneous Functions
+
+

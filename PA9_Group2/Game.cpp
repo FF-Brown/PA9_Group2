@@ -1,12 +1,16 @@
 
+//Game Class Implementation File
+
 #include "Game.h"
+using namespace std;
+
 
 Game::Game(void)
 {
 
 }
 
-Game::run(void)
+void Game::run(void)
 {
 
 
@@ -22,7 +26,7 @@ Game::run(void)
 
 }
 
-Game::display_results(void)
+void Game::display_results(void)
 {
 
 }
