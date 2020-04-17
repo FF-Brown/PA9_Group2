@@ -1,46 +1,34 @@
-/*
-Authors: Derek Henderson, Koji Nastuhara, Nathan Brown, Sammy West
-Description: Epic tower defense game
-*/
+
+//Main File
 
 #include "PA9.h"
-#include "Board.h"
+using namespace std;
 
 
-int main()
+int main(void)
 {
-    double windowWidth = 500, windowHeight = 500, cellSize = 50;
-    double gridWidth = 215, gridHeight = 470;
-	
-	std::cout << "Tower Defense!" << std::endl;
+    sf::RenderWindow mainMenuWindow(sf::VideoMode(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT), "Menu Window");
 
-    //Circle test code
-    sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-
-    //Drawing grid 
-    sf::RectangleShape* squareGrid = createGrid(gridWidth, gridHeight, cellSize);
-    int numSquares = ((int)(gridWidth / cellSize) * (int)(gridHeight / cellSize));
-
-    while (window.isOpen())
+    MainMenuOption option;
+    do
     {
-        //Close window
-        sf::Event event;
-        while (window.pollEvent(event))
+        display_main_menu(mainMenuWindow);
+        option = get_main_menu_option();
+
+        switch (option)
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
+        case INSTRUCTIONS:
+            display_instructions();
+            break;
 
-        //Redraw 
-        window.clear();
-        for (int i = 0; i < numSquares; i++) {
-            window.draw(squareGrid[i]);
-        }
-        window.draw(shape);
-        window.display();
-    }
+        case PLAY_GAME:
+            play_game();
+            break;
 
-	return 0;
+        case EXIT:
+            break;
+        }
+    } while (option != EXIT);
+
+    return 0;
 }
