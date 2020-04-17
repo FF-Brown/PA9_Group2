@@ -1,13 +1,12 @@
-/*
-Authors: Derek Henderson, Koji Nastuhara, Nathan Brown, Sammy West
-Description: Epic tower defense game
-*/
+
+//Main File
 
 #include "PA9.h"
 #include "Board.h"
+using namespace std;
 
 
-int main()
+int main(void)
 {
     double windowWidth = 500, windowHeight = 500, cellSize = 50;
     double gridWidth = 215, gridHeight = 470;
@@ -23,24 +22,37 @@ int main()
     sf::RectangleShape* squareGrid = createGrid(gridWidth, gridHeight, cellSize);
     int numSquares = ((int)(gridWidth / cellSize) * (int)(gridHeight / cellSize));
 
-    while (window.isOpen())
+    MainMenuOption option;
+    do
     {
-        //Close window
-        sf::Event event;
-        while (window.pollEvent(event))
+        display_main_menu();
+        option = get_main_menu_option();
+
+        switch (option)
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+        case INSTRUCTIONS:
+            display_instructions();
+            break;
+
+        case PLAY_GAME:
+            play_game();
+            break;
+
+
+        case EXIT:
+            break;
         }
 
-        //Redraw 
+        
+    
+    } while (option != EXIT);
+    //Redraw 
         window.clear();
         for (int i = 0; i < numSquares; i++) {
             window.draw(squareGrid[i]);
         }
         window.draw(shape);
         window.display();
-    }
 
 	return 0;
 }
