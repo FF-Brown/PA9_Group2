@@ -21,6 +21,10 @@
     <ClCompile Include="PA9.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
     <ClCompile Include="main_menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -47,5 +51,10 @@
     <ClInclude Include="main_menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="oldGridFunction.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
