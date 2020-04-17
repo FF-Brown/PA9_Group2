@@ -166,6 +166,7 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="main_menu.h" />
     <ClInclude Include="PA9.h" />
     <ClInclude Include="Player.h" />

@@ -6,6 +6,8 @@
 //Included Project Files
 #include "Board.h"     
 class Board {}; //temp
+#include "GUI.h"
+class GUI {}; //temp
 #include "Player.h"
 #include "Tower.h"
 #include "Enemy.h"
@@ -20,7 +22,10 @@ class Game
 {
 private:
     Board board;
+    GUI towerMenu;
     Player player;
+
+    sf::RenderWindow gameWindow(...);
 
     int currentRound = 1;
 
@@ -40,7 +45,12 @@ public:
         currentRound++;
     }
 
+    //Runs the game
     void run(void);
+
+    void user_input_handler(void);
+
+    void collision_handler(void);
 
     //Displays highest round passed & total score
     void display_results(void);

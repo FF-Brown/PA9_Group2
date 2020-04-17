@@ -4,9 +4,7 @@
 #pragma once
 
 //Included Project Files
-#include "main_menu.h"
 #include "Game.h"
-#include "Board.h"
 
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
@@ -28,7 +26,7 @@ enum MainMenuOption
 //Main Menu Functions
 
 //Displays the main menu
-void display_main_menu(void);
+void display_main_menu(sf::RenderWindow& mainMenuWindow);
 
 //Gets the users selection from the main menu
 //Returns option
