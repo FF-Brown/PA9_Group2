@@ -28,5 +28,5 @@ int main(void)
         }
     } while (option != EXIT);
 
-	return 0;
+    return 0;
 }
