@@ -15,7 +15,7 @@ void display_main_menu(sf::RenderWindow& mainMenuWindow)
 //*Change to mouse click input?
 MainMenuOption get_main_menu_option(void)
 {
-
+    return INSTRUCTIONS;
 }
 
 void display_instructions(void)

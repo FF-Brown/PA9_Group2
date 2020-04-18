@@ -4,7 +4,7 @@
 #pragma once
 
 //Included Project Files
-#include "Board.h"     
+//#include "Board.h"     
 class Board {}; //temp
 #include "GUI.h"
 class GUI {}; //temp
@@ -22,10 +22,10 @@ class Game
 {
 private:
     Board board;
-    GUI towerMenu;
+    GUI gui;
     Player player;
 
-    sf::RenderWindow gameWindow(sf::VideoMode(500, 500), "Game Window");
+    //sf::RenderWindow gameWindow(sf::VideoMode(500, 500), "Game Window");
 
     int currentRound = 1;
 
