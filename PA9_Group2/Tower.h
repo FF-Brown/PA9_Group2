@@ -13,5 +13,5 @@ protected:
 
 public:
     //Returns true if upgrade successful
-    virtual bool upgrade(void);
+    virtual bool upgrade(void) = 0;
 };
