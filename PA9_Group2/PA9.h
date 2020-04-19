@@ -41,7 +41,7 @@ MainMenuOption get_main_menu_option(void);
 void display_instructions(sf::RenderWindow& window);
 
 //Runs the game
-void play_game(sf::RenderWindow* window);
+void play_game(sf::RenderWindow& window);
 
 
 //Miscellaneous Functions

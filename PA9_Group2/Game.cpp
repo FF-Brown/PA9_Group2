@@ -5,9 +5,8 @@
 using namespace std;
 
 
-Game::Game(sf::RenderWindow* window)
+Game::Game(sf::RenderWindow& window) : gameWindow(window)
 {
-    gameWindow = window;
 
 
 }
@@ -32,7 +31,7 @@ void Game::run(void)
 
         //Render
 
-        gameWindow->clear(); //First time in game loop: Clears menu items
+        gameWindow.clear(); //First time in game loop: Clears menu items
 
         //board.draw(gameWindow); //Including towers/traps
         //gui.draw(gameWindow);
@@ -45,7 +44,7 @@ void Game::run(void)
         for (int i = 0; i < projectiles.size(); i++)
             projectiles[i]->draw(gameWindow);
 
-        gameWindow->display();
+        gameWindow.display();
     }
 }
 
@@ -59,7 +58,7 @@ void Game::collision_handler(void)
 
 }
 
-void Game::display_results()
+void Game::display_results(void)
 {
 
 }

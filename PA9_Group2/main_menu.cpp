@@ -7,7 +7,7 @@ using namespace std;
 
 void display_main_menu(sf::RenderWindow& mainMenuWindow)
 {
-    //Title
+    //Game Title
     //Menu choices
 
 }
@@ -24,7 +24,7 @@ void display_instructions(sf::RenderWindow& window)
 
 }
 
-void play_game(sf::RenderWindow* window)
+void play_game(sf::RenderWindow& window)
 {
     Game game(window);
 
