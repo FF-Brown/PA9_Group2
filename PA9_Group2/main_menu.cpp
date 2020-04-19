@@ -18,16 +18,15 @@ MainMenuOption get_main_menu_option(void)
     return INSTRUCTIONS;
 }
 
-void display_instructions(void)
+void display_instructions(sf::RenderWindow& window)
 {
-    sf::RenderWindow instructionsWindow(...);
     //Adapt from Sammy's menu code
 
 }
 
-void play_game(void)
+void play_game(sf::RenderWindow* window)
 {
-    Game game;
+    Game game(window);
 
     game.run();
     game.display_results();

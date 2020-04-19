@@ -1,2 +1,17 @@
+
+//Class Definition File for the base Tower
+
 #pragma once
-//Base class for towers - range, dmg, price, price to upgrade(?)
+
+#include "Projectiles.h"
+
+
+class Tower
+{
+protected:
+    Projectile* projectileType;
+
+public:
+    //Returns true if upgrade successful
+    virtual bool upgrade(void);
+};
