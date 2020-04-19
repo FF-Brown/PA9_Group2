@@ -22,7 +22,7 @@ int main(void)
             break;
 
         case PLAY_GAME:
-            play_game(&window);
+            play_game(window);
             break;
 
         case EXIT:

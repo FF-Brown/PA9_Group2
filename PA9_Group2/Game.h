@@ -21,8 +21,8 @@ class GUI {}; //temp
 class Game
 {
 private:
-    //Pointer to window
-    sf::RenderWindow* gameWindow;
+    //Reference to window
+    sf::RenderWindow& gameWindow;
 
     Board board;
     GUI gui;
@@ -36,7 +36,7 @@ private:
 
 public:
     //Constructor
-    Game(sf::RenderWindow* window);
+    Game(sf::RenderWindow& window);
 
     //Returns the current round num
     int get_current_round(void)
@@ -58,5 +58,5 @@ public:
     void collision_handler(void);
 
     //Displays highest round passed, total score, and number of enemies killed
-    void display_results();
+    void display_results(void);
 };

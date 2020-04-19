@@ -12,5 +12,5 @@ private:
 
 
 public:
-    void draw(sf::RenderWindow* window);
+    void draw(sf::RenderWindow& window);
 };
