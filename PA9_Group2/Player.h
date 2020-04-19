@@ -12,6 +12,7 @@ private:
     int health = INIT_HEALTH;
     int XP = 0;
     int score = 0;
+    int enemiesKilled = 0;
 
 public:
     //Returns: true if the player is alive | false otherwise
@@ -46,5 +47,11 @@ public:
     {
         XP += amount;
         score += amount;
+    }
+
+    //Increments the number of enemies killed
+    void inc_enemies_killed(void)
+    {
+        enemiesKilled++;
     }
 };

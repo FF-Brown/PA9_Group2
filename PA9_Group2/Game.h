@@ -4,7 +4,7 @@
 #pragma once
 
 //Included Project Files
-//#include "Board.h"     
+//#include "Board.h"    
 class Board {}; //temp
 #include "GUI.h"
 class GUI {}; //temp
@@ -16,22 +16,27 @@ class GUI {}; //temp
 #include <SFML/Graphics.hpp>
 
 //Included STD Libraries
-
+#include <vector>
 
 class Game
 {
 private:
+    //Pointer to window
+    sf::RenderWindow* gameWindow;
+
     Board board;
     GUI gui;
+
     Player player;
 
-    //sf::RenderWindow gameWindow(sf::VideoMode(500, 500), "Game Window");
+    std::vector<Enemy*> enemies;
+    std::vector<Projectile*> projectiles;
 
     int currentRound = 1;
 
 public:
     //Constructor
-    Game(void);
+    Game(sf::RenderWindow* window);
 
     //Returns the current round num
     int get_current_round(void)
@@ -52,6 +57,6 @@ public:
 
     void collision_handler(void);
 
-    //Displays highest round passed & total score
-    void display_results(void);
+    //Displays highest round passed, total score, and number of enemies killed
+    void display_results();
 };

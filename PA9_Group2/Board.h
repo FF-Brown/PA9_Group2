@@ -5,7 +5,6 @@
 using namespace std;
 //class for game board with grid, display options, enemy marching path, rules for acceptable builds (can't build on the same square 2x, etc)
 
-
 // May have to redo. Might need to be a collection of squares instead of a collection of lines
 // Also this is a crap function, not gonna leave it here. Just needed somewhere to stuff it
 // May make a grid class

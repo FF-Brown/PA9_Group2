@@ -15,8 +15,8 @@
 
 
 //Main Window Dimensions
-#define MAIN_WINDOW_HEIGHT 500
-#define MAIN_WINDOW_WIDTH  500
+#define WINDOW_HEIGHT 500
+#define WINDOW_WIDTH  500
 
 
 //Contains an option from the main menu
@@ -38,10 +38,10 @@ void display_main_menu(sf::RenderWindow& mainMenuWindow);
 MainMenuOption get_main_menu_option(void);
 
 //Displays the game instructions
-void display_instructions(void);
+void display_instructions(sf::RenderWindow& window);
 
 //Runs the game
-void play_game(void);
+void play_game(sf::RenderWindow* window);
 
 
 //Miscellaneous Functions
