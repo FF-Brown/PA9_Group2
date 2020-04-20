@@ -36,13 +36,15 @@ void Game::run(void)
         //board.draw(gameWindow); //Including towers/traps
         //gui.draw(gameWindow);
 
-        //Draw all enemies from linked list/vector
-        for (int i = 0; i < enemies.size(); i++)
-            enemies[i]->draw(gameWindow);
+        //Draw all enemies
+        list<Enemy>::iterator enemyIt;
+        for (enemyIt = enemies.begin(); enemyIt != enemies.end(); enemyIt++)
+            enemyIt->draw(gameWindow);
 
         //Draw all projectiles
-        for (int i = 0; i < projectiles.size(); i++)
-            projectiles[i]->draw(gameWindow);
+        list<Projectile>::iterator projectileIt;
+        for (projectileIt = projectiles.begin(); projectileIt != projectiles.end(); projectileIt++)
+            projectileIt->draw(gameWindow);
 
         gameWindow.display();
     }
