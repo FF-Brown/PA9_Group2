@@ -15,8 +15,9 @@ class GUI {}; //temp
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
-//Included STD Libraries
-#include <vector>
+//Included Std Libraries
+#include <list>
+#include <iterator>
 
 class Game
 {
@@ -29,8 +30,8 @@ private:
 
     Player player;
 
-    std::vector<Enemy*> enemies;
-    std::vector<Projectile*> projectiles;
+    std::list<Enemy> enemies;
+    std::list<Projectile> projectiles;
 
     int currentRound = 1;
 
