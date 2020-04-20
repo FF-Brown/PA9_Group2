@@ -2,7 +2,7 @@
 #include "Enemy.h"
 
 
-void Enemy::draw(sf::RenderWindow* window)
+void Enemy::draw(sf::RenderWindow& window)
 {
 
 }

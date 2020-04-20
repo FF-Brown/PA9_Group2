@@ -1,6 +1,7 @@
 
 //Main File
-
+#include <SFML/Graphics.hpp>
+#include "main_menu.h"
 #include "PA9.h"
 using namespace std;
 
@@ -8,12 +9,12 @@ using namespace std;
 int main(void)
 {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tower Defense");
-
+    Menu menu(WINDOW_WIDTH, WINDOW_HEIGHT);
     MainMenuOption option;
     do
     {
-        display_main_menu(window);
-        option = get_main_menu_option();
+        menu.display_main_menu(window);
+        option = menu.get_Selected_Index();
 
         switch (option)
         {
@@ -26,9 +27,12 @@ int main(void)
             break;
 
         case EXIT:
+            
             break;
         }
     } while (option != EXIT);
 
+    window.close();
+    
     return 0;
 }
