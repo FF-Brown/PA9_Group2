@@ -30,12 +30,21 @@ Round::Round(int roundNum)
 
 Enemy Round::get_next_enemy(void)
 {
-    Enemy enemy = enemyQueue.front();
-    enemyQueue.pop();
-    return enemy;
+    Enemy nextEnemy;
+    if (enemyQueue.size() > 0)
+    {
+        nextEnemy = enemyQueue.front();
+        enemyQueue.pop();
+    }
+    else
+        nextEnemy = NoSpawn();
+    return nextEnemy;
 }
 
-int Round::get_enemies_remaining(void)
+bool Round::is_spawning_complete(void)
 {
-    return enemyQueue.size();
+    if (enemyQueue.size() == 0)
+        return true;
+    else
+        return false;
 }
