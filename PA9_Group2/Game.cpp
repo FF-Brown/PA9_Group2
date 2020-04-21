@@ -43,7 +43,7 @@ void Game::run(void) //Refactor
             collision_handler();
         }
 
-        if (rounds[currentRound - 1].spawning_complete() && numEnemies == 0)
+        if (rounds[currentRound - 1].is_spawning_complete() && numEnemies == 0)
         {
             currentRound++;
             roundStarted = false;
