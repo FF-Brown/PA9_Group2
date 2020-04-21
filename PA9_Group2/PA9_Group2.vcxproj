@@ -165,10 +165,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_menu.cpp" />
     <ClCompile Include="PA9.cpp" />
+    <ClCompile Include="Round.cpp" />
     <ClCompile Include="Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Enemies.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GUI.h" />
@@ -176,6 +178,7 @@
     <ClInclude Include="PA9.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectiles.h" />
+    <ClInclude Include="Round.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="Towers.h" />
   </ItemGroup>
