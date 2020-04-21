@@ -2,44 +2,43 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 using namespace std;
 //class for game board with grid, display options, enemy marching path, rules for acceptable builds (can't build on the same square 2x, etc)
 
-// May have to redo. Might need to be a collection of squares instead of a collection of lines
-// Also this is a crap function, not gonna leave it here. Just needed somewhere to stuff it
-// May make a grid class
-void createGrid(double width, double height, double cellSize) {
+sf::RectangleShape* createGrid(double width, double height, double cellSize);
 
-    double windowWidth = width;
-    double windowHeight = height;
-    double cellWidth = cellSize;
-    int i = 0;
-    //Number of vertical/horizontal lines
-    int verticals = windowWidth / cellWidth + 1;
-    int horizontals = windowHeight / cellWidth + 1;
-    //Number of vertical/horizontal points
-    int vertPoints = 2 * verticals;
-    int horizPoints = 2 * horizontals;
-    //Shift slightly so 1st line is visible
-    int offset = 1;
-    int midpoint = vertPoints; //Will be replaced
+class Board
+{
+public:
+	Board();
+	~Board();
 
-    sf::VertexArray grid(sf::Lines, vertPoints + horizPoints);
+	//Draws grid on board. Must be used BEFORE any other calls of window.draw()
+	//or it will hide other objects
+	void displayBoard(sf::RenderWindow& window);
+	//Draws path on board in red. Marks player castle yellow
+	void markPath();
+	//Can be used with other files for different paths
+	//Any csv file used must have all values on a single line and end with a comma
+	//See path.csv for reference
+	void readPath(string fileName);
+	//Determines if a square is in the enemy marching path
+	//Can be used for checking if a square is a valid location for a tower
+	bool inPath(int square);
+private:
+	//Note that grid is a 1D array, not 2D which would be preferrable 
+	sf::RectangleShape* grid;
+	int squareCount;
+	int* path;
+	int pathLength;
+};
 
-    printf("(%.1lf, %.1lf) window\n", windowWidth, windowHeight);
-    cout << "Cell width: " << cellWidth << endl;
-    cout << "# of vertical lines should be: " << verticals << endl;
-    cout << "# of horizontal lines should be: " << horizontals << endl;
-    cout << "Midpoint: " << midpoint << endl;
-
-    for (i = 0; i < vertPoints; i += 2) {
-        grid[i].position = sf::Vector2f(i * cellWidth / 2 + offset, 0);
-        grid[i + 1].position = sf::Vector2f(i * cellWidth / 2 + offset, windowHeight);
-    }
-
-
-    for (int j = 0; j < horizPoints; j += 2) {
-        grid[j + midpoint].position = sf::Vector2f(0, j * cellWidth / 2 + offset);
-        grid[j + midpoint + 1].position = sf::Vector2f(windowWidth, j * cellWidth / 2 + offset);
-    }
-}
+/*
+Snippet for main to test with
+	Board board;
+	board.markPath();
+	board.displayBoard(window);
+	window.display();
+*/
