@@ -4,7 +4,8 @@
 
 //Included Project Files
 #include "Board.h"
-enum Direction { UP, DOWN, LEFT, RIGHT }; class Board { public: Direction get_direction(); }; //temp
+enum Direction { UP, DOWN, LEFT, RIGHT }; 
+//class Board { public: Direction get_direction(); }; //temp 
 
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>

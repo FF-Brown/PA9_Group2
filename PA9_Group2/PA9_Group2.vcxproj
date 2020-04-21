@@ -182,6 +182,9 @@
     <ClInclude Include="Tower.h" />
     <ClInclude Include="Towers.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="path.csv" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

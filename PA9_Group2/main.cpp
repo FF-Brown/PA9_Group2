@@ -11,6 +11,7 @@ int main(void)
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tower Defense");
     Menu menu(WINDOW_WIDTH, WINDOW_HEIGHT);
     MainMenuOption option;
+
     do
     {
         menu.display_main_menu(window);
@@ -20,6 +21,7 @@ int main(void)
         {
         case INSTRUCTIONS:
             display_instructions(window);
+            cout << "Instructions forthcoming...\n";
             break;
 
         case PLAY_GAME:
