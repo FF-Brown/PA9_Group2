@@ -92,13 +92,13 @@ void Game::spawn_enemy(void)
 
 void Game::move_enemies(void)
 {
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
+    for (auto it : enemies)
         it->move(board);
 }
 
 void Game::despawn_enemies(void)
 {
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
+    for (auto it : enemies)
     {
         if (!it->is_alive())
             enemies.erase(it);
@@ -109,19 +109,19 @@ void Game::spawn_projectiles(void)
 {
     vector<Projectile> nProjectiles = board.spawn_projectiles(enemies); //Board::spawn_projectiles(const std::list<Enemy>&): Determines which towers should fire (cool down time), damages enemy, and returns projectiles in a vector
                                                                         //^ Iterate through all towers and call Tower::fire(std::list<Enemy>) on each, which finds closest enemy
-    for (auto it = nProjectiles.begin(); it != nProjectiles.end(); it++)
+    for (auto it : nProjectiles)
         projectiles.push_front(*it);
 }
 
 void Game::move_projectiles(void)
 {
-   for (auto it = projectiles.begin(); it != projectiles.end(); it++)
+   for (auto it : projectiles)
         it->move();
 }
 
 void Game::despawn_projectiles(void)
 {
-    for (auto it = projectiles.begin(); it != projectiles.end(); it++)
+    for (auto it : projectiles)
     {
         if (!it->is_active())
             projectiles.erase(it);
@@ -141,11 +141,11 @@ void Game::render(void)
     gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
 
     //Draw all enemies
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
+    for (auto it : enemies)
         it->draw(gameWindow);
 
     //Draw all projectiles
-    for (auto it = projectiles.begin(); it != projectiles.end(); it++)
+    for (auto it : projectiles)
         it->draw(gameWindow);
 
     gameWindow.display();
