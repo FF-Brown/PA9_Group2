@@ -109,7 +109,7 @@ void Game::despawn_enemies(void)
 
 void Game::spawn_projectiles(void)
 {
-    vector<Projectile> nProjectiles = board.spawn_projectiles(); //Board::spawn_projectiles(): Determines which towers should fire (cool down time), damages enemy, and returns projectiles in a vector
+    vector<Projectile> nProjectiles = board.spawn_projectiles(enemies); //Board::spawn_projectiles(const std::list<Enemy>&): Determines which towers should fire (cool down time), damages enemy, and returns projectiles in a vector
 
     vector<Projectile>::iterator projectileIt;
     for (projectileIt = nProjectiles.begin(); projectileIt != nProjectiles.end(); projectileIt++)
