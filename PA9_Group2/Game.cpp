@@ -92,18 +92,16 @@ void Game::spawn_enemy(void)
 
 void Game::move_enemies(void)
 {
-    list<Enemy>::iterator enemyIt;
-    for (enemyIt = enemies.begin(); enemyIt != enemies.end(); enemyIt++)
-        enemyIt->move(board);
+    for (auto it = enemies.begin(); it != enemies.end(); it++)
+        it->move(board);
 }
 
 void Game::despawn_enemies(void)
 {
-    list<Enemy>::iterator enemyIt;
-    for (enemyIt = enemies.begin(); enemyIt != enemies.end(); enemyIt++)
+    for (auto it = enemies.begin(); it != enemies.end(); it++)
     {
-        if (!enemyIt->is_alive())
-            enemies.erase(enemyIt);
+        if (!it->is_alive())
+            enemies.erase(it);
     }
 }
 
@@ -111,25 +109,22 @@ void Game::spawn_projectiles(void)
 {
     vector<Projectile> nProjectiles = board.spawn_projectiles(enemies); //Board::spawn_projectiles(const std::list<Enemy>&): Determines which towers should fire (cool down time), damages enemy, and returns projectiles in a vector
                                                                         //^ Iterate through all towers and call Tower::fire(std::list<Enemy>) on each, which finds closest enemy
-    vector<Projectile>::iterator projectileIt;
-    for (projectileIt = nProjectiles.begin(); projectileIt != nProjectiles.end(); projectileIt++)
-        projectiles.push_front(*projectileIt);
+    for (auto it = nProjectiles.begin(); it != nProjectiles.end(); it++)
+        projectiles.push_front(*it);
 }
 
 void Game::move_projectiles(void)
 {
-    list<Projectile>::iterator projectileIt;
-    for (projectileIt = projectiles.begin(); projectileIt != projectiles.end(); projectileIt++)
-        projectileIt->move();
+   for (auto it = projectiles.begin(); it != projectiles.end(); it++)
+        it->move();
 }
 
 void Game::despawn_projectiles(void)
 {
-    list<Projectile>::iterator projectileIt;
-    for (projectileIt = projectiles.begin(); projectileIt != projectiles.end(); projectileIt++)
+    for (auto it = projectiles.begin(); it != projectiles.end(); it++)
     {
-        if (!projectileIt->is_active())
-            projectiles.erase(projectileIt);
+        if (!it->is_active())
+            projectiles.erase(it);
     }
 }
 
@@ -146,14 +141,12 @@ void Game::render(void)
     gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
 
     //Draw all enemies
-    list<Enemy>::iterator enemyIt;
-    for (enemyIt = enemies.begin(); enemyIt != enemies.end(); enemyIt++)
-        enemyIt->draw(gameWindow);
+    for (auto it = enemies.begin(); it != enemies.end(); it++)
+        it->draw(gameWindow);
 
     //Draw all projectiles
-    list<Projectile>::iterator projectileIt;
-    for (projectileIt = projectiles.begin(); projectileIt != projectiles.end(); projectileIt++)
-        projectileIt->draw(gameWindow);
+    for (auto it = projectiles.begin(); it != projectiles.end(); it++)
+        it->draw(gameWindow);
 
     gameWindow.display();
 }
