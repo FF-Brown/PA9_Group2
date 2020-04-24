@@ -41,6 +41,7 @@ void Game::run(void)
             {
                 currentRound++;
                 roundStarted = false;
+                lastRoundEndTime = time(nullptr);
             }
         }
         render();
