@@ -15,7 +15,7 @@ class Enemy
 {
 protected:
     unsigned int ID;
-    sf::Vector2i position;
+    sf::Vector2f position;
 
     int health;
 
@@ -48,7 +48,7 @@ public:
     }
 
 
-    void move(Board& board);
+    void move(const Board& board);
 
     void draw(sf::RenderWindow& window);
 };

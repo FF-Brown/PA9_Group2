@@ -10,23 +10,22 @@
 class Projectile
 {
 private:
-    sf::Vector2f initialPos;
-    sf::Vector2f currentPos;
+    sf::Vector2f position;
     sf::Vector2f velocity;
     double maxDistance;
+    double distance;
     bool active;
 
 public:
 
     Projectile(sf::Vector2f startPoint, sf::Vector2f endPoint)
     {
-        initialPos = startPoint;
-        currentPos = endPoint;
+        position = startPoint;
 
         //velocity is direction toward endPos scaled by speed
 
         maxDistance = calculate_distance(startPoint, endPoint);
-
+        distance = 0;
         active = true;
     }
 
@@ -39,7 +38,9 @@ public:
     {
         //Move
 
-        if (calculate_distance(initialPos, currentPos) > maxDistance)
+        //Add to distance
+
+        if (distance > maxDistance)
             active = false;
     }
 

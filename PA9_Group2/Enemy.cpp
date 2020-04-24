@@ -4,9 +4,10 @@
 Enemy::Enemy(void)
 {
     isEnemy = true;
+    position = board.get_starting_position();
 }
 
-void Enemy::move(Board& board)
+void Enemy::move(const Board& board)
 {
     //Calculate distance to move from speed and potential frost/glue effect
 
