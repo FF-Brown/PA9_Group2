@@ -1,7 +1,6 @@
 
 //Main Menu source File
 
-#include "PA9.h"
 #include "main_menu.h"
 using namespace std;
 
@@ -118,8 +117,7 @@ void Menu::mousePlace(sf::RenderWindow& mainMenuWindow)
 	}
 
 }
-//Put Sammy's menu code here ^ v
-//*Changed to mouse click input.
+
 void Menu::get_main_menu_option(sf::RenderWindow& window)
 {
 	int mouseX = sf::Mouse::getPosition(window).x;
@@ -133,7 +131,7 @@ void Menu::get_main_menu_option(sf::RenderWindow& window)
 		int buttonPosW = buttonX + menu_buttons[i].buttonW;
 		int buttonPosH = buttonY + menu_buttons[i].buttonH;
 
-		if (mouseX < buttonPosW && mouseX > buttonX&& mouseY < buttonPosH && mouseY > buttonY)
+		if (mouseX < buttonPosW && mouseX > buttonX && mouseY < buttonPosH && mouseY > buttonY)
 		{
 			if (i == 0)
 			{
@@ -149,7 +147,6 @@ void Menu::get_main_menu_option(sf::RenderWindow& window)
 			}
 		}
 	}
-	return;
 }
 
 MainMenuOption Menu::get_Selected_Index()
@@ -157,13 +154,13 @@ MainMenuOption Menu::get_Selected_Index()
 	return selectedItemIndex;
 }
 
-void display_instructions(sf::RenderWindow& window)
+void Menu::display_instructions(sf::RenderWindow& window)
 {
     //Adapt from Sammy's menu code
 
 }
 
-void play_game(sf::RenderWindow& window)
+void Menu::play_game(sf::RenderWindow& window)
 {
     Game game(window);
 

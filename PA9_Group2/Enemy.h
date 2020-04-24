@@ -15,6 +15,9 @@ class Enemy
 {
 protected:
     unsigned int ID;
+    sf::Vector2i position;
+
+    int health;
 
 public:
     bool isEnemy;
@@ -29,6 +32,19 @@ public:
     unsigned int get_ID(void)
     {
         return ID;
+    }
+
+    void damage(int amount)
+    {
+        health -= amount;
+    }
+
+    bool is_alive(void)
+    {
+        if (health > 0)
+            return true;
+        else
+            return false;
     }
 
 

@@ -9,8 +9,10 @@
 class GUI {}; //temp
 #include "Player.h"
 #include "Tower.h"
+#include "Towers.h"
 #include "Enemy.h"
 #include "Round.h"
+#include "Projectile.h"
 
 
 //Included SFML Libraries
@@ -23,8 +25,6 @@ class GUI {}; //temp
 #include <ctime>
 
 
-#define NUM_ROUNDS 1
-
 #define PREP_TIME 10.0     //Seconds before first enemy in round spawns
 #define SPAWN_COOLDOWN 1.5 //Seconds between enemy spawns
 
@@ -32,8 +32,7 @@ class GUI {}; //temp
 class Game
 {
 private:
-    //Reference to window
-    sf::RenderWindow& gameWindow;
+    sf::RenderWindow& gameWindow; //Reference to window
 
     Board board;
     GUI gui;
@@ -41,18 +40,16 @@ private:
     Player player;
 
     std::list<Enemy> enemies;
-    int numEnemies;
-
     std::list<Projectile> projectiles;
 
-    //Has offset of -1 for array bound
-    Round rounds[NUM_ROUNDS];
-
+    Round rounds[NUM_ROUNDS]; //Has offset of -1 for array index
     int currentRound = 1;
 
     bool roundStarted;
     time_t lastRoundEndTime;
     time_t lastSpawnTime;
+
+    TowerType selectedTower = NONE;
 
 public:
     //Constructor
@@ -65,13 +62,20 @@ public:
 
     void user_input_handler(void);
 
+
     void spawn_enemy(void);
     
     void move_enemies(void);
+
+    void despawn_enemies(void);
+
     
     void spawn_projectiles(void);
 
-    void collision_handler(void);
+    void move_projectiles(void);
+
+    void despawn_projectiles(void);
+
 
     void render(void);
 

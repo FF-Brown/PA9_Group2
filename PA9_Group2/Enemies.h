@@ -12,12 +12,10 @@ public:
 };
 
 
-
-
-class NoSpawn : public Enemy
+class EmptyEnemy : public Enemy
 {
 public:
-    NoSpawn(void)
+    EmptyEnemy(void)
     {
         isEnemy = false;
     }

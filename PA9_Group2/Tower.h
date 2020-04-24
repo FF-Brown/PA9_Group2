@@ -3,15 +3,14 @@
 
 #pragma once
 
-#include "Projectiles.h"
+#include "Projectile.h"
 
 
 class Tower
 {
 protected:
-    Projectile* projectileType;
+    
 
 public:
-    //Returns true if upgrade successful
-    virtual bool upgrade(void) = 0;
+    
 };

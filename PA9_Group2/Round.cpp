@@ -21,7 +21,7 @@ Round::Round(int roundNum)
         for (int i = 0; i < 3; i++)
             enemyQueue.push(Basic()); //3 basic enemies
         for (int i = 0; i < 2; i++)
-            enemyQueue.push(NoSpawn()); //2 NoSpawns
+            enemyQueue.push(EmptyEnemy()); //2 gaps
         for (int i = 0; i < 3; i++)
             enemyQueue.push(Basic()); //3 Basic enemies
         break;
@@ -37,7 +37,7 @@ Enemy Round::get_next_enemy(void)
         enemyQueue.pop();
     }
     else
-        nextEnemy = NoSpawn();
+        nextEnemy = EmptyEnemy();
     return nextEnemy;
 }
 

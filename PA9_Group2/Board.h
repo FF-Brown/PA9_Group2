@@ -17,7 +17,7 @@ public:
 
 	//Draws grid on board. Must be used BEFORE any other calls of window.draw()
 	//or it will hide other objects
-	void displayBoard(sf::RenderWindow& window);
+	void draw(sf::RenderWindow& window);
 	//Draws path on board in red. Marks player castle yellow
 	void markPath();
 	//Can be used with other files for different paths
@@ -39,6 +39,6 @@ private:
 Snippet for main to test with
 	Board board;
 	board.markPath();
-	board.displayBoard(window);
+	board.draw(window);
 	window.display();
 */

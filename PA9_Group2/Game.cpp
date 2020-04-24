@@ -7,8 +7,6 @@ using namespace std;
 
 Game::Game(sf::RenderWindow& window) : gameWindow(window)
 {
-    numEnemies = 0;
-
     roundStarted = false;
     lastRoundEndTime = time(nullptr);
     lastSpawnTime = time(nullptr);
@@ -17,46 +15,64 @@ Game::Game(sf::RenderWindow& window) : gameWindow(window)
         rounds[i] = Round(i + 1);
 }
 
-void Game::run(void) //Refactor
+void Game::run(void)
 {
-
     while (player.is_alive())
     {
         user_input_handler();
 
-
         if (difftime(time(nullptr), lastRoundEndTime) > PREP_TIME)
             roundStarted = true;
-
 
         if (roundStarted)
         {
             spawn_enemy();
-            move_enemies();
-
-
-            //Poison effect?
-
-
             spawn_projectiles();
 
-            collision_handler();
-        }
+            move_enemies();
+            move_projectiles();
 
-        if (rounds[currentRound - 1].is_spawning_complete() && numEnemies == 0)
-        {
-            currentRound++;
-            roundStarted = false;
-        }
+            despawn_enemies();
+            despawn_projectiles();
 
+            //collision_handler();
+
+            if (rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
+            {
+                currentRound++;
+                roundStarted = false;
+            }
+        }
         render();
-
     }
 }
 
 void Game::user_input_handler(void)
 {
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
 
+        selectedTower = gui.get_tower_option(mousePos); //GUI::get_tower_option(sf::Vector2i mousePos): Gets which tower was selected from gui menu (enum in Towers.h)
+                                                        //^ Also highlights button in menu to show shich tower is selected
+        if (selectedTower != NONE)
+        {
+            board.enable_gridlines(); //?
+            if (board.add_tower(mousePos, selectedTower)); //Board::add_tower(Vector2i mousePos, Tower nTower): Adds new tower to the board, returns true if added
+            {
+                gui.unselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
+                selectedTower = NONE;
+                board.disable_gridlines(); //?
+            }
+        }
+
+        //example code (do for each button in gui and each tower on board)
+        sf::RectangleShape button;
+        if (button.getGlobalBounds().contains((sf::Vector2f)mousePos))
+        {
+            //Button clicked
+        }
+    }
 }
 
 
@@ -67,7 +83,7 @@ void Game::spawn_enemy(void)
         Enemy nEnemy = rounds[currentRound - 1].get_next_enemy();
         if (nEnemy.isEnemy)
         {
-            nEnemy.set_ID(numEnemies++); //Set ID to the next number and increment
+            nEnemy.set_ID(enemies.size()); //Set ID to the next number and increment
             enemies.push_back(nEnemy);
         }
     }
@@ -80,22 +96,53 @@ void Game::move_enemies(void)
         enemyIt->move(board);
 }
 
+void Game::despawn_enemies(void)
+{
+    list<Enemy>::iterator enemyIt;
+    for (enemyIt = enemies.begin(); enemyIt != enemies.end(); enemyIt++)
+    {
+        if (!enemyIt->is_alive())
+            enemies.erase(enemyIt);
+    }
+}
+
 void Game::spawn_projectiles(void)
 {
+    vector<Projectile> nProjectiles = board.spawn_projectiles(); //Board::spawn_projectiles(): Determines which towers should fire (cool down time), damages enemy, and returns projectiles in a vector
 
+    vector<Projectile>::iterator projectileIt;
+    for (projectileIt = nProjectiles.begin(); projectileIt != nProjectiles.end(); projectileIt++)
+        projectiles.push_front(*projectileIt);
 }
 
-void Game::collision_handler(void)
+void Game::move_projectiles(void)
+{
+    list<Projectile>::iterator projectileIt;
+    for (projectileIt = projectiles.begin(); projectileIt != projectiles.end(); projectileIt++)
+        projectileIt->move();
+}
+
+void Game::despawn_projectiles(void)
+{
+    list<Projectile>::iterator projectileIt;
+    for (projectileIt = projectiles.begin(); projectileIt != projectiles.end(); projectileIt++)
+    {
+        if (!projectileIt->is_active())
+            projectiles.erase(projectileIt);
+    }
+}
+
+/*void Game::collision_handler(void)
 {
 
-}
+}*/
 
 void Game::render(void)
 {
     gameWindow.clear(); //First time in game loop: Clears menu items
 
-    //board.draw(gameWindow); //Including towers/traps
-    //gui.draw(gameWindow);
+    board.draw(gameWindow);
+    gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
 
     //Draw all enemies
     list<Enemy>::iterator enemyIt;

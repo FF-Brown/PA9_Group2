@@ -5,6 +5,10 @@
 
 #include <queue>
 
+
+#define NUM_ROUNDS 2
+
+
 class Round
 {
 private:

@@ -35,7 +35,7 @@ Board::Board()
 	//Will need to be redone with better math to accomodate any size
 
 }
-void Board::displayBoard(sf::RenderWindow& window)
+void Board::draw(sf::RenderWindow& window)
 {
 	//Draws grid on board. Must be used BEFORE any other calls of window.draw()
 	//or it will hide other objects

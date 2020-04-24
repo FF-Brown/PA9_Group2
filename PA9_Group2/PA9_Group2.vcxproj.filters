@@ -71,13 +71,13 @@
     <ClInclude Include="Towers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Projectiles.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Round.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Enemies.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
