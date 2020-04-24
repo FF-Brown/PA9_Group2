@@ -85,5 +85,8 @@
     <None Include="path.csv">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="pathDiagram.xlsx">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

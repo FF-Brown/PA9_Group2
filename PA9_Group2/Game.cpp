@@ -76,8 +76,8 @@ void Game::spawn_enemy(void)
 void Game::move_enemies(void)
 {
     list<Enemy>::iterator enemyIt;
-    for (enemyIt = enemies.begin(); enemyIt != enemies.end(); enemyIt++)
-        enemyIt->move(board);
+    //for (enemyIt = enemies.begin(); enemyIt != enemies.end(); enemyIt++)
+    //    enemyIt->move(board);
 }
 
 void Game::spawn_projectiles(void)

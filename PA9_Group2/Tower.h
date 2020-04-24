@@ -10,6 +10,7 @@ class Tower
 {
 protected:
     Projectile* projectileType;
+    int location;
 
 public:
     //Returns true if upgrade successful

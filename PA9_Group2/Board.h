@@ -4,8 +4,12 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "Tower.h"
 using namespace std;
 //class for game board with grid, display options, enemy marching path, rules for acceptable builds (can't build on the same square 2x, etc)
+#define GRID_WIDTH 500
+#define GRID_HEIGHT 500
+#define CELL_SIZE 25
 
 sf::RectangleShape* createGrid(double width, double height, double cellSize);
 
@@ -27,18 +31,25 @@ public:
 	//Determines if a square is in the enemy marching path
 	//Can be used for checking if a square is a valid location for a tower
 	bool inPath(int square);
+	int getSquareCoord(double x, double y);
+	void colorCell(int cellNum);
+
 private:
 	//Note that grid is a 1D array, not 2D which would be preferrable 
 	sf::RectangleShape* grid;
-	int squareCount;
+	double gridWidth, gridHeight, cellSize;
+	int squareCount, columns, rows;
 	int* path;
 	int pathLength;
+	Tower* towers;
 };
 
 /*
 Snippet for main to test with
-	Board board;
-	board.markPath();
-	board.displayBoard(window);
-	window.display();
+	    Board board;
+    board.markPath();
+    board.displayBoard(window);
+    window.display();
+
+    system("pause");
 */

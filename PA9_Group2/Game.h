@@ -35,7 +35,7 @@ private:
     //Reference to window
     sf::RenderWindow& gameWindow;
 
-    Board board;
+    Board board();
     GUI gui;
 
     Player player;
