@@ -54,14 +54,14 @@ void Game::user_input_handler(void)
     {
         sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
 
-        selectedTower = gui.get_tower_option(mousePos); //GUI::get_tower_option(sf::Vector2i mousePos): Gets which tower was selected from gui menu (enum in Towers.h)
-                                                        //^ Also highlights button in menu to show shich tower is selected
+        selectedTower = gui.get_tower_option(mousePos); //GUI::get_tower_option(sf::Vector2i mousePos): Gets which tower was selected from gui menu (enum in Towers.h), or NONE
+                                                        //^ Also if button was clicked, highlights button in menu to show shich tower is selected
         if (selectedTower != NONE)
         {
             board.enable_gridlines(); //?
             if (board.add_tower(mousePos, selectedTower)); //Board::add_tower(Vector2i mousePos, Tower nTower): Adds new tower to the board, returns true if added
             {
-                gui.unselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
+                gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
                 selectedTower = NONE;
                 board.disable_gridlines(); //?
             }
