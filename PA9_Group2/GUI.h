@@ -38,6 +38,6 @@ class GUI : public Button
 	TowerType choice;
 public:
 	GUI();		//initates all the buttons
-	void display_GUI(sf::RenderWindow& window, int hp, int xp, int round);
+	void draw(sf::RenderWindow& window, int hp, int xp, int round);
 	TowerType get_choice();
 };
