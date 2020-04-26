@@ -16,7 +16,7 @@ sf::RectangleShape* createGrid(double width, double height, double cellSize);
 class Board
 {
 public:
-	Board();
+	Board(); 
 	~Board();
 
 	//Draws grid on board. Must be used BEFORE any other calls of window.draw()
@@ -31,8 +31,11 @@ public:
 	//Determines if a square is in the enemy marching path
 	//Can be used for checking if a square is a valid location for a tower
 	bool inPath(int square);
+	//Convert coordinates to cell # for use in other functions
 	int getSquareCoord(double x, double y);
 	void colorCell(int cellNum);
+	bool isOpen(sf::Vector2f position);
+	int addTower(sf::Vector2f position);
 
 private:
 	//Note that grid is a 1D array, not 2D which would be preferrable 
@@ -41,7 +44,8 @@ private:
 	int squareCount, columns, rows;
 	int* path;
 	int pathLength;
-	Tower* towers;
+	Tower towers[500];
+	int towerCount;
 };
 
 /*

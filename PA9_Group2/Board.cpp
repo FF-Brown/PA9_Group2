@@ -34,7 +34,6 @@ Board::Board()
 	rows = (int)(gridHeight / cellSize);
 	pathLength = 0;
 	squareCount = columns * rows; //(width / cellsize) * (width / cellsize)
-	towers = nullptr;
 	readPath("path.csv");
 	markPath();
 }
@@ -94,7 +93,7 @@ void Board::readPath(string fileName)
 	inFile.close();
 
 }
-bool Board::inPath(int square) //Add translation from coordinates to 1D array
+bool Board::inPath(int square) 
 {
 	//Determines if a square is in the enemy marching path
 	//Can be used for checking if a square is a valid location for a tower
@@ -127,9 +126,41 @@ void Board::colorCell(int cellNum)
 {
 	grid[cellNum].setFillColor(sf::Color::Blue); 
 }
-void addTower()
-{
 
+int Board::addTower(sf::Vector2f position)
+{
+	int cell = getSquareCoord(position.x, position.y);
+	int result = 1; 
+	//Check that not in path
+	if (inPath(cell)) {
+		cout << "Cell is in enemy path.\n";
+		result = 0;
+	}
+	else { 
+		//Check that no tower there
+		if (!isOpen(position)) {
+			cout << "Cell is occupied.\n";
+			result = -1;
+		}
+		else {
+			//Add tower 
+			Tower newTower;
+			newTower.setPosition(position);
+			towers[towerCount] = newTower;
+			++towerCount;
+		}
+	}
+	return result;
+}
+bool Board::isOpen(sf::Vector2f position)
+{
+	if (towerCount == 0)
+		return true;
+	for (int i = 0; i < towerCount; ++i) { 
+		if ((towers + i)->getPosition() == position)
+			return false;
+	}
+	return true;
 }
 //Function to detect corners
 //Dependent on current grid size
