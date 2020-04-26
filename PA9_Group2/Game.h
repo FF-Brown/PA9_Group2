@@ -6,7 +6,6 @@
 //Included Project Files
 #include "Board.h"
 #include "GUI.h"
-class GUI {}; //temp
 #include "Player.h"
 #include "Tower.h"
 #include "Towers.h"
