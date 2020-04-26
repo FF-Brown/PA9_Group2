@@ -1,8 +1,28 @@
 
 //Main File
+
+
+#pragma once
+
+//Included Project Files
+#include "main_menu.h"
+
+//Included SFML Libraries
 #include <SFML/Graphics.hpp>
-#include "PA9.h"
+
+//Included Std Libraries
+#include <iostream>
+#include <string>
+
 using namespace std;
+
+
+//Main Window Dimensions
+#define WINDOW_HEIGHT 500
+#define WINDOW_WIDTH  800
+
+//Frame Rate Limit
+#define FR_LIMIT 60
 
 
 int main(void)

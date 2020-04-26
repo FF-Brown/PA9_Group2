@@ -19,7 +19,7 @@ enum MainMenuOption
 class Menu
 {
 private:
-    sf::RenderWindow& MenuWindow; //Could use this instead of pass sf::RenderWindow as parameter in all functions | use initializer list
+    //sf::RenderWindow& MenuWindow; //Could use this instead of pass sf::RenderWindow as parameter in all functions | use initializer list
 
 	MainMenuOption selectedItemIndex;
 	sf::Font font;

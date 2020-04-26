@@ -8,6 +8,8 @@
 
 #define NUM_ROUNDS 2
 
+#define SPAWN_COOLDOWN 1 //Seconds between enemy spawns
+
 
 class Round
 {

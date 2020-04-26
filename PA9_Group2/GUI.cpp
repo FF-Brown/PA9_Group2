@@ -1,6 +1,5 @@
 
 #include "GUI.h"
-#include "Towers.h"
 
 Display::Display()
 {

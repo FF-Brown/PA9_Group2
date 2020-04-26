@@ -25,7 +25,6 @@
 
 
 #define PREP_TIME 10.0     //Seconds before first enemy in round spawns
-#define SPAWN_COOLDOWN 1.5 //Seconds between enemy spawns
 
 
 class Game
