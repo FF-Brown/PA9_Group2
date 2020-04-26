@@ -36,6 +36,9 @@ public:
 	void colorCell(int cellNum);
 	bool isOpen(sf::Vector2f position);
 	int addTower(sf::Vector2f position);
+    Tower* get_towers(void);
+    int get_num_towers(void);
+    static sf::Vector2f get_starting_position(void); //Returns spawnpoint of enemies | used in Enemy constructor
 
 private:
 	//Note that grid is a 1D array, not 2D which would be preferrable 

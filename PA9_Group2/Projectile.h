@@ -8,6 +8,8 @@
 
 #define SPEED 5
 
+double calculate_distance(sf::Vector2f a, sf::Vector2f b);
+
 
 class Projectile
 {

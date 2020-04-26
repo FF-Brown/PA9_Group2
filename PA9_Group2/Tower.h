@@ -14,9 +14,11 @@ class Tower
 protected:
 
     
-    
+    sf::Vector2f position;
 
+    int damage;
     double range; //Pixels
+
     int attSpeed; //Shots per minute
     int coolDownTime; //  = (60 / attSpeed) in constructor
 
@@ -31,6 +33,13 @@ protected:
     }
 
 public:
+
+    Tower(void) {}
+
+    Tower(sf::Vector2f initPosition)
+    {
+        position = initPosition;
+    }
     
     double get_range(void)
     {
@@ -51,6 +60,16 @@ public:
     {
         update_status();
         return activeStatus;
+    }
+
+    sf::Vector2f get_position(void)
+    {
+        return position;
+    }
+
+    int get_damage(void)
+    {
+        return damage;
     }
 };
 

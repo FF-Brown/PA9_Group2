@@ -59,7 +59,7 @@ void Game::user_input_handler(void)
         if (selectedTower != NONE)
         {
             //board.enable_gridlines();
-            if (board.add_tower(mousePos/*, selectedTower*/)); //Board::add_tower(Vector2i mousePos, Tower nTower): Adds new tower to the board, returns true if added
+            if (board.addTower((sf::Vector2f)mousePos/*, selectedTower*/)); //Board::add_tower(Vector2i mousePos, Tower nTower): Adds new tower to the board, returns true if added
             {
                 gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
                 selectedTower = NONE;
@@ -108,7 +108,7 @@ void Game::despawn_enemies(void)
 
 void Game::spawn_projectiles(void)
 {
-    Tower towers[] = board.get_towers();
+    Tower* towers = board.get_towers();
     int numTowers  = board.get_num_towers();
 
     for (int i = 0; i < numTowers; i++)
