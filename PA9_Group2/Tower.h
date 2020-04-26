@@ -3,23 +3,54 @@
 
 #pragma once
 
-#include "Projectiles.h"
-#include <SFML/Graphics.hpp>
-//#include <Vector2.hpp>
+
+#include "Projectile.h"
+
+#include <ctime>
+
 
 class Tower
 {
 protected:
-    Projectile* projectileType;
-    sf::Vector2f position;
+
+    
+    
+
+    double range; //Pixels
+    int attSpeed; //Shots per minute
+    int coolDownTime; //  = (60 / attSpeed) in constructor
+
+    bool activeStatus = true;
+    time_t lastFireTime = 0;
+    void update_status(void)
+    {
+        if (difftime(time(nullptr), lastFireTime) < coolDownTime)
+            activeStatus = false;
+        else
+            activeStatus = true;
+    }
 
 public:
-    //Returns true if upgrade successful
-    //virtual bool upgrade(void);
-    Tower();
-    sf::Vector2f getPosition() { return position; }
-    void setPosition(sf::Vector2f location) { position = location; }
+    
+    double get_range(void)
+    {
+        return range;
+    }
+    
+    int get_attack_speed(void)
+    {
+        return attSpeed;
+    }
 
+    void fire(void)
+    {
+        lastFireTime = time(nullptr);
+    }
 
+    bool is_active(void)
+    {
+        update_status();
+        return activeStatus;
+    }
 };
 

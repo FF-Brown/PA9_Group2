@@ -15,6 +15,9 @@ class Enemy
 {
 protected:
     unsigned int ID;
+    sf::CircleShape shape;
+
+    int health;
 
 public:
     bool isEnemy;
@@ -31,8 +34,26 @@ public:
         return ID;
     }
 
+    void damage(int amount)
+    {
+        health -= amount;
+    }
 
-    void move(Board& board);
+    bool is_alive(void)
+    {
+        if (health > 0)
+            return true;
+        else
+            return false;
+    }
+
+    sf::Vector2f get_position(void)
+    {
+        return shape.getPosition();
+    }
+
+
+    void move(const Board& board);
 
     void draw(sf::RenderWindow& window);
 };

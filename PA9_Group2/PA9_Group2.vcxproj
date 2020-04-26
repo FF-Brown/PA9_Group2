@@ -179,7 +179,7 @@
     <ClInclude Include="main_menu.h" />
     <ClInclude Include="PA9.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Projectiles.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Round.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="Towers.h" />

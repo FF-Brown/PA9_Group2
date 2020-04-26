@@ -1,7 +1,6 @@
 
 //Main File
 #include <SFML/Graphics.hpp>
-#include "main_menu.h"
 #include "PA9.h"
 #include "Board_test.h"
 using namespace std;
@@ -10,6 +9,8 @@ using namespace std;
 int main(void)
 {
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Tower Defense");
+    window.setFramerateLimit(FR_LIMIT);
+
     Menu menu(WINDOW_WIDTH, WINDOW_HEIGHT);
     MainMenuOption option;
 
@@ -21,12 +22,12 @@ int main(void)
         switch (option)
         {
         case INSTRUCTIONS:
-            display_instructions(window);
+            menu.display_instructions(window);
             cout << "Instructions forthcoming...\n";
             break;
 
         case PLAY_GAME:
-            play_game(window);
+            menu.play_game(window);
             break;
 
         case EXIT:

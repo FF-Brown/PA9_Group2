@@ -5,6 +5,10 @@
 
 #include <queue>
 
+
+#define NUM_ROUNDS 2
+
+
 class Round
 {
 private:
@@ -17,5 +21,5 @@ public:
     Round(int roundNum);
 
     Enemy get_next_enemy(void);
-    int get_enemies_remaining(void);
+    bool is_spawning_complete(void);
 };

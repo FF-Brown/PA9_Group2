@@ -1,13 +1,26 @@
 
 #pragma once
+
+#include "Game.h"
+
 #include <iostream>
 #include <SFML\Graphics.hpp>
-#include "PA9.h"
 #define MAX_NUMBER_OF_ITEMS 3
+
+
+//Contains an option from the main menu
+enum MainMenuOption
+{
+    INSTRUCTIONS,
+    PLAY_GAME,
+    EXIT
+};
 
 class Menu
 {
 private:
+    sf::RenderWindow& MenuWindow; //Could use this instead of pass sf::RenderWindow as parameter in all functions | use initializer list
+
 	MainMenuOption selectedItemIndex;
 	sf::Font font;
 	sf::Text text[MAX_NUMBER_OF_ITEMS];
@@ -25,6 +38,8 @@ public:
 	void get_main_menu_option(sf::RenderWindow& window);
 	MainMenuOption get_Selected_Index();
 
+    void display_instructions(sf::RenderWindow& window);
+    void play_game(sf::RenderWindow& window);
 };
 
 
