@@ -42,6 +42,9 @@
     <ClCompile Include="Round.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Board_test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -83,6 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="path.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="pathDiagram.xlsx">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

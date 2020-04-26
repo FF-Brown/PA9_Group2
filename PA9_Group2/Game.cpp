@@ -92,6 +92,7 @@ void Game::spawn_enemy(void)
 
 void Game::move_enemies(void)
 {
+
     for (auto it = enemies.begin(); it != enemies.end(); it++)
         it->move(board);
 }

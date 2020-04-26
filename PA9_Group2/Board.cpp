@@ -26,14 +26,16 @@ sf::RectangleShape* createGrid(double width, double height, double cellSize) {
 }
 Board::Board()
 {
-	grid = createGrid(500, 500, 25);
+	gridWidth = GRID_WIDTH;
+	gridHeight = GRID_HEIGHT;
+	cellSize = CELL_SIZE;
+	grid = createGrid(gridWidth, gridHeight, cellSize);
+	columns = (int)(gridWidth / cellSize);
+	rows = (int)(gridHeight / cellSize);
 	pathLength = 0;
-	squareCount = (int)(500 / 25) * (int)(500 / 25); //(width / cellsize) * (width / cellsize)
+	squareCount = columns * rows; //(width / cellsize) * (width / cellsize)
 	readPath("path.csv");
-	//Function to detect corners
-	//Dependent on current grid size
-	//Will need to be redone with better math to accomodate any size
-
+	markPath();
 }
 void Board::draw(sf::RenderWindow& window)
 {
@@ -91,7 +93,7 @@ void Board::readPath(string fileName)
 	inFile.close();
 
 }
-bool Board::inPath(int square)
+bool Board::inPath(int square) 
 {
 	//Determines if a square is in the enemy marching path
 	//Can be used for checking if a square is a valid location for a tower
@@ -103,7 +105,63 @@ bool Board::inPath(int square)
 }
 Board::~Board()
 {
-	//Untested
-	delete path;
-	delete grid;
+	delete [] path;
+	delete [] grid;
 }
+int Board::getSquareCoord(double x, double y)
+{
+	int column = 0, row = 0;
+	int cellNumber = 0;
+
+	if (x > 0 && x < gridWidth && y > 0 && y < gridHeight) {
+		row = y / cellSize;
+		column = x / cellSize;
+		cellNumber = (row * columns) + column;
+		return cellNumber;
+	}
+	else
+		return -1;
+}
+void Board::colorCell(int cellNum)
+{
+	grid[cellNum].setFillColor(sf::Color::Blue); 
+}
+
+int Board::addTower(sf::Vector2f position)
+{
+	int cell = getSquareCoord(position.x, position.y);
+	int result = 1; 
+	//Check that not in path
+	if (inPath(cell)) {
+		cout << "Cell is in enemy path.\n";
+		result = 0;
+	}
+	else { 
+		//Check that no tower there
+		if (!isOpen(position)) {
+			cout << "Cell is occupied.\n";
+			result = -1;
+		}
+		else {
+			//Add tower 
+			Tower newTower;
+			newTower.setPosition(position);
+			towers[towerCount] = newTower;
+			++towerCount;
+		}
+	}
+	return result;
+}
+bool Board::isOpen(sf::Vector2f position)
+{
+	if (towerCount == 0)
+		return true;
+	for (int i = 0; i < towerCount; ++i) { 
+		if ((towers + i)->getPosition() == position)
+			return false;
+	}
+	return true;
+}
+//Function to detect corners
+//Dependent on current grid size
+//Will need to be redone with better math to accomodate any size
