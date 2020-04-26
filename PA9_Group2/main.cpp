@@ -6,7 +6,7 @@
 
 //Included Project Files
 #include "main_menu.h"
-
+#include"PA9.h"
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
@@ -41,8 +41,11 @@ int main(void)
         switch (option)
         {
         case INSTRUCTIONS:
-            menu.display_instructions(window);
-            cout << "Instructions forthcoming...\n";
+            while (!display_instructions(window))
+            {
+                window.display();
+                menu.set_Selected_Index(NOTHING);
+            }
             break;
 
         case PLAY_GAME:

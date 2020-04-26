@@ -45,10 +45,12 @@ void Game::run(void)
             }
         }
         render();
-
+        sf::Event event;
         while (gameWindow.pollEvent(event))
+        {
             if (event.type == sf::Event::Closed)
                 gameWindow.close();
+        }
     }
 }
 
@@ -60,7 +62,7 @@ void Game::user_input_handler(void)
         {
             sf::Vector2i mousePos = { event.mouseButton.x, event.mouseButton.y };
 
-            selectedTower = gui.get_tower_option(mousePos); //GUI::get_tower_option(sf::Vector2i mousePos): Gets which tower was selected from gui menu (enum in Towers.h), or NONE
+            selectedTower = gui.get_tower_choice(); //GUI::get_tower_option(sf::Vector2i mousePos): Gets which tower was selected from gui menu (enum in Towers.h), or NONE
                                                             //^ Also if a tower button was clicked, highlights the button in menu to show shich tower is selected
             if (selectedTower != NONE)
             {
