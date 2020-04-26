@@ -3,6 +3,7 @@
 
 #pragma once
 
+
 #include "Projectile.h"
 
 #include <ctime>
@@ -11,6 +12,7 @@
 class Tower
 {
 protected:
+
     
     
 
@@ -51,3 +53,4 @@ public:
         return activeStatus;
     }
 };
+

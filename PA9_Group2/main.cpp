@@ -2,6 +2,7 @@
 //Main File
 #include <SFML/Graphics.hpp>
 #include "PA9.h"
+#include "Board_test.h"
 using namespace std;
 
 
