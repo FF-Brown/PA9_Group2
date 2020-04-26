@@ -54,6 +54,7 @@ void Game::run(void)
 
 void Game::user_input_handler(void)
 {
+    sf::Event event;
     while (gameWindow.pollEvent(event))
         if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button == sf::Mouse::Left))
         {
