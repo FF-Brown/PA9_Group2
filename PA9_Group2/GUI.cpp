@@ -122,7 +122,7 @@ GUI::GUI()
 
 }
 
-void GUI::display_GUI(sf::RenderWindow& window, int hp, int ex, int round)
+void GUI::draw(sf::RenderWindow& window, int hp, int ex, int round)
 {
 	string str = "Health: " + to_string(hp) + "/ 100";
 	display[0].set_text(str, 15);
