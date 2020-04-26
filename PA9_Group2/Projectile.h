@@ -6,11 +6,13 @@
 
 #include <cmath>
 
+#define SPEED 5
+
 
 class Projectile
 {
 private:
-    sf::Vector2f position;
+    sf::CircleShape shape;
     sf::Vector2f velocity;
     double maxDistance;
     double distance;
@@ -20,9 +22,11 @@ public:
 
     Projectile(sf::Vector2f startPoint, sf::Vector2f endPoint)
     {
-        position = startPoint;
+        shape.setPosition(startPoint);
 
-        //velocity is direction toward endPos scaled by speed
+        sf::Vector2f aimDir = endPoint - startPoint;
+        sf::Vector2f aimDirNorm = aimDir / sqrt(pow(aimDir.x, 2) + pow(aimDir.y, 2));
+        velocity = { aimDirNorm.x * SPEED, aimDirNorm.y * SPEED };
 
         maxDistance = calculate_distance(startPoint, endPoint);
         distance = 0;

@@ -15,7 +15,7 @@ class Enemy
 {
 protected:
     unsigned int ID;
-    sf::Vector2f position;
+    sf::CircleShape shape;
 
     int health;
 
@@ -45,6 +45,11 @@ public:
             return true;
         else
             return false;
+    }
+
+    sf::Vector2f get_position(void)
+    {
+        return shape.getPosition();
     }
 
 
