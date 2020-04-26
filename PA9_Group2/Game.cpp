@@ -45,35 +45,40 @@ void Game::run(void)
             }
         }
         render();
+
+        while (gameWindow.pollEvent(event))
+            if (event.type == sf::Event::Closed)
+                gameWindow.close();
     }
 }
 
 void Game::user_input_handler(void)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-    {
-        sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
-
-        selectedTower = gui.get_tower_option(mousePos); //GUI::get_tower_option(sf::Vector2i mousePos): Gets which tower was selected from gui menu (enum in Towers.h), or NONE
-                                                        //^ Also if a tower button was clicked, highlights the button in menu to show shich tower is selected
-        if (selectedTower != NONE)
+    while (gameWindow.pollEvent(event))
+        if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button == sf::Mouse::Left))
         {
-            //board.enable_gridlines();
-            if (board.addTower((sf::Vector2f)mousePos/*, selectedTower*/)); //Board::add_tower(Vector2i mousePos, Tower nTower): Adds new tower to the board, returns true if added
+            sf::Vector2i mousePos = { event.mouseButton.x, event.mouseButton.y };
+
+            selectedTower = gui.get_tower_option(mousePos); //GUI::get_tower_option(sf::Vector2i mousePos): Gets which tower was selected from gui menu (enum in Towers.h), or NONE
+                                                            //^ Also if a tower button was clicked, highlights the button in menu to show shich tower is selected
+            if (selectedTower != NONE)
             {
-                gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
-                selectedTower = NONE;
-                //board.disable_gridlines();
+                //board.enable_gridlines();
+                if (board.addTower((sf::Vector2f)mousePos/*, selectedTower*/)); //Board::add_tower(Vector2i mousePos, Tower nTower): Adds new tower to the board, returns true if added
+                {
+                    gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
+                    selectedTower = NONE;
+                    //board.disable_gridlines();
+                }
+            }
+
+            //example code (do for each button in gui and each tower on board)
+            sf::RectangleShape button;
+            if (button.getGlobalBounds().contains((sf::Vector2f)mousePos))
+            {
+                //Button clicked
             }
         }
-
-        //example code (do for each button in gui and each tower on board)
-        sf::RectangleShape button;
-        if (button.getGlobalBounds().contains((sf::Vector2f)mousePos))
-        {
-            //Button clicked
-        }
-    }
 }
 
 

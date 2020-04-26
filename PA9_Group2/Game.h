@@ -31,6 +31,7 @@ class Game
 {
 private:
     sf::RenderWindow& gameWindow; //Reference to window
+    sf::Event event;
 
     Board board;
     GUI gui;
