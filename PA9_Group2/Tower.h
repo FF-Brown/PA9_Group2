@@ -32,14 +32,13 @@ protected:
 
 public:
 
-    Tower(void) {}
+    Tower();
 
     Tower(sf::Vector2f initPosition)
     {
         position = initPosition;
     }
     
-    Tower();
     double get_range(void) { return range; }
     int get_attack_speed(void) { return attSpeed; }
     void fire(void) { lastFireTime = time(nullptr); }

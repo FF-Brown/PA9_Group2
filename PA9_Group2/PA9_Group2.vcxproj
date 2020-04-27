@@ -186,8 +186,14 @@
     <ClInclude Include="Towers.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="path.csv" />
-    <None Include="pathDiagram.xlsx" />
+    <Image Include="castleResized.png" />
+    <Image Include="dirtSquareResized.png" />
+    <Image Include="grassSquareResized.png" />
+    <Image Include="towerResized.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\path.csv" />
+    <None Include="Resources\pathDiagram.xlsx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

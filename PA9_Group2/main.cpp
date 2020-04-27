@@ -9,7 +9,7 @@
 #include"PA9.h"
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
-
+#include "Board_test.h"
 //Included Std Libraries
 #include <iostream>
 #include <string>
@@ -32,14 +32,6 @@ int main(void)
 
     Menu menu(WINDOW_WIDTH, WINDOW_HEIGHT);
     MainMenuOption option;
-
-    Board board;
-    int test = 0;
-    BoardTest testBoard;
-    testBoard.testAddTower();
-
-    return 0;
-
 
     do
     {

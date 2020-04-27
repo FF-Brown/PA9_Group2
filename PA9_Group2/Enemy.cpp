@@ -5,7 +5,7 @@ Enemy::Enemy(void)
 {
     isEnemy = true;
 
-    shape.setPosition(Board::get_starting_position());
+    shape.setPosition(Board::getStartingPosition());
 }
 
 void Enemy::move(const Board& board)

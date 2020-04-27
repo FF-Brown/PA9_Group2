@@ -70,7 +70,7 @@ void Game::user_input_handler(void)
                 //board.enable_gridlines();
                 if (board.addTower((sf::Vector2f)mousePos/*, selectedTower*/)); //Board::add_tower(Vector2i mousePos, Tower nTower): Adds new tower to the board, returns true if added
                 {
-                    gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
+                    //gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
                     selectedTower = NONE;
                     //board.disable_gridlines();
                 }
