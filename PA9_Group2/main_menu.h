@@ -41,6 +41,7 @@ public:
 	MainMenuOption get_Selected_Index();
 	void set_Selected_Index(MainMenuOption option);
 
+    bool display_instructions(sf::RenderWindow& window);
     void play_game(sf::RenderWindow& window);
 };
 

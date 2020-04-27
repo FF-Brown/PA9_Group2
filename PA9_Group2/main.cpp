@@ -6,7 +6,6 @@
 
 //Included Project Files
 #include "main_menu.h"
-#include"PA9.h"
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
@@ -45,7 +44,7 @@ int main(void)
         switch (option)
         {
         case INSTRUCTIONS:
-            while (!display_instructions(window))
+            while (!menu.display_instructions(window))
             {
                 window.display();
                 menu.set_Selected_Index(NOTHING);
