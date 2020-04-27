@@ -33,8 +33,8 @@ class Game
 private:
     sf::RenderWindow& gameWindow; //Reference to window
 
-    Board board();
-    GUI gui;
+    Board board;
+    //GUI gui;
 
     Player player;
 

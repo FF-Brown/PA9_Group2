@@ -33,9 +33,14 @@ public:
 	bool inPath(int square);
 	//Convert coordinates to cell # for use in other functions
 	int getSquareCoord(double x, double y);
+	//For testing purposes only
 	void colorCell(int cellNum);
+	//Checks if a given square has a tower in it
 	bool isOpen(sf::Vector2f position);
+	//Calls isOpen() and inPath(). If both check out, adds a tower in the given position
 	int addTower(sf::Vector2f position);
+	Tower* getTowers() { return towers; }
+	int getTowerCount() { return towerCount; } 
 
 private:
 	//Note that grid is a 1D array, not 2D which would be preferrable 

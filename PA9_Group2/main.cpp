@@ -14,6 +14,14 @@ int main(void)
     Menu menu(WINDOW_WIDTH, WINDOW_HEIGHT);
     MainMenuOption option;
 
+    Board board;
+    int test = 0;
+    BoardTest testBoard;
+    testBoard.testAddTower();
+
+    return 0;
+
+
     do
     {
         menu.display_main_menu(window);

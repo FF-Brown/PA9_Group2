@@ -54,25 +54,25 @@ void Game::user_input_handler(void)
     {
         sf::Vector2i mousePos = sf::Mouse::getPosition(gameWindow);
 
-        selectedTower = gui.get_tower_option(mousePos); //GUI::get_tower_option(sf::Vector2i mousePos): Gets which tower was selected from gui menu (enum in Towers.h), or NONE
-                                                        //^ Also if a tower button was clicked, highlights the button in menu to show shich tower is selected
-        if (selectedTower != NONE)
-        {
-            //board.enable_gridlines();
-            if (board.add_tower(mousePos/*, selectedTower*/)); //Board::add_tower(Vector2i mousePos, Tower nTower): Adds new tower to the board, returns true if added
-            {
-                gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
-                selectedTower = NONE;
-                //board.disable_gridlines();
-            }
-        }
+        //selectedTower = gui.get_tower_option(mousePos); //GUI::get_tower_option(sf::Vector2i mousePos): Gets which tower was selected from gui menu (enum in Towers.h), or NONE
+        //                                                //^ Also if a tower button was clicked, highlights the button in menu to show shich tower is selected
+        //if (selectedTower != NONE)
+        //{
+        //    //board.enable_gridlines();
+        //    if (board.add_tower(mousePos/*, selectedTower*/)); //Board::add_tower(Vector2i mousePos, Tower nTower): Adds new tower to the board, returns true if added
+        //    {
+        //        gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
+        //        selectedTower = NONE;
+        //        //board.disable_gridlines();
+        //    }
+        //}
 
-        //example code (do for each button in gui and each tower on board)
-        sf::RectangleShape button;
-        if (button.getGlobalBounds().contains((sf::Vector2f)mousePos))
-        {
-            //Button clicked
-        }
+        ////example code (do for each button in gui and each tower on board)
+        //sf::RectangleShape button;
+        //if (button.getGlobalBounds().contains((sf::Vector2f)mousePos))
+        //{
+        //    //Button clicked
+        //}
     }
 }
 
@@ -93,8 +93,8 @@ void Game::spawn_enemy(void)
 void Game::move_enemies(void)
 {
 
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
-        it->move(board);
+    //for (auto it = enemies.begin(); it != enemies.end(); it++)
+    //    it->move(board);
 }
 
 void Game::despawn_enemies(void)
@@ -108,13 +108,13 @@ void Game::despawn_enemies(void)
 
 void Game::spawn_projectiles(void)
 {
-    Tower towers[] = board.get_towers();
-    int numTowers  = board.get_num_towers();
+    Tower* towers = board.getTowers();
+    int numTowers  = board.getTowerCount(); 
 
     for (int i = 0; i < numTowers; i++)
         if (towers[i].is_active())
         {
-            sf::Vector2f towerPos = towers[i].get_position();
+            sf::Vector2f towerPos = towers[i].getPosition();
 
             Enemy* closestEnemy = nullptr;
             double closestDistance = towers[i].get_range();
@@ -132,9 +132,9 @@ void Game::spawn_projectiles(void)
             }
             if (closestEnemy = nullptr) //No enemies found in range
                 continue;
-
+            
             towers[i].fire();
-            closestEnemy->damage(towers[i].get_damage()); //Damage enemy
+            closestEnemy->damage(towers[i].getDamage()); //Damage enemy
             projectiles.push_back(Projectile(towerPos, closestEnemy->get_position())); //Spawn projectile
         }
 }
@@ -159,7 +159,7 @@ void Game::render(void)
     gameWindow.clear(); //First time in game loop: Clears menu items
 
     board.draw(gameWindow);
-    gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
+    //gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
 
     //Draw all enemies
     for (auto it = enemies.begin(); it != enemies.end(); it++)
