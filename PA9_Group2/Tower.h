@@ -34,7 +34,7 @@ protected:
 
 public:
 
-    Tower(void) {}
+    Tower();
 
     Tower(sf::Vector2f initPosition)
     {
@@ -43,6 +43,7 @@ public:
         coolDownTime = 60 / attSpeed;
     }
     
+
     Tower();
 
     double get_range(void)

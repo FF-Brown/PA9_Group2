@@ -24,34 +24,66 @@ sf::RectangleShape* createGrid(double width, double height, double cellSize) {
 
     return squareGrid;
 }
+void Board::createSpriteGrid(double width, double height, double cellSize)
+{
+	//Number of squares across and down
+	int x = width / cellSize, y = height / cellSize, total = x * y;
+
+	double xCoord = 0, yCoord = 0;
+
+	spriteGrid = new sf::Sprite[total];
+
+	for (int m = 0; m < total; m++, xCoord += cellSize) {
+		if (m % x == 0 && m != 0) {
+			xCoord = 0;
+			yCoord += cellSize;
+		}
+		spriteGrid[m].setPosition(sf::Vector2f(xCoord, yCoord));
+	}
+}
 Board::Board()
 {
 	gridWidth = GRID_WIDTH;
 	gridHeight = GRID_HEIGHT;
 	cellSize = CELL_SIZE;
-	grid = createGrid(gridWidth, gridHeight, cellSize);
+	//grid = createGrid(gridWidth, gridHeight, cellSize);
 	columns = (int)(gridWidth / cellSize);
 	rows = (int)(gridHeight / cellSize);
 	pathLength = 0;
 	squareCount = columns * rows; //(width / cellsize) * (width / cellsize)
-	readPath("path.csv");
-	markPath();
+	readPath("Resources/path.csv");
+
+	//Load textures
+	if (!tower.loadFromFile("Resources/towerResized.png"))
+		cout << "Error: Tower texture file not loaded.\n";
+	if (!dirt.loadFromFile("Resources/dirtSquareResized.png"))
+		cout << "Error: Dirt texture file not loaded.\n";
+	if (!grass.loadFromFile("Resources/grassSquareResized.png"))
+		cout << "Error: Grass texture file not loaded.\n";
+	if (!castle.loadFromFile("Resources/castleResized.png"))
+		cout << "Error: Castle texture file not loaded.\n";
+	createSpriteGrid(gridWidth, gridHeight, cellSize);
+	drawTextures();
 }
 void Board::draw(sf::RenderWindow& window)
 {
-	//Draws grid on board. Must be used BEFORE any other calls of window.draw()
+	//Draws grid on board. Must be used BEFORE any calls of window.draw()
 	//or it will hide other objects
 	for (int i = 0; i < squareCount; ++i) {
-		window.draw(grid[i]);
+		window.draw(spriteGrid[i]);
 	}
 }
 void Board::markPath()
 {
-	//Draws path on board in red. Marks player castle yellow
+	//Draws path on board in red. Marks player castle yellow 
+	//Called by drawTextures() 
 	for (int i = 0; i < pathLength; ++i) {
-		grid[path[i]].setFillColor(sf::Color::Red);
-		if(i == pathLength - 1)
-			grid[path[i]].setFillColor(sf::Color::Yellow);
+		//grid[path[i]].setFillColor(sf::Color::Red);
+		spriteGrid[path[i]].setTexture(dirt);
+		//if(i == pathLength - 1)
+		//	grid[path[i]].setFillColor(sf::Color::Yellow);
+		if (i == pathLength - 1)
+			spriteGrid[path[i]].setTexture(castle);
 	}
 }
 void Board::readPath(string fileName)
@@ -128,11 +160,10 @@ void Board::colorCell(int cellNum)
 }
 int Board::addTower(sf::Vector2f position)
 {
-	//printf("Input: (%.1f, %.1f)\n", position.x, position.y);
 	int cell = getSquareCoord(position.x, position.y);
-	//cout << "Cell number " << cell << endl;
-	position = grid[cell].getPosition();
-	//printf("Corrected input: (%.1f, %.1f)\n", position.x, position.y);
+	if (cell == -1)
+		return -1;
+	position = spriteGrid[cell].getPosition();
 	int result = 1;
 	//Check that not in path
 	if (inPath(cell)) {
@@ -149,6 +180,7 @@ int Board::addTower(sf::Vector2f position)
 			//Add tower 
 			Tower newTower(position);
 			towers[towerCount] = newTower;
+			spriteGrid[cell].setTexture(tower);
 			++towerCount;
 		}
 	}
@@ -164,17 +196,45 @@ bool Board::isOpen(sf::Vector2f position)
 	}
 	return true;
 }
-
-Tower* Board::get_towers(void)
+sf::Vector2f Board::getStartingPosition(void)
 {
-    return towers;
+	//Lazy way: just report default starting point
+	return sf::Vector2f(387, 0);
+	//Better way: report first square on path
+	//Won't work as a static function
+}
+Direction Board::getDirection(sf::Vector2f position)
+{
+	int cell = getSquareCoord(position.x, position.y);
+	int index = -1;
+	for (int i = 0; i < pathLength; ++i) {
+		if (path[i] == cell)
+			index = i;
+	}
+	if (index == -1) {
+		cout << "Coordinates not in path.\n";
+		return DOWN;
+	}
+	//Down
+	if (path[index + 1] - 20 == path[index])
+		return DOWN;
+	//Up
+	if (path[index + 1] + 20 == path[index])
+		return UP;
+	//Right
+	if (path[index + 1] - 1 == path[index])
+		return RIGHT;
+	//Left
+	if (path[index + 1] + 1 == path[index])
+		return LEFT;
+	cout << "Path could not be determined.\n";
+	return DOWN;
+}
+void Board::drawTextures()
+{
+	for (int i = 0; i < squareCount; ++i) {
+		spriteGrid[i].setTexture(grass);
+	}
+	markPath();
 }
 
-int Board::get_num_towers(void)
-{
-    return towerCount;
-}
-
-//Function to detect corners
-//Dependent on current grid size
-//Will need to be redone with better math to accomodate any size

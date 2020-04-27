@@ -91,10 +91,24 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="path.csv">
+    <Image Include="towerResized.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="castleResized.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="dirtSquareResized.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="grassSquareResized.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\path.csv">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="pathDiagram.xlsx">
+    <None Include="Resources\pathDiagram.xlsx">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -15,9 +15,9 @@
 class BoardTest : Board
 {
 public:
-	BoardTest();
-	~BoardTest();
 	void testAddTower(); 
+    void testGetDirection();
+    void testPrint(sf::RenderWindow& window, Board& test);
     void assert(string testName, bool testCase, string errorMessage); 
 
 private:

@@ -8,6 +8,11 @@
 #include "main_menu.h"
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
+//Included Std Libraries
+#include <iostream>
+#include <string>
+//For testing
+#include "Board_test.h"
 
 using namespace std;
 
@@ -27,14 +32,6 @@ int main(void)
 
     Menu menu(WINDOW_WIDTH, WINDOW_HEIGHT);
     MainMenuOption option;
-
-    Board board;
-    int test = 0;
-    BoardTest testBoard;
-    testBoard.testAddTower();
-
-    return 0;
-
 
     do
     {

@@ -63,6 +63,7 @@ void Game::user_input_handler(void)
                 selectedTower = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y);
                 if (selectedTower != NONE)
                 {
+
                     //board.enable_gridlines();
                     if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)/*, selectedTower*/));
                     {

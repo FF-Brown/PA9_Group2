@@ -10,6 +10,8 @@ using namespace std;
 #define GRID_WIDTH 500
 #define GRID_HEIGHT 500
 #define CELL_SIZE 25
+enum Direction { UP, DOWN, LEFT, RIGHT };
+
 
 sf::RectangleShape* createGrid(double width, double height, double cellSize);
 
@@ -19,7 +21,7 @@ public:
 	Board(); 
 	~Board();
 
-	//Draws grid on board. Must be used BEFORE any other calls of window.draw()
+	//Draws grid on board. Must be used BEFORE any calls of window.draw()
 	//or it will hide other objects
 	void draw(sf::RenderWindow& window);
 	//Draws path on board in red. Marks player castle yellow
@@ -39,14 +41,23 @@ public:
 	bool isOpen(sf::Vector2f position);
 	//Calls isOpen() and inPath(). If both check out, adds a tower in the given position
 	int addTower(sf::Vector2f position);
-	Tower* get_towers() { return towers; }
-	int get_num_towers() { return towerCount; } 
-  //WRITE FUNCTION
-    static sf::Vector2f get_starting_position(void); //Returns spawnpoint of enemies | used in Enemy constructor
+	Tower* getTowers() { return towers; }
+	int getTowerCount() { return towerCount; } 
+	//Returns spawnpoint of enemies | used in Enemy constructor
+	static sf::Vector2f getStartingPosition(void); 
+	Direction getDirection(sf::Vector2f position);
+	void createSpriteGrid(double, double, double);
+	void drawTextures();
 
-private:
+protected:
 	//Note that grid is a 1D array, not 2D which would be preferrable 
 	sf::RectangleShape* grid;
+	sf::Sprite* spriteGrid;
+	sf::Texture texture;
+	sf::Texture dirt;
+	sf::Texture grass;
+	sf::Texture castle;
+	sf::Texture tower;
 	double gridWidth, gridHeight, cellSize;
 	int squareCount, columns, rows;
 	int* path;
