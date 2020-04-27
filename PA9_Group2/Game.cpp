@@ -56,6 +56,7 @@ void Game::run(void)
 
 void Game::user_input_handler(void)
 {
+
     sf::Event event;
     while (gameWindow.pollEvent(event))
         if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button == sf::Mouse::Left))
@@ -101,8 +102,8 @@ void Game::spawn_enemy(void)
 void Game::move_enemies(void)
 {
 
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
-        it->move(board);
+    //for (auto it = enemies.begin(); it != enemies.end(); it++)
+    //    it->move(board);
 }
 
 void Game::despawn_enemies(void)
@@ -116,13 +117,13 @@ void Game::despawn_enemies(void)
 
 void Game::spawn_projectiles(void)
 {
-    Tower* towers = board.get_towers();
-    int numTowers  = board.get_num_towers();
+    Tower* towers = board.getTowers();
+    int numTowers  = board.getTowerCount(); 
 
     for (int i = 0; i < numTowers; i++)
         if (towers[i].is_active())
         {
-            sf::Vector2f towerPos = towers[i].get_position();
+            sf::Vector2f towerPos = towers[i].getPosition();
 
             Enemy* closestEnemy = nullptr;
             double closestDistance = towers[i].get_range();
@@ -140,9 +141,9 @@ void Game::spawn_projectiles(void)
             }
             if (closestEnemy = nullptr) //No enemies found in range
                 continue;
-
+            
             towers[i].fire();
-            closestEnemy->damage(towers[i].get_damage()); //Damage enemy
+            closestEnemy->damage(towers[i].getDamage()); //Damage enemy
             projectiles.push_back(Projectile(towerPos, closestEnemy->get_position())); //Spawn projectile
         }
 }
@@ -167,7 +168,7 @@ void Game::render(void)
     gameWindow.clear(); //First time in game loop: Clears menu items
 
     board.draw(gameWindow);
-    gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
+    //gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
 
     //Draw all enemies
     for (auto it = enemies.begin(); it != enemies.end(); it++)
