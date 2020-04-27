@@ -45,12 +45,6 @@ void Game::run(void)
             }
         }
         render();
-        sf::Event event;
-        while (gameWindow.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                gameWindow.close();
-        }
     }
 }
 
@@ -59,7 +53,9 @@ void Game::user_input_handler(void)
 
     sf::Event event;
     while (gameWindow.pollEvent(event))
-        if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button == sf::Mouse::Left))
+        if (event.type == sf::Event::Closed)
+            gameWindow.close();
+        else if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button == sf::Mouse::Left))
         {
             sf::Vector2i mousePos = { event.mouseButton.x, event.mouseButton.y };
 
