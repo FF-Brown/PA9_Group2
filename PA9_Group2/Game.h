@@ -21,7 +21,6 @@
 //Included Std Libraries
 #include <list>
 #include <iterator>
-#include <ctime>
 
 
 #define PREP_TIME 10.0     //Seconds before first enemy in round spawns
@@ -31,6 +30,7 @@ class Game
 {
 private:
     sf::RenderWindow& gameWindow; //Reference to window
+    sf::Clock clock;
 
     Board board;
     GUI gui;
@@ -44,8 +44,8 @@ private:
     int currentRound = 1;
 
     bool roundStarted;
-    time_t lastRoundEndTime;
-    time_t lastSpawnTime;
+    sf::Time lastRoundEndTime;
+    sf::Time lastSpawnTime;
 
     TowerType selectedTower = NONE;
 

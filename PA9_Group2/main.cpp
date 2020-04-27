@@ -6,13 +6,13 @@
 
 //Included Project Files
 #include "main_menu.h"
-#include"PA9.h"
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
-#include "Board_test.h"
 //Included Std Libraries
 #include <iostream>
 #include <string>
+//For testing
+#include "Board_test.h"
 
 using namespace std;
 
@@ -41,7 +41,7 @@ int main(void)
         switch (option)
         {
         case INSTRUCTIONS:
-            while (!display_instructions(window))
+            while (!menu.display_instructions(window))
             {
                 window.display();
                 menu.set_Selected_Index(NOTHING);
