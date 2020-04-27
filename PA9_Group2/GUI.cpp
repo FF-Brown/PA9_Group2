@@ -70,11 +70,8 @@ int Display::get_data()
 	return data;
 }
 
-bool Button::is_over(sf::RenderWindow& window)
+bool Button::is_over(int mouseX, int mouseY)
 {
-	int mouseX = sf::Mouse::getPosition(window).x;
-	int mouseY = sf::Mouse::getPosition(window).y;
-
 
 	sf::Event event;
 
@@ -137,39 +134,24 @@ void GUI::draw(sf::RenderWindow& window, int hp, int ex, int round)
 	for (int i = 0; i < 3; i++)
 	{
 		buttons[i].draw_display(window);
-		buttons[i].is_over(window);
+		buttons[i].is_over(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
 		display[i].draw_display(window);
 
 	}
 	choice = NONE;		//base choice is always none
 
-	sf::Event event;
-	bool time;
-
-	while (window.pollEvent(event))
-	{
-		switch (event.type)
-		{
-		case sf::Event::MouseMoved:
-			time = is_over(window);
-			break;
-		case sf::Event::MouseButtonPressed:
-			for (int i = 0; i < 3; i++)
-			{
-				if (buttons[i].is_over(window))
-				{
-					choice = TURRET;
-					std::cout << "Tower clicked" << std::endl;
-				}
-			}
-			break;
-		}
-	}
-
 	return;
 }
 
-TowerType GUI::get_tower_choice()
+TowerType GUI::get_tower_choice(int mouseX, int mouseY)
 {
+    for (int i = 0; i < 3; i++)
+    {
+        if (buttons[i].is_over(mouseX, mouseY))
+        {
+            choice = TURRET;
+            std::cout << "Tower clicked" << std::endl;
+        }
+    }
 	return choice;
 }
