@@ -25,7 +25,7 @@ public:
 class Button : public Display
 {
 public:
-	bool is_over(sf::RenderWindow& window);		//checks if the mouse is over
+	bool is_over(int mouseX, int mouseY);		//checks if the mouse is over
 
 };
 
@@ -38,5 +38,5 @@ class GUI : public Button
 public:
 	GUI();		//initates all the buttons
 	void draw(sf::RenderWindow& window, int hp, int xp, int round);
-	TowerType get_tower_choice();
+	TowerType get_tower_choice(int mouseX, int mouseY);
 };
