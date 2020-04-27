@@ -10,10 +10,6 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
-//Included Std Libraries
-#include <iostream>
-#include <string>
-
 using namespace std;
 
 
