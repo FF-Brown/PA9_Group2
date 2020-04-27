@@ -6,7 +6,7 @@
 
 #include "Projectile.h"
 
-#include <ctime>
+#include <SFML/Graphics.hpp>
 
 
 class Tower
@@ -17,14 +17,16 @@ protected:
     double range; //Pixels
 
     int attSpeed; //Shots per minute
-    int coolDownTime; //  = (60 / attSpeed) in constructor
+    int coolDownTime; //In seconds
     int damage;
 
     bool activeStatus = true;
-    time_t lastFireTime = 0;
+    sf::Clock clock;
+    sf::Time lastFireTime = clock.getElapsedTime();
+
     void update_status(void)
     {
-        if (difftime(time(nullptr), lastFireTime) < coolDownTime)
+        if ((clock.getElapsedTime() - lastFireTime).asSeconds() < coolDownTime)
             activeStatus = false;
         else
             activeStatus = true;
@@ -37,29 +39,34 @@ public:
     Tower(sf::Vector2f initPosition)
     {
         position = initPosition;
+
+        coolDownTime = 60 / attSpeed;
     }
     
     Tower();
-    double get_range(void) { return range; }
-    int get_attack_speed(void) { return attSpeed; }
-    void fire(void) { lastFireTime = time(nullptr); }
-    sf::Vector2f getPosition() { return position; }
-    void setPosition(sf::Vector2f pos) { position = pos; }
-    int getDamage() { return damage; } 
+
+    double get_range(void)
+        { return range; }
+
+    int get_attack_speed(void)
+        { return attSpeed; }
+
+    void fire(void)
+        { lastFireTime = clock.getElapsedTime(); }
+
+    sf::Vector2f getPosition()
+        { return position; }
+
+    int getDamage(void)
+        { return damage; } 
+
+    sf::Vector2f get_position(void)
+        { return position; }
+
     bool is_active(void)
     {
         update_status();
         return activeStatus;
-    }
-
-    sf::Vector2f get_position(void)
-    {
-        return position;
-    }
-
-    int get_damage(void)
-    {
-        return damage;
     }
 };
 
