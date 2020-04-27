@@ -4,6 +4,7 @@
 Enemy::Enemy(void)
 {
     isEnemy = true;
+
     shape.setPosition(Board::get_starting_position());
 }
 

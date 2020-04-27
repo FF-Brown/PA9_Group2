@@ -105,15 +105,15 @@ bool Board::inPath(int square)
 }
 Board::~Board()
 {
-	delete [] path;
-	delete [] grid;
+	delete[] path;
+	delete[] grid;
 }
 int Board::getSquareCoord(double x, double y)
 {
 	int column = 0, row = 0;
 	int cellNumber = 0;
 
-	if (x > 0 && x < gridWidth && y > 0 && y < gridHeight) {
+	if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
 		row = y / cellSize;
 		column = x / cellSize;
 		cellNumber = (row * columns) + column;
@@ -126,17 +126,20 @@ void Board::colorCell(int cellNum)
 {
 	grid[cellNum].setFillColor(sf::Color::Blue); 
 }
-
 int Board::addTower(sf::Vector2f position)
 {
+	//printf("Input: (%.1f, %.1f)\n", position.x, position.y);
 	int cell = getSquareCoord(position.x, position.y);
-	int result = 1; 
+	//cout << "Cell number " << cell << endl;
+	position = grid[cell].getPosition();
+	//printf("Corrected input: (%.1f, %.1f)\n", position.x, position.y);
+	int result = 1;
 	//Check that not in path
 	if (inPath(cell)) {
 		cout << "Cell is in enemy path.\n";
 		result = 0;
 	}
-	else { 
+	else {
 		//Check that no tower there
 		if (!isOpen(position)) {
 			cout << "Cell is occupied.\n";

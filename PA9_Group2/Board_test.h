@@ -10,6 +10,7 @@
 
     return 0;
 */
+#include <string> 
 
 class BoardTest : Board
 {
@@ -17,6 +18,7 @@ public:
 	BoardTest();
 	~BoardTest();
 	void testAddTower(); 
+    void assert(string testName, bool testCase, string errorMessage); 
 
 private:
 

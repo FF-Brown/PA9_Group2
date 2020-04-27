@@ -166,6 +166,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_menu.cpp" />
     <ClCompile Include="PA9.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Round.cpp" />
     <ClCompile Include="Tower.cpp" />
   </ItemGroup>
