@@ -41,6 +41,8 @@ public:
 	int addTower(sf::Vector2f position);
 	Tower* getTowers() { return towers; }
 	int getTowerCount() { return towerCount; } 
+  //WRITE FUNCTION
+    static sf::Vector2f get_starting_position(void); //Returns spawnpoint of enemies | used in Enemy constructor
 
 private:
 	//Note that grid is a 1D array, not 2D which would be preferrable 

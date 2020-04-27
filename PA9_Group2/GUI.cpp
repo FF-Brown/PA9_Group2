@@ -1,6 +1,5 @@
 
 #include "GUI.h"
-#include "Towers.h"
 
 Display::Display()
 {
@@ -105,18 +104,20 @@ GUI::GUI()
 	for (int i = 150, h = 0; h < 3; h++)
 	{
 		buttons[h].set_size(60, 60);
-		buttons[h].set_position(490, i);
+		buttons[h].set_position(780, i);
 		buttons[h].set_text("Tower", 10);
 
 		i += 100;
 
 	}
-	for (int i = 69, h = 0; h < 3; h++)
+	for (int i = 550, h = 0; h < 2; h++)
 	{
 		display[h].set_size(30, 150);
-		display[h].set_position(i, 150);	//the int h on set_size MUST be the same as y set_position
+		display[h].set_position(i, 580);	//the int h on set size MUST be the same as y in position
 		i += 150;
 	}
+	display[2].set_size(30, 150);
+	display[2].set_position(600, 150);
 
 	return;
 
@@ -168,7 +169,7 @@ void GUI::draw(sf::RenderWindow& window, int hp, int ex, int round)
 	return;
 }
 
-TowerType GUI::get_choice()
+TowerType GUI::get_tower_choice()
 {
 	return choice;
 }

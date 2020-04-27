@@ -1,5 +1,4 @@
-#pragma once
-#include "PA9.h"
+ #pragma once
 #include "Board.h"
 #include "Towers.h"
 
@@ -39,5 +38,5 @@ class GUI : public Button
 public:
 	GUI();		//initates all the buttons
 	void draw(sf::RenderWindow& window, int hp, int xp, int round);
-	TowerType get_choice();
+	TowerType get_tower_choice();
 };

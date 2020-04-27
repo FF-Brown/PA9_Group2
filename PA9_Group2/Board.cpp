@@ -147,8 +147,7 @@ int Board::addTower(sf::Vector2f position)
 		}
 		else {
 			//Add tower 
-			Tower newTower;
-			newTower.setPosition(position);
+			Tower newTower(position);
 			towers[towerCount] = newTower;
 			++towerCount;
 		}
@@ -165,6 +164,17 @@ bool Board::isOpen(sf::Vector2f position)
 	}
 	return true;
 }
+
+Tower* Board::get_towers(void)
+{
+    return towers;
+}
+
+int Board::get_num_towers(void)
+{
+    return towerCount;
+}
+
 //Function to detect corners
 //Dependent on current grid size
 //Will need to be redone with better math to accomodate any size

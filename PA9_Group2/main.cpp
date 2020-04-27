@@ -1,9 +1,28 @@
 
 //Main File
+
+
+#pragma once
+
+//Included Project Files
+#include "main_menu.h"
+#include"PA9.h"
+//Included SFML Libraries
 #include <SFML/Graphics.hpp>
-#include "PA9.h"
-#include "Board_test.h"
+
+//Included Std Libraries
+#include <iostream>
+#include <string>
+
 using namespace std;
+
+
+//Main Window Dimensions
+#define WINDOW_HEIGHT 500
+#define WINDOW_WIDTH  800
+
+//Frame Rate Limit
+#define FR_LIMIT 60
 
 
 int main(void)
@@ -30,8 +49,11 @@ int main(void)
         switch (option)
         {
         case INSTRUCTIONS:
-            menu.display_instructions(window);
-            cout << "Instructions forthcoming...\n";
+            while (!display_instructions(window))
+            {
+                window.display();
+                menu.set_Selected_Index(NOTHING);
+            }
             break;
 
         case PLAY_GAME:

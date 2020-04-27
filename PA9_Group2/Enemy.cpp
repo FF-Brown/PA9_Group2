@@ -4,7 +4,8 @@
 Enemy::Enemy(void)
 {
     isEnemy = true;
-    //position = board.get_starting_position();
+
+    shape.setPosition(Board::get_starting_position());
 }
 
 void Enemy::move(const Board& board)

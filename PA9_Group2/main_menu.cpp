@@ -154,9 +154,9 @@ MainMenuOption Menu::get_Selected_Index()
 	return selectedItemIndex;
 }
 
-void Menu::display_instructions(sf::RenderWindow& window)
+void Menu::set_Selected_Index(MainMenuOption option)
 {
-    //Adapt from Sammy's menu code
+	selectedItemIndex = option;
 
 }
 

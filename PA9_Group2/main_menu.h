@@ -11,15 +11,17 @@
 //Contains an option from the main menu
 enum MainMenuOption
 {
-    INSTRUCTIONS,
-    PLAY_GAME,
-    EXIT
+	INSTRUCTIONS,
+	PLAY_GAME,
+	NOTHING,
+	EXIT
 };
 
 class Menu
 {
 private:
     sf::RenderWindow MenuWindow; //Could use this instead of pass sf::RenderWindow as parameter in all functions | use initializer list
+
 
 	MainMenuOption selectedItemIndex;
 	sf::Font font;
@@ -37,8 +39,8 @@ public:
 	void mousePlace(sf::RenderWindow& window);
 	void get_main_menu_option(sf::RenderWindow& window);
 	MainMenuOption get_Selected_Index();
+	void set_Selected_Index(MainMenuOption option);
 
-    void display_instructions(sf::RenderWindow& window);
     void play_game(sf::RenderWindow& window);
 };
 
