@@ -8,8 +8,8 @@ using namespace std;
 Game::Game(sf::RenderWindow& window) : gameWindow(window)
 {
     roundStarted = false;
-    lastRoundEndTime = time(nullptr);
-    lastSpawnTime = time(nullptr);
+    lastRoundEndTime = clock.getElapsedTime();
+    lastSpawnTime = clock.getElapsedTime();
 
     for (int i = 0; i < NUM_ROUNDS; i++)
         rounds[i] = Round(i + 1);
@@ -21,7 +21,7 @@ void Game::run(void)
     {
         user_input_handler();
 
-        if (difftime(time(nullptr), lastRoundEndTime) > PREP_TIME)
+        if ((clock.getElapsedTime() - lastRoundEndTime).asSeconds() > PREP_TIME)
             roundStarted = true;
 
         if (roundStarted)
@@ -41,7 +41,7 @@ void Game::run(void)
             {
                 currentRound++;
                 roundStarted = false;
-                lastRoundEndTime = time(nullptr);
+                lastRoundEndTime = clock.getElapsedTime();
             }
         }
         render();
@@ -79,7 +79,7 @@ void Game::user_input_handler(void)
 
 void Game::spawn_enemy(void)
 {
-    if (difftime(time(nullptr), lastSpawnTime) > SPAWN_COOLDOWN)
+    if ((clock.getElapsedTime() - lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
     {
         Enemy nEnemy = rounds[currentRound - 1].get_next_enemy();
         if (nEnemy.isEnemy)
@@ -108,10 +108,9 @@ void Game::despawn_enemies(void)
 
 void Game::spawn_projectiles(void)
 {
-    Tower* towers = board.getTowers();
-    int numTowers  = board.getTowerCount(); 
+    Tower* towers = board.get_towers();
 
-    for (int i = 0; i < numTowers; i++)
+    for (int i = 0; i < board.get_num_towers(); i++)
         if (towers[i].is_active())
         {
             sf::Vector2f towerPos = towers[i].getPosition();

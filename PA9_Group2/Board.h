@@ -39,8 +39,8 @@ public:
 	bool isOpen(sf::Vector2f position);
 	//Calls isOpen() and inPath(). If both check out, adds a tower in the given position
 	int addTower(sf::Vector2f position);
-	Tower* getTowers() { return towers; }
-	int getTowerCount() { return towerCount; } 
+	Tower* get_towers() { return towers; }
+	int get_num_towers() { return towerCount; } 
   //WRITE FUNCTION
     static sf::Vector2f get_starting_position(void); //Returns spawnpoint of enemies | used in Enemy constructor
 
