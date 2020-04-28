@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "Tower.h"
+#include "Towers.h"
 using namespace std;
 //class for game board with grid, display options, enemy marching path, rules for acceptable builds (can't build on the same square 2x, etc)
 #define GRID_WIDTH 500
@@ -40,7 +40,7 @@ public:
 	//Checks if a given square has a tower in it
 	bool isOpen(sf::Vector2f position);
 	//Calls isOpen() and inPath(). If both check out, adds a tower in the given position
-	int addTower(sf::Vector2f position);
+	int addTower(sf::Vector2f position, TowerType nTowerType);
 	Tower* getTowers() { return towers; }
 	int getTowerCount() { return towerCount; } 
 	//Returns spawnpoint of enemies | used in Enemy constructor

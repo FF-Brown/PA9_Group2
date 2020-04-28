@@ -11,6 +11,7 @@ protected:
 	int data;
 	sf::Font font;
 	sf::Text text;
+    bool highlighted;
 
 public:
 	Display();
@@ -20,6 +21,7 @@ public:
 	void draw_display(sf::RenderWindow& window);
 	void set_data(int);
 	int get_data();
+    void highlight(bool set);
 };
 
 class Button : public Display
@@ -34,9 +36,11 @@ class GUI : public Button
 	Display round;
 	Display display[NUM_TOWERS];
 	Button buttons[NUM_TOWERS];
+    Tower towers[NUM_TOWERS]; //For reference in button info
 	TowerType choice;
 public:
 	GUI();		//initates all the buttons
 	void draw(sf::RenderWindow& window, int hp, int xp, int round);
 	TowerType get_tower_choice(int mouseX, int mouseY);
+    void highlight_button(TowerType towerType);
 };

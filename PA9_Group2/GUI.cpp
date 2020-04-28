@@ -20,6 +20,7 @@ Display::Display()
 	text.setOutlineColor(sf::Color::Black);
 	text.setOutlineThickness(3);			//and the text
 	data = 0;
+    highlighted = false;
 }
 
 void Display::set_size(int w, int h)
@@ -56,6 +57,11 @@ void Display::set_text(string t, int size)
 
 void Display::draw_display(sf::RenderWindow& window)
 {
+    if (highlighted)
+        Shape.setOutlineColor(sf::Color::Red);
+    else
+        Shape.setOutlineColor(sf::Color::Transparent);
+
 	window.draw(Shape);
 	window.draw(text);
 }
@@ -68,6 +74,11 @@ void Display::set_data(int i)
 int Display::get_data()
 {
 	return data;
+}
+
+void Display::highlight(bool set)
+{
+    highlighted = set;
 }
 
 bool Button::is_over(int mouseX, int mouseY)
@@ -99,7 +110,8 @@ bool Button::is_over(int mouseX, int mouseY)
 GUI::GUI()
 {
     choice = NONE;
-    Tower towers[NUM_TOWERS] = { Turret() };
+    towers[0] = Turret();
+    towers[1] = Sniper();
 	for (int i = 150, h = 0; h < 3; h++)
 	{
 		buttons[h].set_size(60, 60);
@@ -162,4 +174,15 @@ TowerType GUI::get_tower_choice(int mouseX, int mouseY)
         return NONE;
     else
     	return choice;
+}
+
+void GUI::highlight_button(TowerType towerType)
+{
+    for (int i = 0; i < NUM_TOWERS; i++)
+    {
+        if (towers[i].get_type() == towerType)
+            buttons[i].highlight(true);
+        else
+            buttons[i].highlight(false);
+    }
 }

@@ -59,6 +59,9 @@ void Menu::display_main_menu(sf::RenderWindow& mainMenuWindow)
 	{
 		switch (event.type)
 		{
+        case sf::Event::Closed:
+            mainMenuWindow.close();
+            break;
 		case sf::Event::MouseMoved:
 			mousePlace(mainMenuWindow);
 			break;
