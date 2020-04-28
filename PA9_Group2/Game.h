@@ -57,6 +57,7 @@ private:
     sf::Time lastSpawnTime;    //Time that the previous enemy was spawned
 
     TowerType selectedTower; //Currently selected tower in the GUI
+    Tower towers[NUM_TOWERS]; //Tower data used for reference
 
 
     //Game Functions
