@@ -19,6 +19,8 @@ public:
     {
         name = "Turret";
         type = TURRET;
+        price = 50;
+
         attSpeed = 90; //1.5 shots/second
         set_cool_down();
         damage = 25;
@@ -33,7 +35,10 @@ public:
     {
         name = "Sniper";
         type = SNIPER;
+        price = 120;
+
         attSpeed = 30; //0.5 shots/second
+        set_cool_down();
         damage = 60;
     }
 };

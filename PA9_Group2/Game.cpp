@@ -17,6 +17,9 @@ Game::Game(sf::RenderWindow& window) : gameWindow(window)
 
     for (int i = 0; i < NUM_ROUNDS; i++)
         rounds[i] = Round(i + 1);
+
+    towers[TURRET] = Turret();
+    towers[SNIPER] = Sniper();
 }
 
 void Game::run(void)
@@ -79,6 +82,7 @@ void Game::add_tower(sf::Event& event)
 {
     if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y), selectedTower)); //If tower was added successfully
     {
+        player.remove_XP(towers[selectedTower].get_price()); //Take tower price out of player's XP balance
         selectedTower = NONE; //Reset selected tower
         gui.highlight_button(selectedTower); //Updated highlighted button
     }
