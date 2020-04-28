@@ -4,12 +4,12 @@
 
 #include "header.h"
 
-struct Bullet {
+/* struct Bullet {
     float radius;
     sf::CircleShape shape;
     sf::Vector2f currVelocity;
     float maxSpeed;
-};
+}; */
 
 class Tower {
 public:
