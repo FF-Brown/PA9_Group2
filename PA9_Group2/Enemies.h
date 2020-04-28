@@ -12,7 +12,7 @@ public:
 
         health = 50;
         reward = 25;
-        speed  = 6;
+        speed  = 10;
     }
 };
 
@@ -26,7 +26,7 @@ public:
 
         health = 200;
         reward = 150;
-        speed  = 2;
+        speed  = 5;
     }
 };
 

@@ -4,14 +4,15 @@
 #pragma once
 
 #define INIT_HEALTH 100
+#define INIT_XP     75
 
 
 class Player
 {
 private:
     int health = INIT_HEALTH;
-    int XP = 0;
-    int score = 0;
+    int XP     = INIT_XP;
+    int score         = 0;
     int enemiesKilled = 0;
 
 public:
@@ -50,6 +51,11 @@ public:
     {
         XP += amount;
         score += amount;
+    }
+
+    void remove_XP(int amount)
+    {
+        XP -= amount;
     }
 
     //Increments the number of enemies killed
