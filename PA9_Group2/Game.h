@@ -60,6 +60,8 @@ public:
 
     void user_input_handler(void);
 
+    void add_tower(sf::Event& event);
+
 
     void spawn_enemy(void);
     

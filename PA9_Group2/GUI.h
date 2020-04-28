@@ -26,14 +26,14 @@ class Button : public Display
 {
 public:
 	bool is_over(int mouseX, int mouseY);		//checks if the mouse is over
-    TowerType tower;
+    Tower tower;
 };
 
 class GUI : public Button
 {
 	Display round;
-	Display display[3];
-	Button buttons[3];
+	Display display[NUM_TOWERS];
+	Button buttons[NUM_TOWERS];
 	TowerType choice;
 public:
 	GUI();		//initates all the buttons

@@ -36,7 +36,7 @@ void Game::run(void)
             despawn_enemies();
             despawn_projectiles();
 
-            if (rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
+            if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
             {
                 currentRound++;
                 roundStarted = false;
@@ -59,22 +59,26 @@ void Game::user_input_handler(void)
         case sf::Event::MouseButtonPressed:
             if (event.mouseButton.button == sf::Mouse::Left)
             {
-                selectedTower = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y);
-                if (selectedTower != NONE)
-                {
-                    //board.enable_gridlines();
-                    if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)/*, selectedTower*/));
-                    {
-                        //gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
-                        selectedTower = NONE;
-                        //board.disable_gridlines();
-                    }
-                }
+                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y);
+                if (selectedTower == NONE || newSelection != NONE)
+                    selectedTower = newSelection;
+                else
+                    add_tower(event);
             }
             break;
         }
 }
 
+void Game::add_tower(sf::Event& event)
+{
+    //board.enable_gridlines();
+    if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)/*, selectedTower*/));
+    {
+        //gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
+        selectedTower = NONE;
+        //board.disable_gridlines();
+    }
+}
 
 void Game::spawn_enemy(void)
 {

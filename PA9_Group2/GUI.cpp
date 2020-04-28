@@ -105,7 +105,7 @@ GUI::GUI()
 		buttons[h].set_size(60, 60);
 		buttons[h].set_position(780, i);
 		buttons[h].set_text(towers[h].get_name(), 10);
-        buttons[h].tower = towers[h].get_type();
+        buttons[h].tower = towers[h];
 
 		i += 100;
 
@@ -148,13 +148,18 @@ void GUI::draw(sf::RenderWindow& window, int hp, int ex, int round)
 
 TowerType GUI::get_tower_choice(int mouseX, int mouseY)
 {
+    bool buttonClicked = false;
     for (int i = 0; i < 3; i++)
     {
         if (buttons[i].is_over(mouseX, mouseY))
         {
-            choice = buttons[i].tower;
+            buttonClicked = true;
+            choice = buttons[i].tower.get_type();
             std::cout << "Tower clicked" << std::endl;
         }
     }
-	return choice;
+    if (!buttonClicked)
+        return NONE;
+    else
+    	return choice;
 }
