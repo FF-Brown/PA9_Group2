@@ -44,7 +44,7 @@ void BoardTest::testGetDirection()
 {
 	Board test;
 	Direction result;
-	sf::Vector2f invalidPos(155, 227), downPos(375,12), leftPos(375,100), downPos2(324,100), leftPos2(150,280);
+	sf::Vector2f invalidPos(155, 227), downPos(310,110), leftPos(375,115), badDownPos(324,100), badLeftPos(320,280);
 
 	cout << "Test msg: Should print 'Coordinates not in path.'\n";
 	result = test.getDirection(invalidPos);
@@ -56,11 +56,11 @@ void BoardTest::testGetDirection()
 	result = test.getDirection(leftPos);
 	assert("getDirection(): Left", result == LEFT, "Should be LEFT");
 
-	result = test.getDirection(downPos2);
-	assert("getDirection(): Down2", result == DOWN, "Should be DOWN");
+	result = test.getDirection(badDownPos);
+	assert("getDirection(): Not yet down", result == LEFT, "Should be LEFT");
 
-	result = test.getDirection(leftPos2);
-	assert("getDirection(): Left2", result == LEFT, "Should be LEFT");
+	result = test.getDirection(badLeftPos);
+	assert("getDirection(): Not yet left", result == DOWN, "Should be DOWN");
 
 }
 void BoardTest::testPrint(sf::RenderWindow& window, Board& test)
@@ -77,6 +77,23 @@ void BoardTest::testPrint(sf::RenderWindow& window, Board& test)
 		test.draw(window);
 		window.display();
 	}
+}
+void BoardTest::testIsAtEnd()
+{
+	Board test;
+	bool result;
+	sf::Vector2f endPos(49,425), endPos2(40,440), invalidPos(600,300), notEndPos(60,425);
+
+	result = test.isAtEnd(endPos);
+	assert("isAtEnd(): End position", result, "Should be true.");
+	result = test.isAtEnd(endPos2);
+	assert("isAtEnd(): End position 2", result, "Should be true.");
+	cout << "Test msg: Should print a location error.\n";
+	result = test.isAtEnd(invalidPos);
+	assert("isAtEnd(): Invalid position", !result, "Should be false.");
+	result = test.isAtEnd(notEndPos);
+	assert("isAtEnd(): Not end position", !result, "Should be false.");
+
 }
 void BoardTest::assert(string testName, bool testCase, string errorMessage)
 {

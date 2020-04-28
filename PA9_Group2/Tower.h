@@ -42,9 +42,6 @@ public:
 
         coolDownTime = 60 / attSpeed;
     }
-    
-
-    Tower();
 
     double get_range(void)
         { return range; }

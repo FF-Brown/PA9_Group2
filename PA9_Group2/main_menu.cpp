@@ -205,15 +205,15 @@ bool Menu::display_instructions(sf::RenderWindow& window)
         switch (event.type)
         {
         case sf::Event::MouseMoved:
-            button.is_over(window);
+            //button.is_over(window);
             break;
         case sf::Event::MouseButtonPressed:
             for (int i = 0; i < 3; i++)
             {
-                if (button.is_over(window))
-                {
-                    exit = true;
-                }
+                //if (button.is_over(window))
+                //{
+                //    exit = true;
+                //}
             }
 
             break;

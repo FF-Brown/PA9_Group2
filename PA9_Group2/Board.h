@@ -46,8 +46,9 @@ public:
 	//Returns spawnpoint of enemies | used in Enemy constructor
 	static sf::Vector2f getStartingPosition(void); 
 	Direction getDirection(sf::Vector2f position);
-	void createSpriteGrid(double, double, double);
+	void createSpriteGrid(double width, double height, double cellSize);
 	void drawTextures();
+	bool isAtEnd(sf::Vector2f);
 
 protected:
 	//Note that grid is a 1D array, not 2D which would be preferrable 

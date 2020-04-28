@@ -109,9 +109,9 @@ void Game::despawn_enemies(void)
 
 void Game::spawn_projectiles(void)
 {
-    Tower* towers = board.get_towers();
+    Tower* towers = board.getTowers();
 
-    for (int i = 0; i < board.get_num_towers(); i++)
+    for (int i = 0; i < board.getTowerCount(); i++)
         if (towers[i].is_active())
         {
             sf::Vector2f towerPos = towers[i].getPosition();

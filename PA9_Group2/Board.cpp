@@ -207,6 +207,10 @@ Direction Board::getDirection(sf::Vector2f position)
 {
 	int cell = getSquareCoord(position.x, position.y);
 	int index = -1;
+	if (cell == -1) {
+		cout << "Coordinates not on board.\n";
+		return DOWN;
+	}
 	for (int i = 0; i < pathLength; ++i) {
 		if (path[i] == cell)
 			index = i;
@@ -216,17 +220,29 @@ Direction Board::getDirection(sf::Vector2f position)
 		return DOWN;
 	}
 	//Down
-	if (path[index + 1] - 20 == path[index])
-		return DOWN;
+	if (path[index + 1] - 20 == path[index]) {
+		int midpoint = (spriteGrid[path[index]].getPosition().x + spriteGrid[path[index] + 1].getPosition().x) / 2;
+		if (position.x <= midpoint)
+			return DOWN;
+	}
 	//Up
-	if (path[index + 1] + 20 == path[index])
-		return UP;
+	if (path[index + 1] + 20 == path[index]) {
+		int midpoint = (spriteGrid[path[index]].getPosition().x + spriteGrid[path[index] + 1].getPosition().x) / 2;
+		if (position.x <= midpoint)
+			return UP;
+	}
 	//Right
-	if (path[index + 1] - 1 == path[index])
-		return RIGHT;
+	if (path[index + 1] - 1 == path[index]) {
+		int midpoint = (spriteGrid[path[index]].getPosition().y + spriteGrid[path[index] + 20].getPosition().y) / 2;
+		if (position.y >= midpoint)
+			return RIGHT;
+	}
 	//Left
-	if (path[index + 1] + 1 == path[index])
-		return LEFT;
+	if (path[index + 1] + 1 == path[index]) {
+		int midpoint = (spriteGrid[path[index]].getPosition().y + spriteGrid[path[index] + 20].getPosition().y) / 2;
+		if(position.y >= midpoint)
+			return LEFT;
+	}
 	cout << "Path could not be determined.\n";
 	return DOWN;
 }
@@ -237,4 +253,15 @@ void Board::drawTextures()
 	}
 	markPath();
 }
-
+bool Board::isAtEnd(sf::Vector2f position)
+{
+	int cell = getSquareCoord(position.x, position.y);
+	if (cell == -1) {
+		cout << "Enemy location error.\n";
+		return false;
+	}
+	if (path[pathLength - 1] == cell)
+		return true;
+	else
+		return false;
+}
