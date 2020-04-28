@@ -98,6 +98,7 @@ bool Button::is_over(int mouseX, int mouseY)
 
 GUI::GUI()
 {
+    choice = NONE;
 	for (int i = 150, h = 0; h < 3; h++)
 	{
 		buttons[h].set_size(60, 60);

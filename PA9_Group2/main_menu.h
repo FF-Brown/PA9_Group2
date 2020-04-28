@@ -17,6 +17,13 @@ enum MainMenuOption
 	EXIT
 };
 
+struct button {
+    sf::RectangleShape Shape;
+    int buttonW;
+    int buttonH;
+    bool is_over(sf::RenderWindow& window);
+};
+
 class Menu
 {
 private:
@@ -26,11 +33,6 @@ private:
 	MainMenuOption selectedItemIndex;
 	sf::Font font;
 	sf::Text text[MAX_NUMBER_OF_ITEMS];
-	struct button {
-		sf::RectangleShape Shape;
-		int buttonW;
-		int buttonH;
-	};
 	button menu_buttons[3];
 
 public:

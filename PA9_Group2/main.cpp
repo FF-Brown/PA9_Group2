@@ -6,11 +6,14 @@
 
 //Included Project Files
 #include "main_menu.h"
+
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
+
 //Included Std Libraries
 #include <iostream>
 #include <string>
+
 //For testing
 #include "Board_test.h"
 

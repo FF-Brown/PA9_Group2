@@ -205,12 +205,15 @@ bool Menu::display_instructions(sf::RenderWindow& window)
         switch (event.type)
         {
         case sf::Event::MouseMoved:
-            button.is_over(window);
+            for (int i = 0; i < 3; i++)
+            {
+                menu_buttons[i].is_over(window);
+            }
             break;
         case sf::Event::MouseButtonPressed:
             for (int i = 0; i < 3; i++)
             {
-                if (button.is_over(window))
+                if (menu_buttons[i].is_over(window))
                 {
                     exit = true;
                 }
@@ -233,4 +236,32 @@ void Menu::play_game(sf::RenderWindow& window)
 
     game.run();
     game.display_results();
+}
+
+bool button::is_over(sf::RenderWindow& window)
+{
+    int mouseX = sf::Mouse::getPosition().x;
+    int mouseY = sf::Mouse::getPosition().y;
+
+    sf::Event event;
+
+    int buttonX = Shape.getPosition().x;
+    int buttonY = Shape.getPosition().y;
+
+    int buttonPosW = buttonX + buttonW;
+    int buttonPosH = buttonY + buttonH;		//finds the position in the window
+
+    if (mouseX < buttonPosW && mouseX > buttonX && mouseY < buttonPosH && mouseY > buttonY)
+    {
+        Shape.setOutlineThickness(2);
+        Shape.setOutlineColor(sf::Color::Blue);
+        return true;
+    }
+    else {
+        Shape.setOutlineThickness(2);
+        Shape.setOutlineColor(sf::Color::Green);
+        return false;
+    }
+
+
 }

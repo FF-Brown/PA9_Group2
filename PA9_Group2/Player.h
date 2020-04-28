@@ -27,7 +27,10 @@ public:
     //Returns the player's health
     int get_health(void)
     {
-        return health;
+        if (health > 0)
+            return health;
+        else
+            return 0;
     }
 
     //Subtracts an amount from the player's health

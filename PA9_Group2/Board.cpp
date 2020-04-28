@@ -238,3 +238,8 @@ void Board::drawTextures()
 	markPath();
 }
 
+bool Board::is_at_castle(sf::Vector2f position)
+{
+    return false; //temp
+}
+

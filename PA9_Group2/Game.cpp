@@ -63,7 +63,6 @@ void Game::user_input_handler(void)
                 selectedTower = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y);
                 if (selectedTower != NONE)
                 {
-
                     //board.enable_gridlines();
                     if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)/*, selectedTower*/));
                     {
@@ -93,9 +92,15 @@ void Game::spawn_enemy(void)
 
 void Game::move_enemies(void)
 {
-
-    //for (auto it = enemies.begin(); it != enemies.end(); it++)
-    //    it->move(board);
+    for (auto it = enemies.begin(); it != enemies.end(); it++)
+    {
+        it->move(board);
+        if (board.is_at_castle(it->get_position()))
+        {
+            player.damage(it->get_damage());
+            enemies.erase(it);
+        }
+    }
 }
 
 void Game::despawn_enemies(void)
@@ -109,9 +114,9 @@ void Game::despawn_enemies(void)
 
 void Game::spawn_projectiles(void)
 {
-    Tower* towers = board.get_towers();
+    Tower* towers = board.getTowers();
 
-    for (int i = 0; i < board.get_num_towers(); i++)
+    for (int i = 0; i < board.getTowerCount(); i++)
         if (towers[i].is_active())
         {
             sf::Vector2f towerPos = towers[i].getPosition();
@@ -130,7 +135,7 @@ void Game::spawn_projectiles(void)
                     closestDistance = distance;
                 }
             }
-            if (closestEnemy = nullptr) //No enemies found in range
+            if (closestEnemy == nullptr) //No enemies found in range
                 continue;
             
             towers[i].fire();
@@ -159,7 +164,7 @@ void Game::render(void)
     gameWindow.clear(); //First time in game loop: Clears menu items
 
     board.draw(gameWindow);
-    //gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
+    gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
 
     //Draw all enemies
     for (auto it = enemies.begin(); it != enemies.end(); it++)

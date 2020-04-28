@@ -168,7 +168,6 @@
     <ClCompile Include="PA9.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Round.cpp" />
-    <ClCompile Include="Tower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />

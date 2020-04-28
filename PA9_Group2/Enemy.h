@@ -16,6 +16,7 @@ protected:
     sf::CircleShape shape;
 
     int health;
+    int attStrength;
 
 public:
     bool isEnemy;
@@ -49,6 +50,9 @@ public:
     {
         return shape.getPosition();
     }
+
+    int get_damage(void)
+        { return attStrength; }
 
 
     void move(const Board& board);

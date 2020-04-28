@@ -49,6 +49,9 @@ public:
 	void createSpriteGrid(double, double, double);
 	void drawTextures();
 
+    //Checks if the position is inside the castle square
+    bool is_at_castle(sf::Vector2f position);
+
 protected:
 	//Note that grid is a 1D array, not 2D which would be preferrable 
 	sf::RectangleShape* grid;
