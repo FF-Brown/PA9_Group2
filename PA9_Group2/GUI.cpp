@@ -99,11 +99,13 @@ bool Button::is_over(int mouseX, int mouseY)
 GUI::GUI()
 {
     choice = NONE;
+    Tower towers[NUM_TOWERS] = { Turret() };
 	for (int i = 150, h = 0; h < 3; h++)
 	{
 		buttons[h].set_size(60, 60);
 		buttons[h].set_position(780, i);
-		buttons[h].set_text("Tower", 10);
+		buttons[h].set_text(towers[h].get_name(), 10);
+        buttons[h].tower = towers[h].get_type();
 
 		i += 100;
 
@@ -150,7 +152,7 @@ TowerType GUI::get_tower_choice(int mouseX, int mouseY)
     {
         if (buttons[i].is_over(mouseX, mouseY))
         {
-            choice = TURRET;
+            choice = buttons[i].tower;
             std::cout << "Tower clicked" << std::endl;
         }
     }

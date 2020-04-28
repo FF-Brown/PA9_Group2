@@ -8,6 +8,7 @@ using namespace std;
 Game::Game(sf::RenderWindow& window) : gameWindow(window)
 {
     roundStarted = false;
+    clock.restart();
     lastRoundEndTime = clock.getElapsedTime();
     lastSpawnTime = clock.getElapsedTime();
 
@@ -34,8 +35,6 @@ void Game::run(void)
 
             despawn_enemies();
             despawn_projectiles();
-
-            //collision_handler();
 
             if (rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
             {
@@ -108,7 +107,11 @@ void Game::despawn_enemies(void)
     for (auto it = enemies.begin(); it != enemies.end(); it++)
     {
         if (!it->is_alive())
+        {
+            player.add_XP(it->get_reward());
+            player.inc_enemies_killed();
             enemies.erase(it);
+        }
     }
 }
 

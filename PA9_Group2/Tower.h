@@ -8,11 +8,24 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <string>
+
+#define NUM_TOWERS 3
+
+enum TowerType
+{
+    TURRET,
+    NONE
+};
+
 
 class Tower
 {
 protected:
     sf::Vector2f position;
+
+    std::string name;
+    TowerType type;
 
     double range; //Pixels
 
@@ -22,7 +35,7 @@ protected:
 
     bool activeStatus = true;
     sf::Clock clock;
-    sf::Time lastFireTime = clock.getElapsedTime();
+    sf::Time lastFireTime;
 
     void update_status(void)
     {
@@ -37,10 +50,14 @@ public:
     Tower()
     {
         position = { 0, 0 };
+        name = "Tower";
+        type = NONE;
     }
 
     Tower(sf::Vector2f initPosition)
     {
+        clock.restart();
+        lastFireTime = clock.getElapsedTime();
         position = initPosition;
 
         coolDownTime = 60 / attSpeed;
@@ -63,6 +80,12 @@ public:
 
     sf::Vector2f get_position(void)
         { return position; }
+
+    std::string get_name(void)
+        { return name; }
+
+    TowerType get_type(void)
+        { return type; }
 
     bool is_active(void)
     {

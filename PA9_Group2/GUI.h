@@ -26,7 +26,7 @@ class Button : public Display
 {
 public:
 	bool is_over(int mouseX, int mouseY);		//checks if the mouse is over
-
+    TowerType tower;
 };
 
 class GUI : public Button
