@@ -215,6 +215,7 @@ bool Menu::display_instructions(sf::RenderWindow& window)
             {
                 menu_buttons[i].is_over(window);
             }
+
             break;
         case sf::Event::MouseButtonPressed:
             for (int i = 0; i < 3; i++)

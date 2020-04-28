@@ -18,7 +18,9 @@ public:
 	void testAddTower(); 
     void testGetDirection();
     void testPrint(sf::RenderWindow& window, Board& test);
-    void assert(std::string testName, bool testCase, std::string errorMessage); 
+    void testIsAtEnd();
+    void assert(string testName, bool testCase, string errorMessage); 
+
 
 private:
 
