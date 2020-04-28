@@ -87,7 +87,6 @@ void Game::spawn_enemy(void)
         Enemy nEnemy = rounds[currentRound - 1].get_next_enemy();
         if (nEnemy.isEnemy)
         {
-            nEnemy.set_ID(enemies.size()); //Set ID to the next number and increment
             enemies.push_back(nEnemy);
         }
     }
@@ -100,7 +99,7 @@ void Game::move_enemies(void)
         it->move(board);
         if (board.is_at_castle(it->get_position()))
         {
-            player.damage(it->get_damage());
+            player.damage(1);
             enemies.erase(it);
         }
     }
@@ -128,7 +127,10 @@ void Game::spawn_projectiles(void)
         {
             sf::Vector2f towerPos = towers[i].getPosition();
 
-            Enemy* closestEnemy = nullptr;
+            bool found = false;
+            Enemy temp;
+            Enemy& closestEnemy = temp;
+
             double closestDistance = towers[i].get_range();
 
             for (auto it = enemies.begin(); it != enemies.end(); it++)
@@ -138,16 +140,17 @@ void Game::spawn_projectiles(void)
                 double distance = calculate_distance(towerPos, enemyPos);
                 if (distance < closestDistance)
                 {
-                    closestEnemy = &(*it); //Address of closest enemy
+                    found = true;
+                    closestEnemy = *it; //Address of closest enemy
                     closestDistance = distance;
                 }
             }
-            if (closestEnemy == nullptr) //No enemies found in range
+            if (!found) //No enemies found in range
                 continue;
             
             towers[i].fire();
-            closestEnemy->damage(towers[i].getDamage()); //Damage enemy
-            projectiles.push_back(Projectile(towerPos, closestEnemy->get_position())); //Spawn projectile
+            closestEnemy.damage(towers[i].getDamage()); //Damage enemy
+            projectiles.push_back(Projectile(towerPos, closestEnemy.get_position())); //Spawn projectile
         }
 }
 

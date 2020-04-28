@@ -212,7 +212,7 @@ Direction Board::getDirection(sf::Vector2f position)
 			index = i;
 	}
 	if (index == -1) {
-		cout << "Coordinates not in path.\n";
+		cout << "(" << position.x << "," << position.y << ") " <<  "Coordinates not in path.\n";
 		return DOWN;
 	}
 	//Down
@@ -227,7 +227,7 @@ Direction Board::getDirection(sf::Vector2f position)
 	//Left
 	if (path[index + 1] + 1 == path[index])
 		return LEFT;
-	cout << "Path could not be determined.\n";
+	cout << "(" << position.x << "," << position.y << ") " << "Path could not be determined.\n";
 	return DOWN;
 }
 void Board::drawTextures()
