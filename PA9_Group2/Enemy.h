@@ -17,6 +17,7 @@ protected:
 
     int health;
     int attStrength;
+    int reward;
 
 public:
     bool isEnemy;
@@ -53,6 +54,11 @@ public:
 
     int get_damage(void)
         { return attStrength; }
+
+    int get_reward(void)
+    {
+        return reward;
+    }
 
 
     void move(const Board& board);

@@ -204,6 +204,9 @@ bool Menu::display_instructions(sf::RenderWindow& window)
     {
         switch (event.type)
         {
+        case sf::Event::Closed:
+            window.close();
+            break;
         case sf::Event::MouseMoved:
             for (int i = 0; i < 3; i++)
             {
