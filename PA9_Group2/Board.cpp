@@ -158,8 +158,11 @@ void Board::colorCell(int cellNum)
 {
 	grid[cellNum].setFillColor(sf::Color::Blue); 
 }
-int Board::addTower(sf::Vector2f position)
+int Board::addTower(sf::Vector2f position, TowerType nTowerType)
 {
+    if (nTowerType == NONE)
+        return 0;
+
 	int cell = getSquareCoord(position.x, position.y);
 	if (cell == -1)
 		return -1;
@@ -178,9 +181,15 @@ int Board::addTower(sf::Vector2f position)
 		}
 		else {
 			//Add tower 
-			Tower newTower(position);
-			towers[towerCount] = newTower;
-			spriteGrid[cell].setTexture(tower);
+            switch (nTowerType)
+            {
+            case TURRET: towers[towerCount] = Turret(position);
+                         spriteGrid[cell].setTexture(tower); //Change this to turret texture
+                         break;
+            case SNIPER: towers[towerCount] = Sniper(position);
+                         spriteGrid[cell].setTexture(tower); //Change this to sniper texture
+                         break;
+            }
 			++towerCount;
 		}
 	}

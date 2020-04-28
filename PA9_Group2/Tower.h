@@ -15,6 +15,7 @@
 enum TowerType
 {
     TURRET,
+    SNIPER,
     NONE
 };
 
@@ -29,7 +30,6 @@ protected:
     int price;
 
     double range; //Pixels
-
     int attSpeed; //Shots per minute
     int coolDownTime; //In seconds
     int damage;
@@ -46,12 +46,17 @@ protected:
             activeStatus = true;
     }
 
+    void set_cool_down(void)
+    {
+        coolDownTime = 60 / attSpeed;
+    }
+
 public:
 
     Tower()
     {
         position = { 0, 0 };
-        name = "Tower";
+        name = "None";
         type = NONE;
         price = 0;
     }
@@ -61,8 +66,6 @@ public:
         clock.restart();
         lastFireTime = clock.getElapsedTime();
         position = initPosition;
-
-        coolDownTime = 60 / attSpeed;
     }
 
     double get_range(void)

@@ -1,4 +1,5 @@
 
+//Class definition file for the base Enemy
 
 #pragma once
 
@@ -23,7 +24,11 @@ protected:
 public:
     bool isEnemy;
 
-    Enemy(void);
+    Enemy(void)
+    {
+        isEnemy = true;
+        shape.setPosition(Board::getStartingPosition());
+    }
 
     void damage(int amount)
     {
@@ -49,7 +54,35 @@ public:
     }
 
 
-    void move(Board& board);
+    void move(Board& board)
+    {
+        float dx, dy;
 
-    virtual void draw(sf::RenderWindow& window);
+        switch (board.getDirection(shape.getPosition()))
+        {
+        case UP:    dx = 0;
+            dy = -1 * speed;
+            break;
+        case DOWN:  dx = 0;
+            dy = speed;
+            break;
+        case LEFT:  dx = -1 * speed;
+            dy = 0;
+            break;
+        case RIGHT: dx = speed;
+            dy = 0;
+            break;
+        default:    dx = 0;
+            dy = 0;
+        }
+        dx *= SPEED_SCALE;
+        dy *= SPEED_SCALE;
+
+        shape.move(dx, dy);
+    }
+
+    virtual void draw(sf::RenderWindow& window)
+    {
+        window.draw(shape);
+    }
 };

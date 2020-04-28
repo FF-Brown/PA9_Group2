@@ -19,7 +19,22 @@ public:
     {
         name = "Turret";
         type = TURRET;
-        price = 50;
+        attSpeed = 90; //1.5 shots/second
+        set_cool_down();
+        damage = 25;
+    }
+};
+
+
+class Sniper : public Tower
+{
+public:
+    Sniper(sf::Vector2f initPosition = { 0, 0 }) : Tower(initPosition)
+    {
+        name = "Sniper";
+        type = SNIPER;
+        attSpeed = 30; //0.5 shots/second
+        damage = 60;
     }
 };
 

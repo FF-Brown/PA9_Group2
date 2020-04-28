@@ -7,15 +7,16 @@ using namespace std;
 
 Game::Game(sf::RenderWindow& window) : gameWindow(window)
 {
+    currentRound = 1;
     roundStarted = false;
     clock.restart();
     lastRoundEndTime = clock.getElapsedTime();
     lastSpawnTime = clock.getElapsedTime();
 
+    selectedTower = NONE;
+
     for (int i = 0; i < NUM_ROUNDS; i++)
         rounds[i] = Round(i + 1);
-
-    towers[TURRET] = Turret();
 }
 
 void Game::run(void)
@@ -24,7 +25,7 @@ void Game::run(void)
     {
         user_input_handler();
 
-        if ((clock.getElapsedTime() - lastRoundEndTime).asSeconds() > PREP_TIME)
+        if (time_since(lastRoundEndTime).asSeconds() > PREP_TIME)
             roundStarted = true;
 
         if (roundStarted)
@@ -61,13 +62,14 @@ void Game::user_input_handler(void)
         case sf::Event::MouseButtonPressed:
             if (event.mouseButton.button == sf::Mouse::Left)
             {
-                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y, player);
-                if (selectedTower == NONE || newSelection != NONE)
-                {
-                    selectedTower = newSelection;
-                }
-                else
+                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y);
+                if (newSelection == selectedTower)
+                    selectedTower = NONE; //Unselect current tower
+                else if (selectedTower != NONE && newSelection == NONE) //If a tower is currently selected and a new one isn't chosen
                     add_tower(event);
+                else
+                    selectedTower = newSelection; //Update selection
+                gui.highlight_button(selectedTower); //Updated highlighted button
             }
             break;
         }
@@ -75,22 +77,18 @@ void Game::user_input_handler(void)
 
 void Game::add_tower(sf::Event& event)
 {
-    //board.enable_gridlines();
-    if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)/*, selectedTower*/));
+    if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y), selectedTower)); //If tower was added successfully
     {
-        //gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
-        player.remove_XP(towers[selectedTower].get_price());
-        selectedTower = NONE;
-        //board.disable_gridlines();
+        selectedTower = NONE; //Reset selected tower
+        gui.highlight_button(selectedTower); //Updated highlighted button
     }
 }
 
 void Game::spawn_enemy(void)
 {
-    if ((clock.getElapsedTime() - lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
+    if (time_since(lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
     {
         Enemy nEnemy = rounds[currentRound - 1].get_next_enemy();
-        lastSpawnTime = clock.getElapsedTime();
         if (nEnemy.isEnemy)
         {
             enemies.push_back(nEnemy);
@@ -196,4 +194,9 @@ void Game::render(void)
 void Game::display_results(void)
 {
 
+}
+
+sf::Time Game::time_since(sf::Time lastTime)
+{
+    return clock.getElapsedTime() - lastTime;
 }
