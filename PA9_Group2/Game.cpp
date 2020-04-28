@@ -7,12 +7,19 @@ using namespace std;
 
 Game::Game(sf::RenderWindow& window) : gameWindow(window)
 {
+    currentRound = 1;
     roundStarted = false;
+    clock.restart();
     lastRoundEndTime = clock.getElapsedTime();
     lastSpawnTime = clock.getElapsedTime();
 
+    selectedTower = NONE;
+
     for (int i = 0; i < NUM_ROUNDS; i++)
         rounds[i] = Round(i + 1);
+
+    towers[TURRET] = Turret();
+    towers[SNIPER] = Sniper();
 }
 
 void Game::run(void)
@@ -21,7 +28,7 @@ void Game::run(void)
     {
         user_input_handler();
 
-        if ((clock.getElapsedTime() - lastRoundEndTime).asSeconds() > PREP_TIME)
+        if (Utility::time_since(clock, lastRoundEndTime).asSeconds() > PREP_TIME)
             roundStarted = true;
 
         if (roundStarted)
@@ -35,9 +42,7 @@ void Game::run(void)
             despawn_enemies();
             despawn_projectiles();
 
-            //collision_handler();
-
-            if (rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
+            if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
             {
                 currentRound++;
                 roundStarted = false;
@@ -60,32 +65,37 @@ void Game::user_input_handler(void)
         case sf::Event::MouseButtonPressed:
             if (event.mouseButton.button == sf::Mouse::Left)
             {
-                selectedTower = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y);
-                if (selectedTower != NONE)
-                {
-
-                    //board.enable_gridlines();
-                    if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)/*, selectedTower*/));
-                    {
-                        //gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
-                        selectedTower = NONE;
-                        //board.disable_gridlines();
-                    }
-                }
+                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y, player);
+                if (newSelection == selectedTower)
+                    selectedTower = NONE; //Unselect current tower
+                else if (selectedTower != NONE && newSelection == NONE) //If a tower is currently selected and a new one isn't chosen
+                    add_tower(event);
+                else
+                    selectedTower = newSelection;    //Update selection
+                gui.highlight_button(selectedTower); //Update highlighted button
             }
             break;
         }
 }
 
+void Game::add_tower(sf::Event& event)
+{
+    if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y), selectedTower)); //If tower was added successfully
+    {
+        player.remove_XP(towers[selectedTower].get_price()); //Take tower price out of player's XP balance
+        selectedTower = NONE; //Reset selected tower
+        gui.highlight_button(selectedTower); //Update highlighted button
+    }
+}
 
 void Game::spawn_enemy(void)
 {
-    if ((clock.getElapsedTime() - lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
+    if (Utility::time_since(clock, lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
     {
+        lastSpawnTime = clock.getElapsedTime();
         Enemy nEnemy = rounds[currentRound - 1].get_next_enemy();
         if (nEnemy.isEnemy)
         {
-            nEnemy.set_ID(enemies.size()); //Set ID to the next number and increment
             enemies.push_back(nEnemy);
         }
     }
@@ -93,9 +103,15 @@ void Game::spawn_enemy(void)
 
 void Game::move_enemies(void)
 {
-
-    //for (auto it = enemies.begin(); it != enemies.end(); it++)
-    //    it->move(board);
+    for (auto it = enemies.begin(); it != enemies.end(); it++)
+    {
+        it->move(board);
+        if (board.is_at_castle(it->get_position()))
+        {
+            player.damage(1);
+            enemies.erase(it);
+        }
+    }
 }
 
 void Game::despawn_enemies(void)
@@ -103,7 +119,11 @@ void Game::despawn_enemies(void)
     for (auto it = enemies.begin(); it != enemies.end(); it++)
     {
         if (!it->is_alive())
+        {
+            player.add_XP(it->get_reward());
+            player.inc_enemies_killed();
             enemies.erase(it);
+        }
     }
 }
 
@@ -116,26 +136,29 @@ void Game::spawn_projectiles(void)
         {
             sf::Vector2f towerPos = towers[i].getPosition();
 
-            Enemy* closestEnemy = nullptr;
+            bool found = false;
+            Enemy temp;
+            Enemy& closestEnemy = temp;
             double closestDistance = towers[i].get_range();
 
             for (auto it = enemies.begin(); it != enemies.end(); it++)
             {
                 sf::Vector2f enemyPos = it->get_position();
 
-                double distance = calculate_distance(towerPos, enemyPos);
+                double distance = Utility::calculate_distance(towerPos, enemyPos);
                 if (distance < closestDistance)
                 {
-                    closestEnemy = &(*it); //Address of closest enemy
+                    found = true;
+                    closestEnemy = *it; //Reference to closest enemy
                     closestDistance = distance;
                 }
             }
-            if (closestEnemy = nullptr) //No enemies found in range
+            if (!found) //No enemies found in range
                 continue;
             
             towers[i].fire();
-            closestEnemy->damage(towers[i].getDamage()); //Damage enemy
-            projectiles.push_back(Projectile(towerPos, closestEnemy->get_position())); //Spawn projectile
+            closestEnemy.damage(towers[i].getDamage()); //Damage enemy
+            projectiles.push_back(Projectile(towerPos, closestEnemy.get_position())); //Spawn projectile
         }
 }
 
@@ -159,7 +182,7 @@ void Game::render(void)
     gameWindow.clear(); //First time in game loop: Clears menu items
 
     board.draw(gameWindow);
-    //gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
+    gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
 
     //Draw all enemies
     for (auto it = enemies.begin(); it != enemies.end(); it++)

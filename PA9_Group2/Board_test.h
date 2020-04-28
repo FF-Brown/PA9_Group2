@@ -21,6 +21,7 @@ public:
     void testIsAtEnd();
     void assert(string testName, bool testCase, string errorMessage); 
 
+
 private:
 
 };

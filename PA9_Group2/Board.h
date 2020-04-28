@@ -4,8 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "Tower.h"
-using namespace std;
+#include "Towers.h"
 //class for game board with grid, display options, enemy marching path, rules for acceptable builds (can't build on the same square 2x, etc)
 #define GRID_WIDTH 500
 #define GRID_HEIGHT 500
@@ -29,7 +28,7 @@ public:
 	//Can be used with other files for different paths
 	//Any csv file used must have all values on a single line and end with a comma
 	//See path.csv for reference
-	void readPath(string fileName);
+	void readPath(std::string fileName);
 	//Determines if a square is in the enemy marching path
 	//Can be used for checking if a square is a valid location for a tower
 	bool inPath(int square);
@@ -40,7 +39,7 @@ public:
 	//Checks if a given square has a tower in it
 	bool isOpen(sf::Vector2f position);
 	//Calls isOpen() and inPath(). If both check out, adds a tower in the given position
-	int addTower(sf::Vector2f position);
+	int addTower(sf::Vector2f position, TowerType nTowerType);
 	Tower* getTowers() { return towers; }
 	int getTowerCount() { return towerCount; } 
 	//Returns spawnpoint of enemies | used in Enemy constructor
@@ -49,6 +48,9 @@ public:
 	void createSpriteGrid(double width, double height, double cellSize);
 	void drawTextures();
 	bool isAtEnd(sf::Vector2f);
+
+    //Checks if the position is inside the castle square
+    bool is_at_castle(sf::Vector2f position);
 
 protected:
 	//Note that grid is a 1D array, not 2D which would be preferrable 

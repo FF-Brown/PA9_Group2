@@ -2,6 +2,8 @@
 
 #include "Board_test.h"
 
+using namespace std;
+
 void BoardTest::testAddTower()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 500), "Tower Defense");
@@ -13,28 +15,28 @@ void BoardTest::testAddTower()
 
 	//Test rounding coordinates
 	cout << "Test msg: Should place tower at (25,0)\n";
-	test.addTower(oddPosition);
+	test.addTower(oddPosition, TURRET);
 	assert("addTower(): Coordinate adjustment", !test.isOpen(sf::Vector2f(25, 0)), "");
 
 	//Test placing a tower in the enemy path (invalid)
-	returned = test.addTower(position2); 
+	returned = test.addTower(position2, TURRET);
 	assert("addTower(): Path", returned == 0, "Should be 0");
 
 	//Test placing a tower in a valid position
 	cout << "Test msg: Should place tower at (100,275)\n";
-	returned = test.addTower(position); 
+	returned = test.addTower(position, TURRET);
 	assert("addTower(): Valid", returned == 1, "Should be 1");
 
 	//Test placing a tower in an occupied position (invalid)
-	returned = test.addTower(position);
+	returned = test.addTower(position, TURRET);
 	assert("addTower(): Occupied", returned == -1, "Should be -1");
 
 	//Test placing a tower in an occupied position (invalid)
-	returned = test.addTower(slightyInvalid);
+	returned = test.addTower(slightyInvalid, TURRET);
 	assert("addTower(): Occupied2", returned == -1, "Should be -1");
 
 	//Test placing a tower outside of the grid (invalid)
-	returned = test.addTower(superInvalid);
+	returned = test.addTower(superInvalid, TURRET);
 	assert("addTower(): Outside range", returned == -1, "Should be -1");
 
 	cout << test.getTowerCount() << " towers placed.\n";

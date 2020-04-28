@@ -1,6 +1,8 @@
 
 #include "GUI.h"
 
+using namespace std;
+
 Display::Display()
 {
 	if (!font.loadFromFile("Resources/Chunk Five.otf"))	//checks for font
@@ -20,6 +22,7 @@ Display::Display()
 	text.setOutlineColor(sf::Color::Black);
 	text.setOutlineThickness(3);			//and the text
 	data = 0;
+    highlighted = false;
 }
 
 void Display::set_size(int w, int h)
@@ -56,6 +59,11 @@ void Display::set_text(string t, int size)
 
 void Display::draw_display(sf::RenderWindow& window)
 {
+    if (highlighted)
+        Shape.setOutlineColor(sf::Color::Red);
+    else
+        Shape.setOutlineColor(sf::Color::Transparent);
+
 	window.draw(Shape);
 	window.draw(text);
 }
@@ -68,6 +76,11 @@ void Display::set_data(int i)
 int Display::get_data()
 {
 	return data;
+}
+
+void Display::highlight(bool set)
+{
+    highlighted = set;
 }
 
 bool Button::is_over(int mouseX, int mouseY)
@@ -98,11 +111,15 @@ bool Button::is_over(int mouseX, int mouseY)
 
 GUI::GUI()
 {
+    choice = NONE;
+    towers[0] = Turret();
+    towers[1] = Sniper();
 	for (int i = 150, h = 0; h < 3; h++)
 	{
 		buttons[h].set_size(60, 60);
 		buttons[h].set_position(780, i);
-		buttons[h].set_text("Tower", 10);
+		buttons[h].set_text(towers[h].get_name(), 10);
+        buttons[h].tower = towers[h];
 
 		i += 100;
 
@@ -143,15 +160,33 @@ void GUI::draw(sf::RenderWindow& window, int hp, int ex, int round)
 	return;
 }
 
-TowerType GUI::get_tower_choice(int mouseX, int mouseY)
+TowerType GUI::get_tower_choice(int mouseX, int mouseY, Player& player)
 {
+    bool buttonClicked = false;
+    int price;
     for (int i = 0; i < 3; i++)
     {
         if (buttons[i].is_over(mouseX, mouseY))
         {
-            choice = TURRET;
+            buttonClicked = true;
+            choice = buttons[i].tower.get_type();
+            price  = buttons[i].tower.get_price();
             std::cout << "Tower clicked" << std::endl;
         }
     }
-	return choice;
+    if (buttonClicked && player.get_XP() >= price)
+        return choice;
+    else
+        return NONE;
+}
+
+void GUI::highlight_button(TowerType towerType)
+{
+    for (int i = 0; i < NUM_TOWERS; i++)
+    {
+        if ((towers[i].get_type() == towerType) && (towerType != NONE))
+            buttons[i].highlight(true);
+        else
+            buttons[i].highlight(false);
+    }
 }

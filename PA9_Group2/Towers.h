@@ -8,25 +8,38 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
-enum TowerType
-{
-    TURRET,
-    NONE
-};
-
 
 class Turret : public Tower
 {
 private:
-    int damage;
-    int attSpeed; //Or enum slow, medium, fast...
-
     
 
 public:
-    Turret(void) : Tower()
+    Turret(sf::Vector2f initPosition = { 0, 0 }) : Tower(initPosition)
     {
-        
+        name = "Turret";
+        type = TURRET;
+        price = 50;
+
+        attSpeed = 90; //1.5 shots/second
+        set_cool_down();
+        damage = 25;
+    }
+};
+
+
+class Sniper : public Tower
+{
+public:
+    Sniper(sf::Vector2f initPosition = { 0, 0 }) : Tower(initPosition)
+    {
+        name = "Sniper";
+        type = SNIPER;
+        price = 120;
+
+        attSpeed = 30; //0.5 shots/second
+        set_cool_down();
+        damage = 60;
     }
 };
 

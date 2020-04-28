@@ -1,4 +1,5 @@
 
+//Class definition file for the base Enemy
 
 #pragma once
 
@@ -8,28 +9,25 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
+#define SPEED_SCALE 0.1
+
 
 class Enemy
 {
 protected:
-    unsigned int ID;
     sf::CircleShape shape;
 
     int health;
+    int reward;
+    int speed;
 
 public:
     bool isEnemy;
 
-    Enemy(void);
-
-    void set_ID(int nID)
+    Enemy(void)
     {
-        ID = nID;
-    }
-
-    unsigned int get_ID(void)
-    {
-        return ID;
+        isEnemy = true;
+        shape.setPosition(Board::getStartingPosition());
     }
 
     void damage(int amount)
@@ -50,8 +48,41 @@ public:
         return shape.getPosition();
     }
 
+    int get_reward(void)
+    {
+        return reward;
+    }
 
-    void move(const Board& board);
 
-    void draw(sf::RenderWindow& window);
+    void move(Board& board)
+    {
+        float dx, dy;
+
+        switch (board.getDirection(shape.getPosition()))
+        {
+        case UP:    dx = 0;
+            dy = -1 * speed;
+            break;
+        case DOWN:  dx = 0;
+            dy = speed;
+            break;
+        case LEFT:  dx = -1 * speed;
+            dy = 0;
+            break;
+        case RIGHT: dx = speed;
+            dy = 0;
+            break;
+        default:    dx = 0;
+            dy = 0;
+        }
+        dx *= SPEED_SCALE;
+        dy *= SPEED_SCALE;
+
+        shape.move(dx, dy);
+    }
+
+    virtual void draw(sf::RenderWindow& window)
+    {
+        window.draw(shape);
+    }
 };

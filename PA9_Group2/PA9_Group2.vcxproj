@@ -160,15 +160,12 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Board_test.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="main_menu.cpp" />
-    <ClCompile Include="PA9.cpp" />
-    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Round.cpp" />
-    <ClCompile Include="Tower.cpp" />
+    <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
@@ -178,12 +175,12 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="main_menu.h" />
-    <ClInclude Include="PA9.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Round.h" />
     <ClInclude Include="Tower.h" />
     <ClInclude Include="Towers.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="castleResized.png" />

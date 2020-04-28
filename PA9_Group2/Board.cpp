@@ -1,6 +1,8 @@
 
 #include "Board.h"
 
+using namespace std;
+
 sf::RectangleShape* createGrid(double width, double height, double cellSize) {
 
     //Number of squares across and down
@@ -158,8 +160,11 @@ void Board::colorCell(int cellNum)
 {
 	grid[cellNum].setFillColor(sf::Color::Blue); 
 }
-int Board::addTower(sf::Vector2f position)
+int Board::addTower(sf::Vector2f position, TowerType nTowerType)
 {
+    if (nTowerType == NONE)
+        return 0;
+
 	int cell = getSquareCoord(position.x, position.y);
 	if (cell == -1)
 		return -1;
@@ -178,9 +183,15 @@ int Board::addTower(sf::Vector2f position)
 		}
 		else {
 			//Add tower 
-			Tower newTower(position);
-			towers[towerCount] = newTower;
-			spriteGrid[cell].setTexture(tower);
+            switch (nTowerType)
+            {
+            case TURRET: towers[towerCount] = Turret(position);
+                         spriteGrid[cell].setTexture(tower); //Change this to turret texture
+                         break;
+            case SNIPER: towers[towerCount] = Sniper(position);
+                         spriteGrid[cell].setTexture(tower); //Change this to sniper texture
+                         break;
+            }
 			++towerCount;
 		}
 	}
@@ -201,7 +212,7 @@ sf::Vector2f Board::getStartingPosition(void)
 	//Lazy way: just report default starting point
 	return sf::Vector2f(387, 0);
 	//Better way: report first square on path
-	//Won't work as a static function
+	//Won't work as a static function (it already works?)
 }
 Direction Board::getDirection(sf::Vector2f position)
 {
@@ -216,7 +227,7 @@ Direction Board::getDirection(sf::Vector2f position)
 			index = i;
 	}
 	if (index == -1) {
-		cout << "Coordinates not in path.\n";
+		cout << "(" << position.x << "," << position.y << ") " <<  "Coordinates not in path.\n";
 		return DOWN;
 	}
 	//Down
@@ -238,12 +249,14 @@ Direction Board::getDirection(sf::Vector2f position)
 			return RIGHT;
 	}
 	//Left
+
 	if (path[index + 1] + 1 == path[index]) {
 		int midpoint = (spriteGrid[path[index]].getPosition().y + spriteGrid[path[index] + 20].getPosition().y) / 2;
 		if(position.y >= midpoint)
 			return LEFT;
 	}
 	cout << "Path could not be determined.\n";
+
 	return DOWN;
 }
 void Board::drawTextures()
@@ -253,6 +266,7 @@ void Board::drawTextures()
 	}
 	markPath();
 }
+
 bool Board::isAtEnd(sf::Vector2f position)
 {
 	int cell = getSquareCoord(position.x, position.y);
