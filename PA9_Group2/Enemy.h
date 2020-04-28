@@ -8,31 +8,22 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
+#define SPEED_SCALE 0.1
+
 
 class Enemy
 {
 protected:
-    unsigned int ID;
     sf::CircleShape shape;
 
     int health;
-    int attStrength;
     int reward;
+    int speed;
 
 public:
     bool isEnemy;
 
     Enemy(void);
-
-    void set_ID(int nID)
-    {
-        ID = nID;
-    }
-
-    unsigned int get_ID(void)
-    {
-        return ID;
-    }
 
     void damage(int amount)
     {
@@ -52,16 +43,13 @@ public:
         return shape.getPosition();
     }
 
-    int get_damage(void)
-        { return attStrength; }
-
     int get_reward(void)
     {
         return reward;
     }
 
 
-    void move(const Board& board);
+    void move(Board& board);
 
-    void draw(sf::RenderWindow& window);
+    virtual void draw(sf::RenderWindow& window);
 };

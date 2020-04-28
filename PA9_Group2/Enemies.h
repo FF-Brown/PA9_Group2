@@ -7,15 +7,34 @@ class Basic : public Enemy
 public:
     Basic(void) : Enemy()
     {
+        shape.setRadius(8);
+        shape.setFillColor(sf::Color::Blue);
 
+        health = 50;
+        reward = 25;
+        speed  = 6;
+    }
+};
+
+class BigBoi : public Enemy
+{
+public:
+    BigBoi(void) : Enemy()
+    {
+        shape.setRadius(16);
+        shape.setFillColor(sf::Color::Red);
+
+        health = 200;
+        reward = 150;
+        speed  = 2;
     }
 };
 
 
-class EmptyEnemy : public Enemy
+class Empty : public Enemy
 {
 public:
-    EmptyEnemy(void)
+    Empty(void)
     {
         isEnemy = false;
     }

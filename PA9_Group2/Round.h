@@ -6,7 +6,7 @@
 #include <queue>
 
 
-#define NUM_ROUNDS 2
+#define NUM_ROUNDS 5
 
 #define SPAWN_COOLDOWN 1 //Seconds between enemy spawns
 
