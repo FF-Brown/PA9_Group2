@@ -18,7 +18,7 @@ public:
 	Display();
 	void set_size(int w, int h);
 	void set_position(int x, int y);
-	void set_text(string, int size);
+	void set_text(std::string, int size);
 	void draw_display(sf::RenderWindow& window);
 	void set_data(int);
 	int get_data();

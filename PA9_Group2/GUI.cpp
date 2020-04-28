@@ -1,6 +1,8 @@
 
 #include "GUI.h"
 
+using namespace std;
+
 Display::Display()
 {
 	if (!font.loadFromFile("Resources/Chunk Five.otf"))	//checks for font

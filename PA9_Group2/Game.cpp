@@ -28,7 +28,7 @@ void Game::run(void)
     {
         user_input_handler();
 
-        if (time_since(lastRoundEndTime).asSeconds() > PREP_TIME)
+        if (Utility::time_since(clock, lastRoundEndTime).asSeconds() > PREP_TIME)
             roundStarted = true;
 
         if (roundStarted)
@@ -71,8 +71,8 @@ void Game::user_input_handler(void)
                 else if (selectedTower != NONE && newSelection == NONE) //If a tower is currently selected and a new one isn't chosen
                     add_tower(event);
                 else
-                    selectedTower = newSelection; //Update selection
-                gui.highlight_button(selectedTower); //Updated highlighted button
+                    selectedTower = newSelection;    //Update selection
+                gui.highlight_button(selectedTower); //Update highlighted button
             }
             break;
         }
@@ -84,13 +84,13 @@ void Game::add_tower(sf::Event& event)
     {
         player.remove_XP(towers[selectedTower].get_price()); //Take tower price out of player's XP balance
         selectedTower = NONE; //Reset selected tower
-        gui.highlight_button(selectedTower); //Updated highlighted button
+        gui.highlight_button(selectedTower); //Update highlighted button
     }
 }
 
 void Game::spawn_enemy(void)
 {
-    if (time_since(lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
+    if (Utility::time_since(clock, lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
     {
         lastSpawnTime = clock.getElapsedTime();
         Enemy nEnemy = rounds[currentRound - 1].get_next_enemy();
@@ -139,18 +139,17 @@ void Game::spawn_projectiles(void)
             bool found = false;
             Enemy temp;
             Enemy& closestEnemy = temp;
-
             double closestDistance = towers[i].get_range();
 
             for (auto it = enemies.begin(); it != enemies.end(); it++)
             {
                 sf::Vector2f enemyPos = it->get_position();
 
-                double distance = calculate_distance(towerPos, enemyPos);
+                double distance = Utility::calculate_distance(towerPos, enemyPos);
                 if (distance < closestDistance)
                 {
                     found = true;
-                    closestEnemy = *it; //Address of closest enemy
+                    closestEnemy = *it; //Reference to closest enemy
                     closestDistance = distance;
                 }
             }
@@ -199,9 +198,4 @@ void Game::render(void)
 void Game::display_results(void)
 {
 
-}
-
-sf::Time Game::time_since(sf::Time lastTime)
-{
-    return clock.getElapsedTime() - lastTime;
 }

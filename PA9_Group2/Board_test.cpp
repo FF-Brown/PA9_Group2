@@ -2,6 +2,8 @@
 
 #include "Board_test.h"
 
+using namespace std;
+
 void BoardTest::testAddTower()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 500), "Tower Defense");

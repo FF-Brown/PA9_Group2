@@ -11,6 +11,7 @@
 #include "Towers.h"
 #include "Enemies.h"
 #include "Projectile.h"
+#include "Utility.h"
 
 
 //Included SFML Libraries
@@ -91,8 +92,4 @@ private:
 
     //Draws the board, GUI, enemies, and projectiles and displays the window
     void render(void);
-
-
-    //Returns the time elapsed since lastTime
-    sf::Time time_since(sf::Time lastTime);
 };

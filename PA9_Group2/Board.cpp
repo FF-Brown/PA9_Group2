@@ -1,6 +1,8 @@
 
 #include "Board.h"
 
+using namespace std;
+
 sf::RectangleShape* createGrid(double width, double height, double cellSize) {
 
     //Number of squares across and down

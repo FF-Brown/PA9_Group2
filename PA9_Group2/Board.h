@@ -5,7 +5,6 @@
 #include <fstream>
 #include <sstream>
 #include "Towers.h"
-using namespace std;
 //class for game board with grid, display options, enemy marching path, rules for acceptable builds (can't build on the same square 2x, etc)
 #define GRID_WIDTH 500
 #define GRID_HEIGHT 500
@@ -29,7 +28,7 @@ public:
 	//Can be used with other files for different paths
 	//Any csv file used must have all values on a single line and end with a comma
 	//See path.csv for reference
-	void readPath(string fileName);
+	void readPath(std::string fileName);
 	//Determines if a square is in the enemy marching path
 	//Can be used for checking if a square is a valid location for a tower
 	bool inPath(int square);

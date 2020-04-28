@@ -5,6 +5,7 @@
 
 
 #include "Projectile.h"
+#include "Utility.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -40,7 +41,7 @@ protected:
 
     void update_status(void)
     {
-        if ((clock.getElapsedTime() - lastFireTime).asSeconds() < coolDownTime)
+        if (Utility::time_since(clock, lastFireTime).asSeconds() < coolDownTime)
             activeStatus = false;
         else
             activeStatus = true;
