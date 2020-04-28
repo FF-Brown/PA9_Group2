@@ -182,7 +182,7 @@ void GUI::highlight_button(TowerType towerType)
 {
     for (int i = 0; i < NUM_TOWERS; i++)
     {
-        if (towers[i].get_type() == towerType)
+        if ((towers[i].get_type() == towerType) && (towerType != NONE))
             buttons[i].highlight(true);
         else
             buttons[i].highlight(false);

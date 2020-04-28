@@ -65,7 +65,7 @@ void Game::user_input_handler(void)
         case sf::Event::MouseButtonPressed:
             if (event.mouseButton.button == sf::Mouse::Left)
             {
-                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y);
+                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y, player);
                 if (newSelection == selectedTower)
                     selectedTower = NONE; //Unselect current tower
                 else if (selectedTower != NONE && newSelection == NONE) //If a tower is currently selected and a new one isn't chosen
@@ -92,6 +92,7 @@ void Game::spawn_enemy(void)
 {
     if (time_since(lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
     {
+        lastSpawnTime = clock.getElapsedTime();
         Enemy nEnemy = rounds[currentRound - 1].get_next_enemy();
         if (nEnemy.isEnemy)
         {
