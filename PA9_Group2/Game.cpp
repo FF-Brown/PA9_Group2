@@ -14,6 +14,8 @@ Game::Game(sf::RenderWindow& window) : gameWindow(window)
 
     for (int i = 0; i < NUM_ROUNDS; i++)
         rounds[i] = Round(i + 1);
+
+    towers[TURRET] = Turret();
 }
 
 void Game::run(void)
@@ -59,9 +61,11 @@ void Game::user_input_handler(void)
         case sf::Event::MouseButtonPressed:
             if (event.mouseButton.button == sf::Mouse::Left)
             {
-                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y);
+                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y, player);
                 if (selectedTower == NONE || newSelection != NONE)
+                {
                     selectedTower = newSelection;
+                }
                 else
                     add_tower(event);
             }
@@ -75,6 +79,7 @@ void Game::add_tower(sf::Event& event)
     if (board.addTower(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)/*, selectedTower*/));
     {
         //gui.deselect_tower(selectedTower); //GUI::unselect_tower(Tower selectedTower): Unhighlights the tower button
+        player.remove_XP(towers[selectedTower].get_price());
         selectedTower = NONE;
         //board.disable_gridlines();
     }
@@ -85,6 +90,7 @@ void Game::spawn_enemy(void)
     if ((clock.getElapsedTime() - lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
     {
         Enemy nEnemy = rounds[currentRound - 1].get_next_enemy();
+        lastSpawnTime = clock.getElapsedTime();
         if (nEnemy.isEnemy)
         {
             enemies.push_back(nEnemy);

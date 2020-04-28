@@ -26,6 +26,7 @@ protected:
 
     std::string name;
     TowerType type;
+    int price;
 
     double range; //Pixels
 
@@ -52,6 +53,7 @@ public:
         position = { 0, 0 };
         name = "Tower";
         type = NONE;
+        price = 0;
     }
 
     Tower(sf::Vector2f initPosition)
@@ -86,6 +88,9 @@ public:
 
     TowerType get_type(void)
         { return type; }
+
+    int get_price(void)
+        { return price; }
 
     bool is_active(void)
     {

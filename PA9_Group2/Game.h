@@ -36,6 +36,7 @@ private:
     GUI gui;
 
     Player player;
+    Tower towers[NUM_TOWERS];
 
     std::list<Enemy> enemies;
     std::list<Projectile> projectiles;

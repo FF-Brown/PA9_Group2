@@ -146,20 +146,22 @@ void GUI::draw(sf::RenderWindow& window, int hp, int ex, int round)
 	return;
 }
 
-TowerType GUI::get_tower_choice(int mouseX, int mouseY)
+TowerType GUI::get_tower_choice(int mouseX, int mouseY, Player& player)
 {
     bool buttonClicked = false;
+    int price;
     for (int i = 0; i < 3; i++)
     {
         if (buttons[i].is_over(mouseX, mouseY))
         {
             buttonClicked = true;
             choice = buttons[i].tower.get_type();
+            price  = buttons[i].tower.get_price();
             std::cout << "Tower clicked" << std::endl;
         }
     }
-    if (!buttonClicked)
-        return NONE;
+    if (buttonClicked && player.get_XP() >= price)
+        return choice;
     else
-    	return choice;
+        return NONE;
 }

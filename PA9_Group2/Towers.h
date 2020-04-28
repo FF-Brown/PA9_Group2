@@ -19,6 +19,7 @@ public:
     {
         name = "Turret";
         type = TURRET;
+        price = 50;
     }
 };
 

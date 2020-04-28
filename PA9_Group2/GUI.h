@@ -1,6 +1,7 @@
  #pragma once
 #include "Board.h"
 #include "Towers.h"
+#include "Player.h"
 
 class Display
 {
@@ -38,5 +39,5 @@ class GUI : public Button
 public:
 	GUI();		//initates all the buttons
 	void draw(sf::RenderWindow& window, int hp, int xp, int round);
-	TowerType get_tower_choice(int mouseX, int mouseY);
+	TowerType get_tower_choice(int mouseX, int mouseY, Player& player);
 };
