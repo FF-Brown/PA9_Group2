@@ -45,8 +45,9 @@ public:
 	//Returns spawnpoint of enemies | used in Enemy constructor
 	static sf::Vector2f getStartingPosition(void); 
 	Direction getDirection(sf::Vector2f position);
-	void createSpriteGrid(double, double, double);
+	void createSpriteGrid(double width, double height, double cellSize);
 	void drawTextures();
+	bool isAtEnd(sf::Vector2f);
 
     //Checks if the position is inside the castle square
     bool is_at_castle(sf::Vector2f position);
