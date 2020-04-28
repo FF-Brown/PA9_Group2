@@ -13,10 +13,8 @@
 #include "Projectile.h"
 #include "Utility.h"
 
-
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
-
 
 //Included Std Libraries
 #include <list>
@@ -35,9 +33,8 @@ public:
     //Run game
     void run(void);
 
-
     //Displays highest round passed, total score, and number of enemies killed
-    void display_results(void);
+    bool display_results(void);
 
 private:
     sf::RenderWindow& gameWindow; //Reference to window
@@ -47,8 +44,13 @@ private:
     Board board;
     GUI gui;
 
-    Round rounds[NUM_ROUNDS]; //Array of all rounds | has offset of -1 for array index
     int currentRound;
+    Round rounds[NUM_ROUNDS]; //Array of all rounds | has offset of -1 for array index
+    void init_rounds(void)
+    {
+        for (int i = 0; i < NUM_ROUNDS; i++)
+            rounds[i] = Round(i + 1); //Round 1 stored in rounds[0], Round 2 in rounds[1], etc.
+    }
 
     std::list<Enemy> enemies;          //Contains all enemies on the board
     std::list<Projectile> projectiles; //Contains all projectiles on the board
@@ -57,8 +59,13 @@ private:
     sf::Time lastRoundEndTime; //Time that the previous round ended
     sf::Time lastSpawnTime;    //Time that the previous enemy was spawned
 
-    TowerType selectedTower; //Currently selected tower in the GUI
+    TowerType selectedTower;  //Currently selected tower in the GUI
     Tower towers[NUM_TOWERS]; //Tower data used for reference
+    void init_towers(void)
+    {
+        towers[TURRET] = Turret();
+        towers[SNIPER] = Sniper();
+    }
 
 
     //Game Functions

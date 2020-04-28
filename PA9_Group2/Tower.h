@@ -39,6 +39,7 @@ protected:
     sf::Clock clock;
     sf::Time lastFireTime;
 
+
     void update_status(void)
     {
         if (Utility::time_since(clock, lastFireTime).asSeconds() < coolDownTime)
@@ -48,25 +49,44 @@ protected:
     }
 
     void set_cool_down(void)
-    {
-        coolDownTime = 60 / attSpeed;
-    }
+        { coolDownTime = 60 / attSpeed; }
 
 public:
+    //Constructor with position argument
+    Tower(sf::Vector2f initPosition)
+    {
+        position = initPosition;
+        lastFireTime = clock.getElapsedTime();
+        activeStatus = true;
 
+        name = "";
+        type = NONE;
+        price = 0;
+        range = 0;
+        attSpeed = 0;
+        coolDownTime = 0;
+        damage = 0;
+    }
+
+    //Default Construcctor
     Tower()
     {
         position = { 0, 0 };
         name = "None";
         type = NONE;
         price = 0;
+        range = 0;
+        attSpeed = 0;
+        coolDownTime = 0;
+        damage - 0;
+        lastFireTime = sf::Time();
+        activeStatus = false;
     }
 
-    Tower(sf::Vector2f initPosition)
+    bool is_active(void)
     {
-        clock.restart();
-        lastFireTime = clock.getElapsedTime();
-        position = initPosition;
+        update_status();
+        return activeStatus;
     }
 
     double get_range(void)
@@ -95,11 +115,5 @@ public:
 
     int get_price(void)
         { return price; }
-
-    bool is_active(void)
-    {
-        update_status();
-        return activeStatus;
-    }
 };
 

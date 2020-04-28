@@ -22,17 +22,44 @@ protected:
     int speed;
 
 public:
-    bool isEnemy;
+    bool isEnemy; //true if the object is an Enemy, false if an Empty
 
+    //Constructor
     Enemy(void)
     {
         isEnemy = true;
-        shape.setPosition(Board::getStartingPosition());
+        shape.setPosition(Board::getStartingPosition()); //Gets the position of the start of the path
+
+        health = 0;
+        reward = 0;
+        speed  = 0;
     }
 
-    void damage(int amount)
+    void move(Board& board)
     {
-        health -= amount;
+        float dx, dy;
+
+        switch (board.getDirection(shape.getPosition()))
+        {
+        case UP:    dx = 0;
+                    dy = -1 * speed;
+                    break;
+        case DOWN:  dx = 0;
+                    dy = speed;
+                    break;
+        case LEFT:  dx = -1 * speed;
+                    dy = 0;
+                    break;
+        case RIGHT: dx = speed;
+                    dy = 0;
+                    break;
+        default:    dx = 0;
+                    dy = 0;
+        }
+        dx *= SPEED_SCALE;
+        dy *= SPEED_SCALE;
+
+        shape.move(dx, dy);
     }
 
     bool is_alive(void)
@@ -43,46 +70,15 @@ public:
             return false;
     }
 
+    void damage(int amount)
+        { health -= amount; }
+
     sf::Vector2f get_position(void)
-    {
-        return shape.getPosition();
-    }
+        { return shape.getPosition(); }
 
     int get_reward(void)
-    {
-        return reward;
-    }
+        { return reward; }
 
-
-    void move(Board& board)
-    {
-        float dx, dy;
-
-        switch (board.getDirection(shape.getPosition()))
-        {
-        case UP:    dx = 0;
-            dy = -1 * speed;
-            break;
-        case DOWN:  dx = 0;
-            dy = speed;
-            break;
-        case LEFT:  dx = -1 * speed;
-            dy = 0;
-            break;
-        case RIGHT: dx = speed;
-            dy = 0;
-            break;
-        default:    dx = 0;
-            dy = 0;
-        }
-        dx *= SPEED_SCALE;
-        dy *= SPEED_SCALE;
-
-        shape.move(dx, dy);
-    }
-
-    virtual void draw(sf::RenderWindow& window)
-    {
-        window.draw(shape);
-    }
+    void draw(sf::RenderWindow& window)
+        { window.draw(shape); }
 };

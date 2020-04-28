@@ -19,9 +19,36 @@ private:
     std::queue<Enemy> enemyQueue;
 
 public:
-    Round(void) {};
+    //Constructor for a particular round
     Round(int roundNum);
 
-    Enemy get_next_enemy(void);
-    bool is_spawning_complete(void);
+    //Default Constructor
+    Round(void)
+    {
+        num = 0;
+        reward = 0;
+    }
+
+    //Returns the next enemy in the queue and pops it
+    Enemy get_next_enemy(void)
+    {
+        Enemy nextEnemy;
+        if (enemyQueue.size() > 0) //If queue is not empty
+        {
+            nextEnemy = enemyQueue.front();
+            enemyQueue.pop();
+        }
+        else
+            nextEnemy = Empty();
+        return nextEnemy;
+    }
+
+    //Returns true if the round is finished spawning enemies | false otherwise
+    bool is_spawning_complete(void)
+    {
+        if (enemyQueue.size() == 0)
+            return true;
+        else
+            return false;
+    }
 };

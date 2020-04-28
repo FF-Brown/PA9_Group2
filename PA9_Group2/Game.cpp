@@ -11,15 +11,12 @@ Game::Game(sf::RenderWindow& window) : gameWindow(window)
     roundStarted = false;
     clock.restart();
     lastRoundEndTime = clock.getElapsedTime();
-    lastSpawnTime = clock.getElapsedTime();
+    lastSpawnTime    = clock.getElapsedTime();
 
     selectedTower = NONE;
 
-    for (int i = 0; i < NUM_ROUNDS; i++)
-        rounds[i] = Round(i + 1);
-
-    towers[TURRET] = Turret();
-    towers[SNIPER] = Sniper();
+    init_rounds();
+    init_towers();
 }
 
 void Game::run(void)
@@ -93,20 +90,18 @@ void Game::spawn_enemy(void)
     if (Utility::time_since(clock, lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
     {
         lastSpawnTime = clock.getElapsedTime();
-        Enemy nEnemy = rounds[currentRound - 1].get_next_enemy();
+        Enemy nEnemy = rounds[currentRound - 1].get_next_enemy(); //Get the next enemy in the current round's queue
         if (nEnemy.isEnemy)
-        {
-            enemies.push_back(nEnemy);
-        }
+            enemies.push_back(nEnemy); //Add enemy to game
     }
 }
 
 void Game::move_enemies(void)
 {
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
+    for (auto it = enemies.begin(); it != enemies.end(); it++) //Iterate through all enemies
     {
         it->move(board);
-        if (board.is_at_castle(it->get_position()))
+        if (board.is_at_castle(it->get_position())) //If the enemy reached the end of the path
         {
             player.damage(1);
             enemies.erase(it);
@@ -116,22 +111,19 @@ void Game::move_enemies(void)
 
 void Game::despawn_enemies(void)
 {
-    for (auto it = enemies.begin(); it != enemies.end(); it++)
-    {
+    for (auto it = enemies.begin(); it != enemies.end(); it++) //Iterate through all enemies
         if (!it->is_alive())
         {
             player.add_XP(it->get_reward());
             player.inc_enemies_killed();
             enemies.erase(it);
         }
-    }
 }
 
 void Game::spawn_projectiles(void)
 {
-    Tower* towers = board.getTowers();
-
-    for (int i = 0; i < board.getTowerCount(); i++)
+    Tower* towers = board.getTowers(); //All towers on the board
+    for (int i = 0; i < board.getTowerCount(); i++) //Iterate through all towers
         if (towers[i].is_active())
         {
             sf::Vector2f towerPos = towers[i].getPosition();
@@ -141,7 +133,7 @@ void Game::spawn_projectiles(void)
             Enemy& closestEnemy = temp;
             double closestDistance = towers[i].get_range();
 
-            for (auto it = enemies.begin(); it != enemies.end(); it++)
+            for (auto it = enemies.begin(); it != enemies.end(); it++) //Iterate through all enemies to find the closest to the current tower
             {
                 sf::Vector2f enemyPos = it->get_position();
 
@@ -164,22 +156,20 @@ void Game::spawn_projectiles(void)
 
 void Game::move_projectiles(void)
 {
-   for (auto it = projectiles.begin(); it != projectiles.end(); it++)
+   for (auto it = projectiles.begin(); it != projectiles.end(); it++) //Iterate through all projectiles
         it->move();
 }
 
 void Game::despawn_projectiles(void)
 {
-    for (auto it = projectiles.begin(); it != projectiles.end(); it++)
-    {
+    for (auto it = projectiles.begin(); it != projectiles.end(); it++) //Iterate through all projectiles
         if (!it->is_active())
             projectiles.erase(it);
-    }
 }
 
 void Game::render(void)
 {
-    gameWindow.clear(); //First time in game loop: Clears menu items
+    gameWindow.clear();
 
     board.draw(gameWindow);
     gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
@@ -195,7 +185,27 @@ void Game::render(void)
     gameWindow.display();
 }
 
-void Game::display_results(void)
+bool Game::display_results(void)
 {
+    //Display stats
 
+    //Menu button
+    
+
+    sf::Event event;
+    while (gameWindow.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+        {
+            gameWindow.close();
+            return false;
+        }
+        if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button = sf::Mouse::Left))
+        {
+            sf::Vector2i mousePos = { event.mouseButton.x, event.mouseButton.y };
+            if (20 < mousePos.x && mousePos.x < 40 && 20 < mousePos.y && mousePos.y < 10);
+                return false;
+        }
+    }
+    return true;
 }

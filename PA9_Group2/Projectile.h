@@ -20,7 +20,6 @@ private:
     bool active;
 
 public:
-
     Projectile(sf::Vector2f startPoint, sf::Vector2f endPoint)
     {
         shape.setPosition(startPoint);

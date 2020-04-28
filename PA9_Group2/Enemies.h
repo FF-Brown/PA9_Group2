@@ -5,7 +5,7 @@
 class Basic : public Enemy
 {
 public:
-    Basic(void) : Enemy()
+    Basic(void)
     {
         shape.setRadius(8);
         shape.setFillColor(sf::Color::Blue);
@@ -19,7 +19,7 @@ public:
 class BigBoi : public Enemy
 {
 public:
-    BigBoi(void) : Enemy()
+    BigBoi(void)
     {
         shape.setRadius(16);
         shape.setFillColor(sf::Color::Red);

@@ -34,18 +34,6 @@ public:
             return 0;
     }
 
-    //Subtracts an amount from the player's health
-    void damage(int amount)
-    {
-        health -= amount;
-    }
-
-    //Returns the player's XP
-    int get_XP(void)
-    {
-        return XP;
-    }
-
     //Adds an amount to the player's XP
     void add_XP(int amount)
     {
@@ -53,14 +41,19 @@ public:
         score += amount;
     }
 
+    //Returns the player's XP
+    int get_XP(void)
+        { return XP;  }
+
+    //Subtracts an amount from the playere's XP
     void remove_XP(int amount)
-    {
-        XP -= amount;
-    }
+        { XP -= amount; }
+
+    //Subtracts an amount from the player's health
+    void damage(int amount)
+        { health -= amount; }
 
     //Increments the number of enemies killed
     void inc_enemies_killed(void)
-    {
-        enemiesKilled++;
-    }
+        { enemiesKilled++; }
 };

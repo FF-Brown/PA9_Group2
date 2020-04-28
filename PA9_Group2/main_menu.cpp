@@ -238,10 +238,10 @@ bool Menu::display_instructions(sf::RenderWindow& window)
 
 void Menu::play_game(sf::RenderWindow& window)
 {
-    Game game(window);
+    Game game(window); //Create the game
 
     game.run();
-    game.display_results();
+    while (game.display_results()); //Display until user exits
 }
 
 bool button::is_over(sf::RenderWindow& window)
