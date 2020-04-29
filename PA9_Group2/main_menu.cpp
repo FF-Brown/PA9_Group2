@@ -167,7 +167,7 @@ bool Menu::display_instructions(sf::RenderWindow& window)
     window.clear();
     sf::Text text[6];
 
-    text[0].setString("How to play the Epic Tower Defence Game:");
+    text[0].setString("How to play the Epic Tower Defense Game:");
     text[1].setString("Prevent Monsters from reaching your castle by placing");
     text[2].setString("towers along the path by clicking the button of the ");
     text[3].setString("tower you want and then clicking the space where you");

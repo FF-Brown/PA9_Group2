@@ -11,6 +11,7 @@ public:
     Basic(void)
     {
         shape.setRadius(8);
+        shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
         shape.setFillColor(sf::Color::Blue);
 
         health = 50;
@@ -27,6 +28,7 @@ public:
     BigBoi(void)
     {
         shape.setRadius(12);
+        shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
         shape.setFillColor(sf::Color::Red);
 
         health = 250;
@@ -43,6 +45,7 @@ public:
     SpeedyBoi(void)
     {
         shape.setRadius(6);
+        shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
         shape.setFillColor(sf::Color::Yellow);
 
         health = 45;

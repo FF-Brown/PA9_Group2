@@ -54,7 +54,8 @@ public:
     {
         float dx, dy;
 
-        switch (board.getDirection(shape.getPosition()))
+        //Trying with center position instead of vanilla position
+        switch (board.getDirection(get_center_position()))
         {
         case UP:    dx = 0;
                     dy = -1 * speed;
