@@ -60,6 +60,7 @@ void BoardTest::testGetDirection()
 
 	result = test.getDirection(badDownPos);
 	assert("getDirection(): Not yet down", result == LEFT, "Should be LEFT");
+	//cout << "Result: " << result << endl;
 
 	result = test.getDirection(badLeftPos);
 	assert("getDirection(): Not yet left", result == DOWN, "Should be DOWN");

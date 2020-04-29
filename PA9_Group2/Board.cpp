@@ -222,6 +222,7 @@ Direction Board::getDirection(sf::Vector2f position)
 {
 	int cell = getSquareCoord(position.x, position.y);
 	int index = -1;
+	Direction prevDir = DOWN;
 	if (cell == -1) {
 		cout << "Coordinates not on board.\n";
 		return DOWN;
@@ -234,30 +235,50 @@ Direction Board::getDirection(sf::Vector2f position)
 		cout << "(" << position.x << "," << position.y << ") " <<  "Coordinates not in path.\n";
 		return DOWN;
 	}
+	else if (index == 0)
+		return DOWN;
+	//Get previous direction
+	if (path[index - 1] + 20 == path[index])
+		prevDir = DOWN;
+	else if (path[index - 1] - 1 == path[index])
+		prevDir = LEFT;
+	else if (path[index - 1] - 20 == path[index])
+		prevDir = UP;
+	else if (path[index - 1] + 1 == path[index])
+		prevDir = RIGHT;
+	
 	//Down
-	if (path[index + 1] - 20 == path[index]) {
+	if(path[index] + 20 == path[index + 1]) {
 		int midpoint = (spriteGrid[path[index]].getPosition().x + spriteGrid[path[index] + 1].getPosition().x) / 2;
 		if (position.x <= midpoint)
 			return DOWN;
+		else
+			return prevDir;
 	}
 	//Up
-	if (path[index + 1] + 20 == path[index]) {
+	if (path[index] - 20 == path[index + 1]) {
 		int midpoint = (spriteGrid[path[index]].getPosition().x + spriteGrid[path[index] + 1].getPosition().x) / 2;
 		if (position.x <= midpoint)
 			return UP;
+		else
+			return prevDir;
 	}
 	//Right
-	if (path[index + 1] - 1 == path[index]) {
+	if(path[index] + 1 == path[index + 1]) {
 		int midpoint = (spriteGrid[path[index]].getPosition().y + spriteGrid[path[index] + 20].getPosition().y) / 2;
 		if (position.y >= midpoint)
 			return RIGHT;
+		else
+			return prevDir;
 	}
 	//Left
+	if(path[index] - 1 == path[index + 1]) {
 
-	if (path[index + 1] + 1 == path[index]) {
 		int midpoint = (spriteGrid[path[index]].getPosition().y + spriteGrid[path[index] + 20].getPosition().y) / 2;
-		if(position.y >= midpoint)
+		if (position.y >= midpoint)
 			return LEFT;
+		else
+			return prevDir;
 	}
 	//cout << "Path could not be determined.\n";
 

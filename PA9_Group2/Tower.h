@@ -108,6 +108,9 @@ public:
     int get_damage(void)
         { return damage; }
 
+    void setPosition(sf::Vector2f pos)
+        { position = pos; }
+
     std::string get_name(void)
         { return name; }
 
