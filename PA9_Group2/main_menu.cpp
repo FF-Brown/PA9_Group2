@@ -208,51 +208,36 @@ bool Menu::display_instructions(sf::RenderWindow& window)
 
 	sf::Event event;
 	bool exit = false;
-    while (window.pollEvent(event))
-    {
-		int mouseX = sf::Mouse::getPosition(window).x;
-		int mouseY = sf::Mouse::getPosition(window).y;
-
-		int buttonPosW = buttonX + buttonW;
-		int buttonPosH = buttonY + buttonH;
-
-        switch (event.type)
-        {
-        case sf::Event::Closed:
-            window.close();
-            break;
-        case sf::Event::MouseMoved:
-            
-		if (mouseX < buttonPosW && mouseX > buttonX&& mouseY < buttonPosH && mouseY > buttonY)
+		while (window.pollEvent(event))
 		{
-			button.setOutlineThickness(2);
-			button.setOutlineColor(sf::Color::Red);
-		}
-		else {
-			button.setOutlineThickness(2);
-			button.setOutlineColor(sf::Color::Green);
-		}
-            break;
-        case sf::Event::MouseButtonPressed:
-             
-			if (mouseX < buttonPosW && mouseX > buttonX&& mouseY < buttonPosH && mouseY > buttonY)
+			int mouseX = sf::Mouse::getPosition(window).x;
+			int mouseY = sf::Mouse::getPosition(window).y;
+
+			int buttonPosW = buttonX + buttonW;
+			int buttonPosH = buttonY + buttonH;
+
+			switch (event.type)
 			{
-				button.setOutlineThickness(2);
-				button.setOutlineColor(sf::Color::Red);
-				exit = true;
-			}
-			else {
-				button.setOutlineThickness(2);
-				button.setOutlineColor(sf::Color::Green);
-			}
-            break;
-        }
-    }
+			case sf::Event::Closed:
+				window.close();
+				break;
 
-    window.draw(text[5]);
-	window.draw(button);
-	window.draw(back);
+			case sf::Event::MouseButtonPressed:
 
+				if (mouseX < buttonPosW && mouseX > buttonX&& mouseY < buttonPosH && mouseY > buttonY)
+				{
+					exit = true;
+				}
+
+				break;
+			}
+		
+		}
+
+		window.draw(text[5]);
+		window.draw(button);
+		window.draw(back);
+	
 
     return exit;
 }
