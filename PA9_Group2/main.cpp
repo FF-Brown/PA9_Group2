@@ -33,7 +33,7 @@ int main(void)
 
     Menu menu(WINDOW_WIDTH, WINDOW_HEIGHT);
     MainMenuOption option;
-
+     
     do
     {
         menu.display_main_menu(window);
