@@ -93,6 +93,17 @@ public:
         return activeStatus;
     }
 
+    sf::Vector2f get_center_position(void)
+    {
+        sf::Vector2f center;
+        center.x = position.x + (float)SQUARE_SIZE / 2.f;
+        center.y = position.y + (float)SQUARE_SIZE / 2.f;
+        return center;
+    }
+
+    sf::Vector2f get_position(void)
+        { return position; }
+
     double get_range(void)
         { return range; }
 
@@ -101,9 +112,6 @@ public:
 
     void fire(void)
         { lastFireTime = clock.getElapsedTime(); }
-
-    sf::Vector2f get_position(void)
-        { return position; }
 
     int get_damage(void)
         { return damage; }

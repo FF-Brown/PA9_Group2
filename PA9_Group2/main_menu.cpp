@@ -264,7 +264,10 @@ void Menu::play_game(sf::RenderWindow& window)
     game.run();
 
     if (window.isOpen())
+    {
+        Utility::delay(2);
         game.display_results();
+    }
 }
 
 bool button::is_over(sf::RenderWindow& window)

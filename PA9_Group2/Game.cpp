@@ -39,8 +39,6 @@ void Game::run(void)
             spawn_enemy();
             spawn_projectiles();
 
-            move_enemies();
-
             despawn_enemies();
             despawn_projectiles();
 
@@ -142,7 +140,7 @@ void Game::spawn_projectiles(void)
         {
             bool found = false;
             sf::Vector2f closestEnemy;
-            sf::Vector2f towerPos  = towers[i].get_position();
+            sf::Vector2f towerPos  = towers[i].get_center_position();
             double closestDistance = towers[i].get_range();
 
             for (auto it = enemies.begin(); it != enemies.end(); it++) //Iterate through all enemies to find the closest to the current tower
@@ -217,27 +215,57 @@ void Game::render(void)
 
 void Game::display_results(void)
 {
-    string stats[3];
-    stats[0] = player.check_won() ? "You won!" : "You lost in round " + to_string(currentRound);
-    stats[1] = "Total score is: " + to_string(player.get_score());
-    stats[2] = "Total enemies killed: " + to_string(player.get_enemies_killed());
+    //Load font
+    sf::Font font;
+    if (!font.loadFromFile("Resources/Chunk Five.otf"))
+    {
+        std::cout << "Error Loading Font" << std::endl;
+        return;
+    }
+    
+    //Define text
+    sf::Text text[4];
+    text[0].setString(player.check_won() ? "You won!" : "Game Over! You made it to round " + to_string(currentRound));
+    text[1].setString("Total score: " + to_string(player.get_score()));
+    text[2].setString("Total enemies killed: " + to_string(player.get_enemies_killed()));
+    text[3].setString("MENU");
 
-    //Set up button
+    //Set up Menu button
+    sf::RectangleShape button;
+    sf::Vector2f buttonPos(70, 450);
 
+    button.setSize(sf::Vector2f(100, 100));
+    button.setPosition(buttonPos);
+    button.setFillColor(sf::Color::Green);
+    button.setOutlineColor(sf::Color::Green);
+    button.setOutlineThickness(2);
+
+    //Set up text style
+    for (int i = 0; i < 4; i++)
+    {
+        text[i].setFont(font);
+        text[i].setOutlineThickness(2);
+        text[i].setOutlineColor(sf::Color::Black);
+        text[i].setFillColor(sf::Color::White);
+        text[i].setCharacterSize(25);
+        if (i == 3)
+            text[i].setPosition(buttonPos);
+        else
+            text[i].setPosition(sf::Vector2f(50, (50 * i) + 10));
+    }
+
+    //Display loop
     bool exit = false;
     while (!exit && gameWindow.isOpen())
     {
-        for (int i = 0; i < 3; i++)
-            //gameWindow.draw(stats[i]);
-
-        //Display menu button
-
-
         //Render
         gameWindow.clear();
-
+        gameWindow.draw(button);
+        for (int i = 0; i < 4; i++)
+            gameWindow.draw(text[i]);
         gameWindow.display();
 
+        //Event handling: highlight button, leave screen, close window
         sf::Event event;
         while (gameWindow.pollEvent(event))
         {
@@ -246,14 +274,18 @@ void Game::display_results(void)
             case sf::Event::Closed:
                 gameWindow.close();
                 break;
-
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
-                    sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
-                    if (20 < mousePos.x && mousePos.x < 40 && 20 < mousePos.y && mousePos.y < 10) //Click was on Menu button: shape.getGlobalBounds.contains(mousePos)
+                    if (button.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                         exit = true;
                 }
+                break;
+            case sf::Event::MouseMoved:
+                if (button.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                    button.setOutlineColor(sf::Color::Blue);
+                else
+                    button.setOutlineColor(sf::Color::Green);
                 break;
             }
         }

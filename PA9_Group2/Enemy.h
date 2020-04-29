@@ -48,6 +48,7 @@ public:
         health = 0;
         reward = 0;
         speed  = 0;
+        healthScale = 0;
     }
 
     void move(Board& board)
