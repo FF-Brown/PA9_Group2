@@ -47,7 +47,7 @@ public:
 
         health = 45;
         reward = 15;
-        speed = 25;
+        speed = 27;
 
         set_health_scale();
     }

@@ -120,7 +120,7 @@ Round::Round(int roundNum)
     case 9:
         reward = 125;
         spawnCoolDown = 0.5;
-        for (int i = 0; i < 122; i++) //12 SpeedyBois
+        for (int i = 0; i < 12; i++) //12 SpeedyBois
             enemyQueue.push(SpeedyBoi());
         for (int i = 0; i < 5; i++) //5 Basics
             enemyQueue.push(Basic());
