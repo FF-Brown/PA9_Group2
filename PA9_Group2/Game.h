@@ -21,7 +21,7 @@
 #include <iterator>
 
 
-#define PREP_TIME 10.0 //Seconds before first enemy in round spawns
+#define PREP_TIME 5.0 //Seconds before first enemy in round spawns
 
 
 class Game

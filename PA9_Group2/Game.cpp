@@ -26,7 +26,10 @@ void Game::run(void)
         user_input_handler();
 
         if (Utility::time_since(clock, lastRoundEndTime).asSeconds() > PREP_TIME)
+        {
+            currentRound++;
             roundStarted = true;
+        }
 
         move_projectiles();
 
@@ -42,7 +45,7 @@ void Game::run(void)
 
             if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
             {
-                currentRound++;
+                player.add_XP(rounds[currentRound - 1].get_reward());
                 roundStarted = false;
                 lastRoundEndTime = clock.getElapsedTime();
             }
@@ -173,7 +176,8 @@ void Game::despawn_projectiles(void)
                 return;
             }
             sf::Vector2f projPos = projectileIt->get_position();
-            if (!(0 <= projPos.x && projPos.y <= GRID_WIDTH && 0 <= projPos.y && projPos.y <= GRID_HEIGHT)) //Erase projectiles that left the board
+            if (!(0 <= projPos.x && projPos.x <= GRID_WIDTH
+               && 0 <= projPos.y && projPos.y <= GRID_HEIGHT)) //Erase projectiles that left the board
             {
                 projectiles.erase(projectileIt);
                 return;

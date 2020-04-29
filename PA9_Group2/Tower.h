@@ -56,7 +56,6 @@ public:
     Tower(sf::Vector2f initPosition)
     {
         position = initPosition;
-        lastFireTime = clock.getElapsedTime();
         activeStatus = true;
 
         name = "";

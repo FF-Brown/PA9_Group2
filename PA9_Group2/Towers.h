@@ -1,5 +1,5 @@
 
-//Class Definition File for Towers
+//Implementation file for towers
 
 #pragma once
 
@@ -20,7 +20,7 @@ public:
         type  = TURRET;
         price = 50;
 
-        range = SQUARE_SIZE * 4;
+        range = SQUARE_SIZE * 5;
         attSpeed = 45;
         set_cool_down();
         damage = 20;

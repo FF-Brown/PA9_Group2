@@ -1,3 +1,6 @@
+
+//Implementation file for enemies
+
 #pragma once
 
 #include "Enemy.h"
@@ -8,7 +11,7 @@ public:
     Basic(void)
     {
         health = 50;
-        reward = 25;
+        reward = 10;
         speed  = 10;
 
         healthScale = 255 / (double)health;
@@ -33,7 +36,7 @@ public:
         shape.setFillColor(sf::Color(255, 0, 0)); //Red
 
         health = 200;
-        reward = 150;
+        reward = 50;
         speed  = 5;
     }
 

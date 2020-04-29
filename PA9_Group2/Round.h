@@ -51,4 +51,8 @@ public:
         else
             return false;
     }
+
+    //Returns the XP reward for the round
+    int get_reward(void)
+        { return reward; }
 };

@@ -3,8 +3,8 @@
 
 #pragma once
 
-#define INIT_HEALTH 100
-#define INIT_XP     500 //75
+#define INIT_HEALTH 50
+#define INIT_XP     100
 
 
 class Player
