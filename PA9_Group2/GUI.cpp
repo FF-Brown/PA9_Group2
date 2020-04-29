@@ -66,7 +66,7 @@ void Display::draw_display(sf::RenderWindow& window)
 
 	window.draw(Shape);
 	window.draw(text);
-}
+} //Exception thrown sometimes when Play Game is clicked from main menu (std::length_error)
 
 void Display::set_data(int i)
 {

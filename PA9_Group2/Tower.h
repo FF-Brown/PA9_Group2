@@ -32,7 +32,7 @@ protected:
 
     double range; //Pixels
     int attSpeed; //Shots per minute
-    int coolDownTime; //In seconds
+    double coolDownTime; //In seconds
     int damage;
 
     bool activeStatus = true;
@@ -49,7 +49,7 @@ protected:
     }
 
     void set_cool_down(void)
-        { coolDownTime = 60 / attSpeed; }
+        { coolDownTime = 60 / (double)attSpeed; }
 
 public:
     //Constructor with position argument
@@ -98,14 +98,11 @@ public:
     void fire(void)
         { lastFireTime = clock.getElapsedTime(); }
 
-    sf::Vector2f getPosition()
-        { return position; }
-
-    int getDamage(void)
-        { return damage; } 
-
     sf::Vector2f get_position(void)
         { return position; }
+
+    int get_damage(void)
+        { return damage; }
 
     std::string get_name(void)
         { return name; }

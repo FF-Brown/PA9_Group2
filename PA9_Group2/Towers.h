@@ -21,9 +21,9 @@ public:
         price = 50;
 
         range = SQUARE_SIZE * 4;
-        attSpeed = 90; //1.5 shots/second
+        attSpeed = 45;
         set_cool_down();
-        damage = 25;
+        damage = 20;
     }
 };
 
@@ -37,9 +37,9 @@ public:
         price = 120;
 
         range = SQUARE_SIZE * 10;
-        attSpeed = 30; //0.5 shots/second
+        attSpeed = 20; //0.5 shots/second
         set_cool_down();
-        damage = 60;
+        damage = 40;
     }
 };
 

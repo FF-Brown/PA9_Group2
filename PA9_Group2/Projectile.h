@@ -7,7 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 
-#define SPEED 5
+#define SPEED 10
 
 
 class Projectile
@@ -15,51 +15,34 @@ class Projectile
 private:
     sf::CircleShape shape;
     sf::Vector2f velocity;
-    double maxDistance;
-    double distance;
-    bool active;
+    int damage;
 
 public:
-    Projectile(sf::Vector2f startPoint, sf::Vector2f endPoint)
+    Projectile(sf::Vector2f startPoint, sf::Vector2f endPoint, int initDamage)
     {
         shape.setPosition(startPoint);
-        shape.setRadius(3);
+        shape.setRadius(4);
         shape.setFillColor(sf::Color::Black);
 
         sf::Vector2f aimDir = endPoint - startPoint;
         sf::Vector2f aimDirNorm = aimDir / sqrt(pow(aimDir.x, 2) + pow(aimDir.y, 2));
         velocity = { aimDirNorm.x * SPEED, aimDirNorm.y * SPEED };
 
-        maxDistance = Utility::calculate_distance(startPoint, endPoint);
-        distance = 0;
-        active = true;
+        damage = initDamage;
     }
 
-    bool is_active(void)
-        { return active; }
+    sf::FloatRect get_bounds(void)
+        { return shape.getGlobalBounds(); }
 
-    void update_active_status(void)
-    {
-        if (distance > maxDistance)
-            active = false;
-        else
-            active = true;
-    }
+    sf::Vector2f get_position(void)
+        { return shape.getPosition(); }
+
+    int get_damage(void)
+        { return damage; }
 
     void move(void)
-    {
-        //Move
-
-        //Add move length to distance
-
-        update_active_status();
-    }
+        { shape.move(velocity); }
 
     void draw(sf::RenderWindow& window)
-    {
-        if (active)
-        {
-
-        }
-    }
+        { window.draw(shape); }
 };

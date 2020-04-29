@@ -59,12 +59,13 @@ private:
     sf::Time lastRoundEndTime; //Time that the previous round ended
     sf::Time lastSpawnTime;    //Time that the previous enemy was spawned
 
-    TowerType selectedTower;  //Currently selected tower in the GUI
-    Tower towers[NUM_TOWERS]; //Tower data used for reference
-    void init_towers(void)
+    TowerType selectedTower; //Currently selected tower in the GUI
+
+    Tower towerRef[NUM_TOWERS]; //Tower data used for reference
+    void init_towerRef(void)
     {
-        towers[TURRET] = Turret();
-        towers[SNIPER] = Sniper();
+        towerRef[TURRET] = Turret();
+        towerRef[SNIPER] = Sniper();
     }
 
 
@@ -93,7 +94,7 @@ private:
     //Moves any existing projectiles on the board
     void move_projectiles(void);
 
-    //Despawns any projectiles that have reached the end of their journey
+    //Despawns any projectile that has collided with an enemy and damages the enemy
     void despawn_projectiles(void);
 
 

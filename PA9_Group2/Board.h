@@ -39,7 +39,7 @@ public:
 	//Checks if a given square has a tower in it
 	bool isOpen(sf::Vector2f position);
 	//Calls isOpen() and inPath(). If both check out, adds a tower in the given position
-	int addTower(sf::Vector2f position, TowerType nTowerType);
+	bool addTower(sf::Vector2f position, TowerType nTowerType);
 	Tower* getTowers() { return towers; }
 	int getTowerCount() { return towerCount; } 
 	//Returns spawnpoint of enemies | used in Enemy constructor
@@ -47,10 +47,9 @@ public:
 	Direction getDirection(sf::Vector2f position);
 	void createSpriteGrid(double width, double height, double cellSize);
 	void drawTextures();
-	bool isAtEnd(sf::Vector2f);
 
     //Checks if the position is inside the castle square
-    bool is_at_castle(sf::Vector2f position);
+    bool isAtEnd(sf::Vector2f position);
 
 protected:
 	//Note that grid is a 1D array, not 2D which would be preferrable 

@@ -21,6 +21,10 @@ protected:
     int reward;
     int speed;
 
+
+    void update_color(void)
+        { shape.setFillColor(shape.getFillColor()); } //Keep color the same
+
 public:
     bool isEnemy; //true if the object is an Enemy, false if an Empty
 
@@ -70,15 +74,29 @@ public:
             return false;
     }
 
-    void damage(int amount)
-        { health -= amount; }
+    void draw(sf::RenderWindow& window)
+    {
+        update_color();
+        window.draw(shape);
+    }
+
+    sf::Vector2f get_center_position(void)
+    {
+        sf::Vector2f center;
+        center.x = shape.getPosition().x + shape.getRadius();
+        center.y = shape.getPosition().y + shape.getRadius();
+        return center;
+    }
 
     sf::Vector2f get_position(void)
         { return shape.getPosition(); }
 
+    sf::FloatRect get_bounds(void)
+        { return shape.getGlobalBounds(); }
+
+    void damage(int amount)
+        { health -= amount; }
+
     int get_reward(void)
         { return reward; }
-
-    void draw(sf::RenderWindow& window)
-        { window.draw(shape); }
 };

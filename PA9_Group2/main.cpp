@@ -17,8 +17,6 @@
 //For testing
 #include "Board_test.h"
 
-using namespace std;
-
 
 //Main Window Dimensions
 #define WINDOW_HEIGHT 500
@@ -35,16 +33,6 @@ int main(void)
 
     Menu menu(WINDOW_WIDTH, WINDOW_HEIGHT);
     MainMenuOption option;
-
-    Board board;
-    int test = 0;
-    BoardTest testBoard;
-    testBoard.testGetDirection();
-    //testBoard.testAddTower();
-
-
-    return 0;
-
 
     do
     {

@@ -160,26 +160,30 @@ void Board::colorCell(int cellNum)
 {
 	grid[cellNum].setFillColor(sf::Color::Blue); 
 }
-int Board::addTower(sf::Vector2f position, TowerType nTowerType)
+bool Board::addTower(sf::Vector2f position, TowerType nTowerType)
 {
-    if (nTowerType == NONE)
-        return 0;
+    if (position.x > GRID_WIDTH)
+        return false;
 
-	int cell = getSquareCoord(position.x, position.y);
+    if (nTowerType == NONE)
+        return false;
+
+    int cell = getSquareCoord(position.x, position.y);
 	if (cell == -1)
-		return -1;
+		return false;
+
 	position = spriteGrid[cell].getPosition();
-	int result = 1;
+	bool result = true;
 	//Check that not in path
 	if (inPath(cell)) {
 		cout << "Cell is in enemy path.\n";
-		result = 0;
+		result = false;
 	}
 	else {
 		//Check that no tower there
 		if (!isOpen(position)) {
 			cout << "Cell is occupied.\n";
-			result = -1;
+			result = false;
 		}
 		else {
 			//Add tower 
@@ -202,7 +206,7 @@ bool Board::isOpen(sf::Vector2f position)
 	if (towerCount == 0)
 		return true;
 	for (int i = 0; i < towerCount; ++i) { 
-		if ((towers + i)->getPosition() == position)
+		if ((towers + i)->get_position() == position)
 			return false;
 	}
 	return true;
@@ -255,7 +259,7 @@ Direction Board::getDirection(sf::Vector2f position)
 		if(position.y >= midpoint)
 			return LEFT;
 	}
-	cout << "Path could not be determined.\n";
+	//cout << "Path could not be determined.\n";
 
 	return DOWN;
 }
