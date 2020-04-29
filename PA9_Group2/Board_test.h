@@ -19,7 +19,8 @@ public:
     void testGetDirection();
     void testPrint(sf::RenderWindow& window, Board& test);
     void testIsAtEnd();
-    void assert(string testName, bool testCase, string errorMessage); 
+    void assert(std::string testName, bool testCase, std::string errorMessage); 
+
 
 private:
 

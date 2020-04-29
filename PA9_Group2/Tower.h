@@ -5,8 +5,21 @@
 
 
 #include "Projectile.h"
+#include "Utility.h"
 
 #include <SFML/Graphics.hpp>
+
+#include <string>
+
+#define SQUARE_SIZE 25 //Size of a square on the board
+#define NUM_TOWERS 3
+
+enum TowerType
+{
+    TURRET,
+    SNIPER,
+    NONE
+};
 
 
 class Tower
@@ -14,33 +27,70 @@ class Tower
 protected:
     sf::Vector2f position;
 
-    double range; //Pixels
+    std::string name;
+    TowerType type;
+    int price;
 
+    double range; //Pixels
     int attSpeed; //Shots per minute
-    int coolDownTime; //In seconds
+    double coolDownTime; //In seconds
     int damage;
+    int projSpeed; //Projectile speed
 
     bool activeStatus = true;
     sf::Clock clock;
-    sf::Time lastFireTime = clock.getElapsedTime();
+    sf::Time lastFireTime;
+
 
     void update_status(void)
     {
-        if ((clock.getElapsedTime() - lastFireTime).asSeconds() < coolDownTime)
+        if (Utility::time_since(clock, lastFireTime).asSeconds() < coolDownTime)
             activeStatus = false;
         else
             activeStatus = true;
     }
 
+    void set_cool_down(void)
+        { coolDownTime = 60 / (double)attSpeed; }
+
 public:
-
-    Tower();
-
+    //Constructor with position argument
     Tower(sf::Vector2f initPosition)
     {
         position = initPosition;
+        activeStatus = true;
 
-        coolDownTime = 60 / attSpeed;
+        name = "";
+        type = NONE;
+        price = 0;
+        range = 0;
+        attSpeed = 0;
+        damage = 0;
+        projSpeed = 0;
+        coolDownTime = 0;
+        lastFireTime = sf::Time();
+    }
+
+    //Default Construcctor
+    Tower()
+    {
+        position = { 0, 0 };
+        name = "None";
+        type = NONE;
+        price = 0;
+        range = 0;
+        attSpeed = 0;
+        coolDownTime = 0;
+        damage = 0;
+        projSpeed = 0;
+        lastFireTime = sf::Time();
+        activeStatus = false;
+    }
+
+    bool is_active(void)
+    {
+        update_status();
+        return activeStatus;
     }
 
     double get_range(void)
@@ -52,19 +102,25 @@ public:
     void fire(void)
         { lastFireTime = clock.getElapsedTime(); }
 
-    sf::Vector2f getPosition()
+    sf::Vector2f get_position(void)
         { return position; }
 
-    int getDamage(void)
-        { return damage; } 
+    int get_damage(void)
+        { return damage; }
 
     void setPosition(sf::Vector2f pos)
         { position = pos; }
 
-    bool is_active(void)
-    {
-        update_status();
-        return activeStatus;
-    }
+    std::string get_name(void)
+        { return name; }
+
+    TowerType get_type(void)
+        { return type; }
+
+    int get_price(void)
+        { return price; }
+
+    int get_proj_speed(void)
+        { return projSpeed; }
 };
 

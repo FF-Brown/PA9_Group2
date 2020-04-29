@@ -1,6 +1,8 @@
 
 #include "Board.h"
 
+using namespace std;
+
 sf::RectangleShape* createGrid(double width, double height, double cellSize) {
 
     //Number of squares across and down
@@ -158,29 +160,42 @@ void Board::colorCell(int cellNum)
 {
 	grid[cellNum].setFillColor(sf::Color::Blue); 
 }
-int Board::addTower(sf::Vector2f position)
+bool Board::addTower(sf::Vector2f position, TowerType nTowerType)
 {
-	int cell = getSquareCoord(position.x, position.y);
+    if (position.x > GRID_WIDTH)
+        return false;
+
+    if (nTowerType == NONE)
+        return false;
+
+    int cell = getSquareCoord(position.x, position.y);
 	if (cell == -1)
-		return -1;
+		return false;
+
 	position = spriteGrid[cell].getPosition();
-	int result = 1;
+	bool result = true;
 	//Check that not in path
 	if (inPath(cell)) {
 		cout << "Cell is in enemy path.\n";
-		result = 0;
+		result = false;
 	}
 	else {
 		//Check that no tower there
 		if (!isOpen(position)) {
 			cout << "Cell is occupied.\n";
-			result = -1;
+			result = false;
 		}
 		else {
 			//Add tower 
-			Tower newTower(position);
-			towers[towerCount] = newTower;
-			spriteGrid[cell].setTexture(tower);
+            switch (nTowerType)
+            {
+            case TURRET: towers[towerCount] = Turret(position);
+                         spriteGrid[cell].setTexture(tower); //Change this to turret texture
+                         break;
+            case SNIPER: towers[towerCount] = Sniper(position);
+                         spriteGrid[cell].setTexture(tower); //Change this to sniper texture
+                         break;
+            }
 			++towerCount;
 		}
 	}
@@ -191,7 +206,7 @@ bool Board::isOpen(sf::Vector2f position)
 	if (towerCount == 0)
 		return true;
 	for (int i = 0; i < towerCount; ++i) { 
-		if ((towers + i)->getPosition() == position)
+		if ((towers + i)->get_position() == position)
 			return false;
 	}
 	return true;
@@ -199,9 +214,9 @@ bool Board::isOpen(sf::Vector2f position)
 sf::Vector2f Board::getStartingPosition(void)
 {
 	//Lazy way: just report default starting point
-	return sf::Vector2f(387, 0);
+	return sf::Vector2f(387, -10);
 	//Better way: report first square on path
-	//Won't work as a static function
+	//Won't work as a static function (it already works?)
 }
 Direction Board::getDirection(sf::Vector2f position)
 {
@@ -217,7 +232,7 @@ Direction Board::getDirection(sf::Vector2f position)
 			index = i;
 	}
 	if (index == -1) {
-		cout << "Coordinates not in path.\n";
+		cout << "(" << position.x << "," << position.y << ") " <<  "Coordinates not in path.\n";
 		return DOWN;
 	}
 	else if (index == 0)
@@ -258,13 +273,15 @@ Direction Board::getDirection(sf::Vector2f position)
 	}
 	//Left
 	if(path[index] - 1 == path[index + 1]) {
+
 		int midpoint = (spriteGrid[path[index]].getPosition().y + spriteGrid[path[index] + 20].getPosition().y) / 2;
 		if (position.y >= midpoint)
 			return LEFT;
 		else
 			return prevDir;
 	}
-	cout << "Path could not be determined.\n";
+	//cout << "Path could not be determined.\n";
+
 	return DOWN;
 }
 void Board::drawTextures()
@@ -274,6 +291,7 @@ void Board::drawTextures()
 	}
 	markPath();
 }
+
 bool Board::isAtEnd(sf::Vector2f position)
 {
 	int cell = getSquareCoord(position.x, position.y);
