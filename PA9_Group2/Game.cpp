@@ -33,6 +33,7 @@ void Game::run(void)
             }
 
         move_projectiles();
+        move_enemies();
 
         if (roundStarted)
         {

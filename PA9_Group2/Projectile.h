@@ -17,11 +17,19 @@ private:
     int damage;
     bool active;
 
+    sf::Vector2f center_to_origin(sf::Vector2f centerPos)
+    {
+        sf::Vector2f originPos;
+        originPos.x = centerPos.x - shape.getRadius();
+        originPos.y = centerPos.y - shape.getRadius();
+        return originPos;
+    }
+
 public:
     Projectile(sf::Vector2f startPoint, sf::Vector2f endPoint, int initDamage, int range, int setSpeed)
     {
         startPos = startPoint;
-        shape.setPosition(startPoint);
+        shape.setPosition(center_to_origin(startPoint));
         shape.setRadius(4);
         shape.setFillColor(sf::Color::Black);
 
