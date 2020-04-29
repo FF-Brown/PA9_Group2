@@ -58,8 +58,8 @@ public:
     int getDamage(void)
         { return damage; } 
 
-    sf::Vector2f get_position(void)
-        { return position; }
+    void setPosition(sf::Vector2f pos)
+        { position = pos; }
 
     bool is_active(void)
     {
