@@ -17,11 +17,12 @@
 #include <SFML/Graphics.hpp>
 
 //Included Std Libraries
+#include <string>
 #include <list>
 #include <iterator>
 
 
-#define PREP_TIME 5.0 //Seconds before first enemy in round spawns
+#define PREP_TIME 4.0 //Seconds before first enemy in round spawns
 
 
 class Game
@@ -33,8 +34,8 @@ public:
     //Run game
     void run(void);
 
-    //Displays highest round passed, total score, and number of enemies killed
-    bool display_results(void);
+    //Displays if the player won, highest round passed, total score, and number of enemies killed
+    void display_results(void);
 
 private:
     sf::RenderWindow& gameWindow; //Reference to window

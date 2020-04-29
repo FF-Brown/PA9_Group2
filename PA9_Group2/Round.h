@@ -6,9 +6,7 @@
 #include <queue>
 
 
-#define NUM_ROUNDS 5
-
-#define SPAWN_COOLDOWN 1 //Seconds between enemy spawns
+#define NUM_ROUNDS 11
 
 
 class Round
@@ -16,6 +14,7 @@ class Round
 private:
     int num;
     int reward;
+    double spawnCoolDown; //Seconds between enemy spawning
     std::queue<Enemy> enemyQueue;
 
 public:
@@ -55,4 +54,7 @@ public:
     //Returns the XP reward for the round
     int get_reward(void)
         { return reward; }
+
+    double get_spawn_cool_down(void)
+        { return spawnCoolDown; }
 };

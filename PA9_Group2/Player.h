@@ -3,8 +3,8 @@
 
 #pragma once
 
-#define INIT_HEALTH 50
-#define INIT_XP     100
+#define INIT_HEALTH 20
+#define INIT_XP     150
 
 
 class Player
@@ -14,6 +14,7 @@ private:
     int XP     = INIT_XP;
     int score         = 0;
     int enemiesKilled = 0;
+    bool won = false;
 
 public:
     //Returns: true if the player is alive | false otherwise
@@ -43,7 +44,7 @@ public:
 
     //Returns the player's XP
     int get_XP(void)
-        { return XP;  }
+        { return XP; }
 
     //Subtracts an amount from the playere's XP
     void remove_XP(int amount)
@@ -56,4 +57,17 @@ public:
     //Increments the number of enemies killed
     void inc_enemies_killed(void)
         { enemiesKilled++; }
+
+    void set_won(void)
+        { won = true; }
+
+    bool check_won(void)
+        { return won; }
+
+    //Returns the player's score
+    int get_score(void)
+        { return score; }
+
+    int get_enemies_killed(void)
+        { return enemiesKilled; }
 };

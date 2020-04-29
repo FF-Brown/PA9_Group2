@@ -242,7 +242,9 @@ void Menu::play_game(sf::RenderWindow& window)
     Game game(window); //Create the game
 
     game.run();
-    while (game.display_results()); //Display until user exits
+
+    if (window.isOpen())
+        game.display_results();
 }
 
 bool button::is_over(sf::RenderWindow& window)

@@ -11,6 +11,7 @@
 
 #include <string>
 
+#define SQUARE_SIZE 25 //Size of a square on the board
 #define NUM_TOWERS 3
 
 enum TowerType
@@ -34,6 +35,7 @@ protected:
     int attSpeed; //Shots per minute
     double coolDownTime; //In seconds
     int damage;
+    int projSpeed; //Projectile speed
 
     bool activeStatus = true;
     sf::Clock clock;
@@ -63,8 +65,10 @@ public:
         price = 0;
         range = 0;
         attSpeed = 0;
-        coolDownTime = 0;
         damage = 0;
+        projSpeed = 0;
+        coolDownTime = 0;
+        lastFireTime = sf::Time();
     }
 
     //Default Construcctor
@@ -77,7 +81,8 @@ public:
         range = 0;
         attSpeed = 0;
         coolDownTime = 0;
-        damage - 0;
+        damage = 0;
+        projSpeed = 0;
         lastFireTime = sf::Time();
         activeStatus = false;
     }
@@ -111,5 +116,8 @@ public:
 
     int get_price(void)
         { return price; }
+
+    int get_proj_speed(void)
+        { return projSpeed; }
 };
 

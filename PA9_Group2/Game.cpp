@@ -7,7 +7,7 @@ using namespace std;
 
 Game::Game(sf::RenderWindow& window) : gameWindow(window)
 {
-    currentRound = 1;
+    currentRound = 0;
     roundStarted = false;
     clock.restart();
     lastRoundEndTime = clock.getElapsedTime();
@@ -21,15 +21,16 @@ Game::Game(sf::RenderWindow& window) : gameWindow(window)
 
 void Game::run(void)
 {
-    while (player.is_alive())
+    while (player.is_alive() && gameWindow.isOpen())
     {
         user_input_handler();
 
         if (Utility::time_since(clock, lastRoundEndTime).asSeconds() > PREP_TIME)
-        {
-            currentRound++;
-            roundStarted = true;
-        }
+            if (!roundStarted)
+            {
+                currentRound++;
+                roundStarted = true;
+            }
 
         move_projectiles();
 
@@ -46,6 +47,12 @@ void Game::run(void)
             if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
             {
                 player.add_XP(rounds[currentRound - 1].get_reward());
+
+                if (currentRound == NUM_ROUNDS) //If the highest round was beat
+                {
+                    player.set_won();
+                    break;
+                }
                 roundStarted = false;
                 lastRoundEndTime = clock.getElapsedTime();
             }
@@ -92,7 +99,7 @@ void Game::add_tower(sf::Event& event)
 
 void Game::spawn_enemy(void)
 {
-    if (Utility::time_since(clock, lastSpawnTime).asSeconds() > SPAWN_COOLDOWN)
+    if (Utility::time_since(clock, lastSpawnTime).asSeconds() > rounds[currentRound - 1].get_spawn_cool_down())
     {
         lastSpawnTime = clock.getElapsedTime();
         Enemy nEnemy = rounds[currentRound - 1].get_next_enemy(); //Get the next enemy in the current round's queue
@@ -153,7 +160,7 @@ void Game::spawn_projectiles(void)
             if (found) //Enemy found in range
             {
                 towers[i].fire();
-                projectiles.push_back(Projectile(towerPos, closestEnemy, towers[i].get_damage())); //Spawn projectile
+                projectiles.push_back(Projectile(towerPos, closestEnemy, towers[i].get_damage(), towers[i].get_range(), towers[i].get_proj_speed())); //Spawn projectile
             }
         }
 }
@@ -175,9 +182,14 @@ void Game::despawn_projectiles(void)
                 projectiles.erase(projectileIt);
                 return;
             }
+            if (!projectileIt->is_active()) //If projectile has reached the end of its range
+            {
+                projectiles.erase(projectileIt);
+                return;
+            }
             sf::Vector2f projPos = projectileIt->get_position();
             if (!(0 <= projPos.x && projPos.x <= GRID_WIDTH
-               && 0 <= projPos.y && projPos.y <= GRID_HEIGHT)) //Erase projectiles that left the board
+               && 0 <= projPos.y && projPos.y <= GRID_HEIGHT)) //If the projectile has left the board
             {
                 projectiles.erase(projectileIt);
                 return;
@@ -190,7 +202,7 @@ void Game::render(void)
     gameWindow.clear();
 
     board.draw(gameWindow);
-    gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
+    gui.draw(gameWindow, player.get_health(), player.get_XP(), (currentRound == 0) ? 1 : currentRound); //If round 1 hasn't started yet: still display round 1 in GUI
 
     //Draw all enemies
     for (auto it = enemies.begin(); it != enemies.end(); it++)
@@ -203,27 +215,47 @@ void Game::render(void)
     gameWindow.display();
 }
 
-bool Game::display_results(void)
+void Game::display_results(void)
 {
-    //Display stats
+    string stats[3];
+    stats[0] = player.check_won() ? "You won!" : "You lost in round " + to_string(currentRound);
+    stats[1] = "Total score is: " + to_string(player.get_score());
+    stats[2] = "Total enemies killed: " + to_string(player.get_enemies_killed());
 
-    //Menu button
-    
+    //Set up button
 
-    sf::Event event;
-    while (gameWindow.pollEvent(event))
+    bool exit = false;
+    while (!exit && gameWindow.isOpen())
     {
-        if (event.type == sf::Event::Closed)
+        for (int i = 0; i < 3; i++)
+            //gameWindow.draw(stats[i]);
+
+        //Display menu button
+
+
+        //Render
+        gameWindow.clear();
+
+        gameWindow.display();
+
+        sf::Event event;
+        while (gameWindow.pollEvent(event))
         {
-            gameWindow.close();
-            return false;
-        }
-        if ((event.type == sf::Event::MouseButtonPressed) && (event.mouseButton.button = sf::Mouse::Left))
-        {
-            sf::Vector2i mousePos = { event.mouseButton.x, event.mouseButton.y };
-            if (20 < mousePos.x && mousePos.x < 40 && 20 < mousePos.y && mousePos.y < 10);
-                return false;
+            switch (event.type)
+            {
+            case sf::Event::Closed:
+                gameWindow.close();
+                break;
+
+            case sf::Event::MouseButtonPressed:
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+                    sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
+                    if (20 < mousePos.x && mousePos.x < 40 && 20 < mousePos.y && mousePos.y < 10) //Click was on Menu button: shape.getGlobalBounds.contains(mousePos)
+                        exit = true;
+                }
+                break;
+            }
         }
     }
-    return true;
 }

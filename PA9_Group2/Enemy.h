@@ -9,7 +9,10 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
-#define SPEED_SCALE 0.1
+#include <cstdint>
+
+#define SPEED_SCALE 0.05
+#define MIN_OPACITY 120
 
 
 class Enemy
@@ -21,9 +24,17 @@ protected:
     int reward;
     int speed;
 
+    double healthScale;
+
+    void set_health_scale(void)
+        { healthScale = (health == 0) ? 0 : ((255 - MIN_OPACITY) / health); }
 
     void update_color(void)
-        { shape.setFillColor(shape.getFillColor()); } //Keep color the same
+    {
+        sf::Color color = shape.getFillColor();
+        color.a = (health * healthScale) + MIN_OPACITY; //Opacity decreases with health
+        shape.setFillColor(color);
+    }
 
 public:
     bool isEnemy; //true if the object is an Enemy, false if an Empty

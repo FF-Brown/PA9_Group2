@@ -8,8 +8,6 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
-#define SQUARE_SIZE 25
-
 
 class Turret : public Tower
 {
@@ -18,12 +16,15 @@ public:
     {
         name = "Turret";
         type  = TURRET;
-        price = 50;
+        price = 75;
 
-        range = SQUARE_SIZE * 5;
-        attSpeed = 45;
+        range     = SQUARE_SIZE * 5;
+        coolDownTime = 0;
+        attSpeed  = 45;
+        damage    = 20;
+        projSpeed = 10;
+
         set_cool_down();
-        damage = 20;
     }
 };
 
@@ -34,12 +35,14 @@ public:
     {
         name = "Sniper";
         type  = SNIPER;
-        price = 120;
+        price = 150;
 
-        range = SQUARE_SIZE * 10;
-        attSpeed = 20; //0.5 shots/second
+        range     = SQUARE_SIZE * 9;
+        attSpeed  = 20; //0.5 shots/second
+        damage    = 35;
+        projSpeed = 13;
+
         set_cool_down();
-        damage = 40;
     }
 };
 
