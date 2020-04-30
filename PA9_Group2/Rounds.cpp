@@ -103,23 +103,23 @@ Round::Round(int roundNum)
 
     //Define Round 8
     case 8:
-        reward = 120;
+        reward = 130;
         spawnCoolDown = 0.5;
-        for (int i = 0; i < 12; i++)
-            enemyQueue.push(BigBoi()); //12 BigBois
+        for (int i = 0; i < 10; i++)
+            enemyQueue.push(BigBoi()); //10 BigBois
         for (int i = 0; i < 2; i++)
             enemyQueue.push(SpeedyBoi()); //5 SpeedyBois
         for (int i = 0; i < 2; i++)
             enemyQueue.push(Empty()); //2 gaps
-        for (int i = 0; i < 12; i++)
-            enemyQueue.push(BigBoi()); //12 BigBois
+        for (int i = 0; i < 10; i++)
+            enemyQueue.push(BigBoi()); //10 BigBois
         for (int i = 0; i < 20; i++)
             enemyQueue.push(Basic()); //20 Basics
         break;
 
     //Define Round 9
     case 9:
-        reward = 125;
+        reward = 135;
         spawnCoolDown = 0.5;
         for (int i = 0; i < 12; i++) //12 SpeedyBois
             enemyQueue.push(SpeedyBoi());
@@ -136,7 +136,7 @@ Round::Round(int roundNum)
 
         //Define Round 10
     case 10:
-        reward = 130;
+        reward = 140;
         spawnCoolDown = 0.3;
         for (int i = 0; i < 5; i++) //Alternating Basic and gap, repeating 5 times
         {
@@ -154,7 +154,7 @@ Round::Round(int roundNum)
 
         //Define Round 11
     case 11:
-        reward = 135;
+        reward = 145;
         spawnCoolDown = 0.3;
         for (int i = 0; i < 10; i++) //Alternating BigBoi and gap, repeating 10 times
         {
@@ -167,6 +167,18 @@ Round::Round(int roundNum)
             enemyQueue.push(Basic());
             enemyQueue.push(SpeedyBoi());
         }
+        break;
+
+        //Define Round 12
+    case 12:
+        reward = 160;
+        spawnCoolDown = 0.2;
+        for (int i = 0; i < 20; i++) //20 BigBois
+            enemyQueue.push(BigBoi());
+        for (int i = 0; i < 25; i++) //25 Basics
+            enemyQueue.push(Basic());
+        for (int i = 0; i < 30; i++) //30 SpeedyBois
+            enemyQueue.push(SpeedyBoi());
         break;
 
     default:

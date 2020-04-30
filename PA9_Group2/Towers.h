@@ -35,7 +35,7 @@ public:
     {
         name = "Sniper";
         type  = SNIPER;
-        price = 150;
+        price = 140;
 
         range     = SQUARE_SIZE * 9;
         attSpeed  = 20; //0.5 shots/second
@@ -53,11 +53,11 @@ public:
     {
         name = "Rapid";
         type  = RAPID;
-        price = 175;
+        price = 160;
 
         range     = SQUARE_SIZE * 5;
-        attSpeed  = 180; //3 shots/second
-        damage    = 1;
+        attSpeed  = 240; //4 shots/second
+        damage    = 2;
         projSpeed = 12;
 
         set_cool_down();

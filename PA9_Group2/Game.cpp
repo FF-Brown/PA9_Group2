@@ -35,13 +35,13 @@ void Game::run(void)
         move_projectiles();
         move_enemies();
 
+        despawn_enemies();
+        despawn_projectiles();
+
         if (roundStarted)
         {
             spawn_enemy();
             spawn_projectiles();
-
-            despawn_enemies();
-            despawn_projectiles();
 
             if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
             {
