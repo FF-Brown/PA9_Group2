@@ -10,7 +10,9 @@ class Basic : public Enemy
 public:
     Basic(void)
     {
+
         setRadius(8);
+        //shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
         setFillColor(sf::Color::Blue);
 
         health = initHealth = 50;
@@ -25,6 +27,7 @@ public:
     BigBoi(void)
     {
         setRadius(12);
+        //shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
         setFillColor(sf::Color::Red);
 
         health = initHealth = 250;
@@ -39,6 +42,7 @@ public:
     SpeedyBoi(void)
     {
         setRadius(6);
+        //shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
         setFillColor(sf::Color::Yellow);
 
         health = initHealth = 45;
