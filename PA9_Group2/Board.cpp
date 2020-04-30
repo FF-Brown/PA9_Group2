@@ -56,14 +56,16 @@ Board::Board()
 	readPath("Resources/path.csv");
 
 	//Load textures
-	if (!tower.loadFromFile("Resources/towerResized.png"))
+	if (!tower.loadFromFile("Resources/towerWithGrass.png"))
 		cout << "Error: Tower texture file not loaded.\n";
 	if (!dirt.loadFromFile("Resources/dirtSquareResized.png"))
 		cout << "Error: Dirt texture file not loaded.\n";
 	if (!grass.loadFromFile("Resources/grassSquareResized.png"))
 		cout << "Error: Grass texture file not loaded.\n";
-	if (!castle.loadFromFile("Resources/castleResized.png"))
+	if (!castle.loadFromFile("Resources/fortressWithGrass.png"))
 		cout << "Error: Castle texture file not loaded.\n";
+	if (!sniperTower.loadFromFile("Resources/sniperTowerWithGrass.png"))
+		cout << "Error: Sniper tower texture file not loaded.\n";
 	createSpriteGrid(gridWidth, gridHeight, cellSize);
 	drawTextures();
 }
@@ -77,7 +79,7 @@ void Board::draw(sf::RenderWindow& window)
 }
 void Board::markPath()
 {
-	//Draws path on board in red. Marks player castle yellow 
+	//Draws path on board. Marks player castle 
 	//Called by drawTextures() 
 	for (int i = 0; i < pathLength; ++i) {
 		//grid[path[i]].setFillColor(sf::Color::Red);
@@ -224,7 +226,7 @@ Direction Board::getDirection(sf::Vector2f position)
 	int index = -1;
 	Direction prevDir = DOWN;
 	if (cell == -1) {
-		cout << "Coordinates not on board.\n";
+		//cout << "Coordinates not on board.\n";
 		return DOWN;
 	}
 	for (int i = 0; i < pathLength; ++i) {
@@ -296,7 +298,7 @@ bool Board::isAtEnd(sf::Vector2f position)
 {
 	int cell = getSquareCoord(position.x, position.y);
 	if (cell == -1) {
-		cout << "Enemy location error.\n";
+		//cout << "Enemy location error.\n";
 		return false;
 	}
 	if (path[pathLength - 1] == cell)

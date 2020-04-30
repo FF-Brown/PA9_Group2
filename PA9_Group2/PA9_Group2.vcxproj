@@ -186,6 +186,9 @@
     <Image Include="castleResized.png" />
     <Image Include="dirtSquareResized.png" />
     <Image Include="grassSquareResized.png" />
+    <Image Include="Resources\fortressWithGrass.png" />
+    <Image Include="Resources\sniperTowerWithGrass.png" />
+    <Image Include="Resources\towerWithGrass.png" />
     <Image Include="towerResized.png" />
   </ItemGroup>
   <ItemGroup>

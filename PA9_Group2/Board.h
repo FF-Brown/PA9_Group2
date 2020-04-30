@@ -60,6 +60,7 @@ protected:
 	sf::Texture grass;
 	sf::Texture castle;
 	sf::Texture tower;
+	sf::Texture sniperTower;
 	double gridWidth, gridHeight, cellSize;
 	int squareCount, columns, rows;
 	int* path;
