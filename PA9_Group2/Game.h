@@ -67,6 +67,7 @@ private:
     {
         towerRef[TURRET] = Turret();
         towerRef[SNIPER] = Sniper();
+        towerRef[RAPID]  = Rapid();
     }
 
 

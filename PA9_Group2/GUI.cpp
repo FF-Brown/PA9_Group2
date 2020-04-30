@@ -112,9 +112,11 @@ GUI::GUI()
     choice = NONE;
     towers[0] = Turret();
     towers[1] = Sniper();
-	buttons[0].set_text(towers[0].get_name() + " - cost: " + to_string(towers[0].get_price()), 15);
-	buttons[1].set_text(towers[1].get_name() + " - cost: " + to_string(towers[1].get_price()), 15);
-	for (int i = 250, h = 0; h < 2; h++)
+    towers[2] = Rapid();
+    for (int i = 0; i < 3; i++)
+	    buttons[i].set_text(towers[i].get_name() + " - cost: " + to_string(towers[i].get_price()), 15);
+
+	for (int i = 250, h = 0; h < 3; h++)
 	{
 		buttons[h].set_size(60, 150);
 		buttons[h].set_position(600, i);
@@ -124,7 +126,7 @@ GUI::GUI()
 		i += 100;
 	}
 
-	for (int i = 550, h = 0; h < 2; h++)
+	for (int i = 550, h = 0; h < 3; h++)
 	{
 		display[h].set_size(30, 150);
 		display[h].set_position(i, 580);	
@@ -132,9 +134,6 @@ GUI::GUI()
 	}
 	display[2].set_size(30, 150);
 	display[2].set_position(600, 150);
-
-	return;
-
 }
 
 void GUI::draw(sf::RenderWindow& window, int hp, int ex, int round)
@@ -174,7 +173,7 @@ TowerType GUI::get_tower_choice(int mouseX, int mouseY, Player& player)
             std::cout << "Tower clicked" << std::endl;
         }
     }
-    if (buttonClicked && player.get_XP() >= price)
+    if (buttonClicked && player.get_XP() >= price) //Check if the player has enough XP for the tower
         return choice;
     else
         return NONE;
@@ -182,7 +181,7 @@ TowerType GUI::get_tower_choice(int mouseX, int mouseY, Player& player)
 
 void GUI::highlight_button(TowerType towerType)
 {
-    for (int i = 0; i < NUM_TOWERS; i++)
+    for (int i = 0; i < NUM_TOWERS - 1; i++)
     {
         if ((towers[i].get_type() == towerType) && (towerType != NONE))
             buttons[i].highlight(true);

@@ -32,6 +32,7 @@ public:
         setRadius(4);
         setFillColor(sf::Color::Black);
 
+        //Calculate velocity
         sf::Vector2f aimDir = endPoint - startPoint;
         sf::Vector2f aimDirNorm = aimDir / sqrt(pow(aimDir.x, 2) + pow(aimDir.y, 2));
         velocity = { aimDirNorm.x * setSpeed, aimDirNorm.y * setSpeed };

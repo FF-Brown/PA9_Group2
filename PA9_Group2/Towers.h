@@ -20,7 +20,7 @@ public:
 
         range     = SQUARE_SIZE * 5;
         coolDownTime = 0;
-        attSpeed  = 45;
+        attSpeed  = 45; //0.75 shots/second
         damage    = 20;
         projSpeed = 10;
 
@@ -46,12 +46,20 @@ public:
     }
 };
 
-class BombTower : public Tower
+class Rapid : public Tower
 {
+public:
+    Rapid(sf::Vector2f initPosition = { 0, 0 }) : Tower(initPosition)
+    {
+        name = "Rapid";
+        type  = RAPID;
+        price = 200;
 
-};
+        range     = SQUARE_SIZE * 5;
+        attSpeed  = 180; //3 shots/second
+        damage    = 1;
+        projSpeed = 12;
 
-class PoisonTower : public Tower
-{
-
+        set_cool_down();
+    }
 };

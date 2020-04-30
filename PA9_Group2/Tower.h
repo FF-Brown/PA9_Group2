@@ -12,12 +12,13 @@
 #include <string>
 
 #define SQUARE_SIZE 25 //Size of a square on the board
-#define NUM_TOWERS 3
+#define NUM_TOWERS 4
 
 enum TowerType
 {
     TURRET,
     SNIPER,
+    RAPID,
     NONE
 };
 
