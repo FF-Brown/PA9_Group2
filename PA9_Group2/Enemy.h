@@ -48,7 +48,6 @@ public:
     {
         float dx, dy;
 
-        //Trying with center position instead of vanilla position
         switch (board.getDirection(get_center_position()))
         {
         case UP:    dx = 0;
