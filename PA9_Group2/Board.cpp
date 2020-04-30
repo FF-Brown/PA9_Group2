@@ -64,6 +64,8 @@ Board::Board()
 		cout << "Error: Grass texture file not loaded.\n";
 	if (!castle.loadFromFile("Resources/fortressWithGrass.png"))
 		cout << "Error: Castle texture file not loaded.\n";
+	if (!sniperTower.loadFromFile("Resources/sniperTowerWithGrass.png"))
+		cout << "Error: Sniper tower texture file not loaded.\n";
 	createSpriteGrid(gridWidth, gridHeight, cellSize);
 	drawTextures();
 }
