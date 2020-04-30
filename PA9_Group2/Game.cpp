@@ -90,7 +90,6 @@ void Game::add_tower(sf::Event& event)
     {
         player.remove_XP(towerRef[selectedTower].get_price()); //Take tower price out of player's XP balance
         selectedTower = NONE; //Reset selected tower
-        gui.highlight_button(selectedTower); //Update highlighted button
     }
 }
 
