@@ -105,8 +105,6 @@ bool Button::is_over(int mouseX, int mouseY)
 		Shape.setOutlineColor(sf::Color::Green);
 		return false;
 	}
-
-
 }
 
 GUI::GUI()
@@ -114,8 +112,8 @@ GUI::GUI()
     choice = NONE;
     towers[0] = Turret();
     towers[1] = Sniper();
-	buttons[0].set_text(towers[0].get_name() + " - cost: 75", 15);
-	buttons[1].set_text(towers[1].get_name() + " - cost: 150", 15);
+	buttons[0].set_text(towers[0].get_name() + " - cost: " + to_string(towers[0].get_price()), 15);
+	buttons[1].set_text(towers[1].get_name() + " - cost: " + to_string(towers[1].get_price()), 15);
 	for (int i = 250, h = 0; h < 2; h++)
 	{
 		buttons[h].set_size(60, 150);

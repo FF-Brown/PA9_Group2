@@ -1,6 +1,7 @@
 
-#include "Round.h"
+//Defines the constructor for each individual round
 
+#include "Round.h"
 
 Round::Round(int roundNum)
 {

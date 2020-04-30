@@ -48,7 +48,7 @@ Menu::Menu(float width, float height)
 		menu_buttons[i].buttonW = menu_buttons[i].Shape.getGlobalBounds().width;
 		menu_buttons[i].buttonH = menu_buttons[i].Shape.getGlobalBounds().height;
 	}
-
+    selectedItemIndex = NOTHING;
 }
 
 void Menu::display_main_menu(sf::RenderWindow& mainMenuWindow)

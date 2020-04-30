@@ -9,8 +9,6 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
-#include <cstdint>
-
 #define SPEED_SCALE 0.05
 #define MAX_OPACITY 255
 #define MIN_OPACITY 100
@@ -25,8 +23,6 @@ protected:
     int health;
     int reward;
     int speed;
-
-    double healthScale;
 
     void update_color(void)
     {
@@ -48,7 +44,6 @@ public:
         health = 0;
         reward = 0;
         speed  = 0;
-        healthScale = 0;
     }
 
     void move(Board& board)
