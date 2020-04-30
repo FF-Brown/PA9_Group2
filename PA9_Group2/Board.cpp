@@ -216,7 +216,7 @@ bool Board::isOpen(sf::Vector2f position)
 sf::Vector2f Board::getStartingPosition(void)
 {
 	//Lazy way: just report default starting point
-	return sf::Vector2f(378, -12);
+	return sf::Vector2f(387, -12);
 	//Better way: report first square on path
 }
 Direction Board::getDirection(sf::Vector2f position)
