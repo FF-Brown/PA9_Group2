@@ -1,7 +1,6 @@
 
 //Main File
 
-
 #pragma once
 
 //Included Project Files
@@ -9,9 +8,6 @@
 
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
-
-//For testing
-#include "Board_test.h"
 
 
 //Main Window Dimensions

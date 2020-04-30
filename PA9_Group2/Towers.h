@@ -8,7 +8,7 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
-
+//Basic tower
 class Turret : public Tower
 {
 public:
@@ -28,6 +28,7 @@ public:
     }
 };
 
+//Long range tower with large damage and slow speed
 class Sniper : public Tower
 {
 public:
@@ -46,6 +47,7 @@ public:
     }
 };
 
+//Rapid firing tower with low damage per shot
 class Rapid : public Tower
 {
 public:

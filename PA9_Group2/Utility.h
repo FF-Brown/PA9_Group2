@@ -1,15 +1,18 @@
 
-//Utility Functions
+//Utility Functions Definitions
 
 #pragma once
 
+//Included SFML library
 #include <SFML/Graphics.hpp>
 
+//Included std libraries
 #include <cmath>
+
 
 namespace Utility
 {
-    //Returns the time elapsed since lastTime
+    //Returns the time elapsed in clock since lastTime
     sf::Time time_since(const sf::Clock& clock, const sf::Time lastTime);
 
     //Returns the distance between two vectors

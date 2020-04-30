@@ -9,6 +9,7 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
+
 #define SPEED_SCALE 0.05
 #define MAX_OPACITY 255
 #define MIN_OPACITY 100
@@ -22,7 +23,8 @@ protected:
     int reward;
     int speed;
 
-    void update_color(void)
+    //Updates the opacity of the enemy shape based on health percentage
+    void update_opacity(void)
     {
         sf::Color color = getFillColor();
         color.a = (MAX_OPACITY - MIN_OPACITY) * ((double)health / (double)initHealth) + MIN_OPACITY; //Opacity decreases with health
@@ -35,7 +37,7 @@ public:
     //Constructor
     Enemy(void)
     {
-        isEnemy = true;
+        isEnemy = false;
         setPosition(Board::getStartingPosition()); //Gets the position of the start of the path
 
         initHealth = 0;
@@ -44,6 +46,7 @@ public:
         speed  = 0;
     }
 
+    //Moves the enemy in the direction specified by the board based on its current position
     void move(Board& board)
     {
         float dx, dy;
@@ -71,6 +74,7 @@ public:
         sf::CircleShape::move(dx, dy);
     }
 
+    //Returns true if the enemy is still alive | false otherwise
     bool is_alive(void)
     {
         if (health > 0)
@@ -79,12 +83,14 @@ public:
             return false;
     }
 
+    //Updates the opacity of the enemy shape and draws it to the window
     void draw(sf::RenderWindow& window)
     {
-        update_color();
+        update_opacity();
         window.draw(*this);
     }
 
+    //Returns the coordinate of the center of the enemy shape
     sf::Vector2f get_center_position(void)
     {
         sf::Vector2f center;
@@ -93,6 +99,7 @@ public:
         return center;
     }
 
+    //Removes health from the enemy based on the amount argument
     void damage(int amount)
         { health -= amount; }
 

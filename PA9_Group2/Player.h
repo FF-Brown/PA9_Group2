@@ -58,9 +58,11 @@ public:
     void inc_enemies_killed(void)
         { enemiesKilled++; }
 
+    //Sets the player to have won the game
     void set_won(void)
         { won = true; }
 
+    //Returns true if the player won the game | false otherwise
     bool check_won(void)
         { return won; }
 
@@ -68,6 +70,7 @@ public:
     int get_score(void)
         { return score; }
 
+    //Returns the number of enemies killed
     int get_enemies_killed(void)
         { return enemiesKilled; }
 };

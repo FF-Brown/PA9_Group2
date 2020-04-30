@@ -1,11 +1,15 @@
 
+//Round class defintition file
+
 #pragma once
 
+//Included project files
 #include "Enemies.h"
 
+//Included std libraries
 #include <queue>
 
-
+//Number of rounds in the game
 #define NUM_ROUNDS 12
 
 
@@ -56,6 +60,7 @@ public:
     int get_reward(void)
         { return reward; }
 
+    //Returns spawn cool down time
     double get_spawn_cool_down(void)
         { return spawnCoolDown; }
 };

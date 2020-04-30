@@ -3,17 +3,20 @@
 
 #pragma once
 
-
+//Included project files
 #include "Projectile.h"
 #include "Utility.h"
 
+//Included SFML library
 #include <SFML/Graphics.hpp>
 
+//Included std libraries
 #include <string>
 
 #define SQUARE_SIZE 25 //Size of a square on the board
 #define NUM_TOWERS 4
 
+//Enum for each type of tower
 enum TowerType
 {
     TURRET,
@@ -32,7 +35,7 @@ protected:
     TowerType type;
     int price;
 
-    double range; //Pixels
+    double range; //In pixels
     int attSpeed; //Shots per minute
     double coolDownTime; //In seconds
     int damage;
@@ -42,7 +45,7 @@ protected:
     sf::Clock clock;
     sf::Time lastFireTime;
 
-
+    //Updates the active status of the tower based on cool down time
     void update_status(void)
     {
         if (Utility::time_since(clock, lastFireTime).asSeconds() < coolDownTime)
@@ -51,6 +54,7 @@ protected:
             activeStatus = true;
     }
 
+    //Sets the cool down time based on attack speed
     void set_cool_down(void)
         { coolDownTime = 60 / (double)attSpeed; }
 
@@ -88,12 +92,14 @@ public:
         activeStatus = false;
     }
 
+    //Updates the active status and returns it
     bool is_active(void)
     {
         update_status();
         return activeStatus;
     }
 
+    //Returns the coordinate of the center of the tower
     sf::Vector2f get_center_position(void)
     {
         sf::Vector2f center;
@@ -102,17 +108,19 @@ public:
         return center;
     }
 
+    //Returns the coordinate of the tower origin
     sf::Vector2f get_position(void)
         { return position; }
+
+    //Resets the clock for tracking cool down time
+    void fire(void)
+        { lastFireTime = clock.getElapsedTime(); }
 
     double get_range(void)
         { return range; }
 
     int get_attack_speed(void)
         { return attSpeed; }
-
-    void fire(void)
-        { lastFireTime = clock.getElapsedTime(); }
 
     int get_damage(void)
         { return damage; }

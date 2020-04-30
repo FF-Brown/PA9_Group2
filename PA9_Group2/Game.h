@@ -17,7 +17,6 @@
 #include <SFML/Graphics.hpp>
 
 //Included Std Libraries
-#include <string>
 #include <list>
 #include <iterator>
 

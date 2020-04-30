@@ -1,6 +1,9 @@
 
+//Projectile class definition file
+
 #pragma once
 
+//Included project files
 #include "Utility.h"
 
 //Included SFML Libraries
@@ -16,6 +19,7 @@ private:
     int damage;
     bool active;
 
+    //Converts a coordinate of the center of the projectile shape to its origin
     sf::Vector2f center_to_origin(sf::Vector2f centerPos)
     {
         sf::Vector2f originPos;
@@ -25,6 +29,7 @@ private:
     }
 
 public:
+    //Constructor
     Projectile(sf::Vector2f startPoint, sf::Vector2f endPoint, int initDamage, int range, int setSpeed)
     {
         startPos = startPoint;
@@ -42,6 +47,7 @@ public:
         damage = initDamage;
     }
 
+    //Moves the enemy shape and checks if has reached the end of its range
     void move(void)
     {
         sf::CircleShape::move(velocity);

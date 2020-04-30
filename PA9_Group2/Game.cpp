@@ -21,6 +21,7 @@ Game::Game(sf::RenderWindow& window) : gameWindow(window)
 
 void Game::run(void)
 {
+    //Game Loop
     while (player.is_alive() && !player.check_won() && gameWindow.isOpen())
     {
         user_input_handler();
@@ -45,7 +46,7 @@ void Game::run(void)
 
             if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0) //If current round was passed
             {
-                player.add_XP(rounds[currentRound - 1].get_reward());
+                player.add_XP(rounds[currentRound - 1].get_reward()); //Add XP reward for the current round
 
                 if (currentRound == NUM_ROUNDS) //If the highest round was beaten
                     player.set_won();
@@ -61,7 +62,7 @@ void Game::run(void)
 void Game::user_input_handler(void)
 {
     sf::Event event;
-    while (gameWindow.pollEvent(event))
+    while (gameWindow.pollEvent(event)) //Handle all queued events
         switch (event.type)
         {
         case sf::Event::Closed:
@@ -70,7 +71,7 @@ void Game::user_input_handler(void)
         case sf::Event::MouseButtonPressed:
             if (event.mouseButton.button == sf::Mouse::Left)
             {
-                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y, player);
+                TowerType newSelection = gui.get_tower_choice(event.mouseButton.x, event.mouseButton.y, player); //Get selected tower from the GUI
                 if (newSelection == selectedTower)
                     selectedTower = NONE; //Unselect current tower
                 else if (selectedTower != NONE && newSelection == NONE) //If a tower is currently selected and a new one isn't chosen
@@ -136,10 +137,11 @@ void Game::spawn_projectiles(void)
     for (int i = 0; i < board.getTowerCount(); i++) //Iterate through all towers
         if (towers[i].is_active())
         {
-            bool found = false;
-            sf::Vector2f closestEnemy;
-            sf::Vector2f towerPos  = towers[i].get_center_position();
+            sf::Vector2f towerPos = towers[i].get_center_position();
+
+            sf::Vector2f closestEnemy; //Closest enemy to the tower
             double closestDistance = towers[i].get_range();
+            bool found = false;
 
             for (auto it = enemies.begin(); it != enemies.end(); it++) //Iterate through all enemies to find the closest to the current tower
             {
@@ -198,7 +200,7 @@ void Game::render(void)
     gameWindow.clear();
 
     board.draw(gameWindow);
-    gui.draw(gameWindow, player.get_health(), player.get_XP(), (currentRound == 0) ? 1 : currentRound); //If round 1 hasn't started yet: still display round 1 in GUI
+    gui.draw(gameWindow, player.get_health(), player.get_XP(), currentRound);
 
     //Draw all enemies
     for (auto it = enemies.begin(); it != enemies.end(); it++)

@@ -5,11 +5,13 @@
 
 #include "Enemy.h"
 
+//Medium speed, size, health
 class Basic : public Enemy
 {
 public:
     Basic(void)
     {
+        isEnemy = true;
         setRadius(8);
         CircleShape::move(sf::Vector2f(-8, 0));
         setFillColor(sf::Color::Blue); 
@@ -20,11 +22,13 @@ public:
     }
 };
 
+//Slow, large, and high health
 class BigBoi : public Enemy
 {
 public:
     BigBoi(void)
     {
+        isEnemy = true;
         setRadius(12);
         CircleShape::move(sf::Vector2f(-12, 0));
         setFillColor(sf::Color::Red);
@@ -35,11 +39,13 @@ public:
     }
 };
 
+//Fast, small, medium health
 class SpeedyBoi : public Enemy
 {
 public:
     SpeedyBoi(void)
     {
+        isEnemy = true;
         setRadius(6);
         CircleShape::move(sf::Vector2f(-6, 0));
         setFillColor(sf::Color::Yellow);
@@ -50,7 +56,7 @@ public:
     }
 };
 
-
+//Non-enemy used to create gaps in the enemy queue in rounds
 class Empty : public Enemy
 {
 public:
