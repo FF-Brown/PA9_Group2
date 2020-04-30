@@ -104,7 +104,7 @@ Round::Round(int roundNum)
     //Define Round 8
     case 8:
         reward = 130;
-        spawnCoolDown = 0.5;
+        spawnCoolDown = 0.6;
         for (int i = 0; i < 10; i++)
             enemyQueue.push(BigBoi()); //10 BigBois
         for (int i = 0; i < 2; i++)
@@ -172,7 +172,7 @@ Round::Round(int roundNum)
         //Define Round 12
     case 12:
         reward = 160;
-        spawnCoolDown = 0.2;
+        spawnCoolDown = 0.3;
         for (int i = 0; i < 20; i++) //20 BigBois
             enemyQueue.push(BigBoi());
         for (int i = 0; i < 25; i++) //25 Basics

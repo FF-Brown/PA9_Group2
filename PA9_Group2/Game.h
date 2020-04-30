@@ -71,7 +71,8 @@ private:
     }
 
 
-    //Game Functions
+    //Game Loop Functions
+
 
     //Handles user input during the game: closing the window, selected a tower from the GUI, and placing a tower on the board
     void user_input_handler(void);

@@ -43,9 +43,9 @@ void Game::run(void)
             spawn_enemy();
             spawn_projectiles();
 
-            if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
+            if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0) //If user passed the current round
             {
-                player.add_XP(rounds[currentRound - 1].get_reward());
+                player.add_XP(rounds[currentRound - 1].get_reward()); //Add XP reward for the round
 
                 if (currentRound == NUM_ROUNDS) //If the highest round was beaten
                 {
