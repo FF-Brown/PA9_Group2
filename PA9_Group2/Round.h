@@ -26,6 +26,7 @@ public:
     {
         num = 0;
         reward = 0;
+        spawnCoolDown = 0;
     }
 
     //Returns the next enemy in the queue and pops it

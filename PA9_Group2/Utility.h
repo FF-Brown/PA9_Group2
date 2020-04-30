@@ -14,4 +14,7 @@ namespace Utility
 
     //Returns the distance between two vectors
     double calculate_distance(sf::Vector2f a, sf::Vector2f b);
+
+    //Delays the program for n seconds
+    void delay(double n);
 }

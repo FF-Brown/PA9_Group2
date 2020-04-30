@@ -17,10 +17,10 @@ Display::Display()
 
 
 	text.setFont(font);
-	text.setCharacterSize(18);
+	text.setCharacterSize(20);
 	text.setFillColor(sf::Color::White);
 	text.setOutlineColor(sf::Color::Black);
-	text.setOutlineThickness(3);			//and the text
+	text.setOutlineThickness(2.5);			//and the text
 	data = 0;
     highlighted = false;
 }
@@ -105,8 +105,6 @@ bool Button::is_over(int mouseX, int mouseY)
 		Shape.setOutlineColor(sf::Color::Green);
 		return false;
 	}
-
-
 }
 
 GUI::GUI()
@@ -114,20 +112,22 @@ GUI::GUI()
     choice = NONE;
     towers[0] = Turret();
     towers[1] = Sniper();
-	for (int i = 150, h = 0; h < 3; h++)
+	buttons[0].set_text(towers[0].get_name() + " - cost: " + to_string(towers[0].get_price()), 15);
+	buttons[1].set_text(towers[1].get_name() + " - cost: " + to_string(towers[1].get_price()), 15);
+	for (int i = 250, h = 0; h < 2; h++)
 	{
-		buttons[h].set_size(60, 60);
-		buttons[h].set_position(780, i);
-		buttons[h].set_text(towers[h].get_name(), 10);
+		buttons[h].set_size(60, 150);
+		buttons[h].set_position(600, i);
+		
         buttons[h].tower = towers[h];
-
+		
 		i += 100;
-
 	}
+
 	for (int i = 550, h = 0; h < 2; h++)
 	{
 		display[h].set_size(30, 150);
-		display[h].set_position(i, 580);	//the int h on set size MUST be the same as y in position
+		display[h].set_position(i, 580);	
 		i += 150;
 	}
 	display[2].set_size(30, 150);

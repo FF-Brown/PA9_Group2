@@ -1,6 +1,7 @@
 
-#include "Round.h"
+//Defines the constructor for each individual round
 
+#include "Round.h"
 
 Round::Round(int roundNum)
 {
@@ -19,11 +20,11 @@ Round::Round(int roundNum)
     case 2:
         reward = 65;
         spawnCoolDown = 0.8;
-        for (int i = 0; i < 3; i++) //3 basic enemies
+        for (int i = 0; i < 5; i++) //5 basic enemies
             enemyQueue.push(Basic());
         for (int i = 0; i < 2; i++) //2 gaps
             enemyQueue.push(Empty());
-        for (int i = 0; i < 3; i++) //3 Basic enemies
+        for (int i = 0; i < 5; i++) //5 Basic enemies
             enemyQueue.push(Basic());
         break;
 

@@ -39,15 +39,16 @@ int main(void)
         menu.display_main_menu(window);
         option = menu.get_Selected_Index();
 
-        if (option== INSTRUCTIONS) //Display instructions screen
-            while (!menu.display_instructions(window))
-            {
-                window.display();
-                menu.set_Selected_Index(NOTHING);
-            }
+        if (option == INSTRUCTIONS) //Display instructions screen
+        {
+            menu.display_instructions(window);
+            menu.set_Selected_Index(NOTHING);
+        }
         else if (option == PLAY_GAME) //Begin game
+        {
             menu.play_game(window);
-
+            menu.set_Selected_Index(NOTHING);
+        }
     } while (option != EXIT && window.isOpen()); //Continue until exit is selected or window is closed
 
     window.close();

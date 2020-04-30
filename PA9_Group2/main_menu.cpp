@@ -48,7 +48,7 @@ Menu::Menu(float width, float height)
 		menu_buttons[i].buttonW = menu_buttons[i].Shape.getGlobalBounds().width;
 		menu_buttons[i].buttonH = menu_buttons[i].Shape.getGlobalBounds().height;
 	}
-
+    selectedItemIndex = NOTHING;
 }
 
 void Menu::display_main_menu(sf::RenderWindow& mainMenuWindow)
@@ -162,10 +162,9 @@ void Menu::set_Selected_Index(MainMenuOption option)
 	selectedItemIndex = option;
 }
 
-bool Menu::display_instructions(sf::RenderWindow& window)
+void Menu::display_instructions(sf::RenderWindow& window)
 {
-    window.clear();
-    sf::Text text[6];
+    sf::Text text[5];
 
     text[0].setString("How to play the Epic Tower Defense Game:");
     text[1].setString("Prevent Monsters from reaching your castle by placing");
@@ -182,7 +181,6 @@ bool Menu::display_instructions(sf::RenderWindow& window)
         text[i].setCharacterSize(25);
         text[i].setPosition(sf::Vector2f(50, h));
         h = h + 50;
-        window.draw(text[i]);
     }
 
 	sf::RectangleShape button;
@@ -190,6 +188,8 @@ bool Menu::display_instructions(sf::RenderWindow& window)
 	button.setSize(sf::Vector2f(100, 100));
 	button.setPosition(70, 450);
 	button.setFillColor(sf::Color::Green);
+    button.setOutlineColor(sf::Color::Green);
+    button.setOutlineThickness(2);
 
     back.setString("BACK");
 	back.setCharacterSize(25);
@@ -198,63 +198,42 @@ bool Menu::display_instructions(sf::RenderWindow& window)
 	back.setOutlineColor(sf::Color::Black);
 	back.setPosition(sf::Vector2f(70, 450));
 	back.setOutlineThickness(2);
- 
 
-	int buttonX = 70;
-	int buttonY = 450;
-	int buttonW = 50;
-	int buttonH = 80;
-
-
-	sf::Event event;
-	bool exit = false;
-    while (window.pollEvent(event))
+    bool exit = false;
+    while (!exit && window.isOpen())
     {
-		int mouseX = sf::Mouse::getPosition(window).x;
-		int mouseY = sf::Mouse::getPosition(window).y;
+        window.clear();
 
-		int buttonPosW = buttonX + buttonW;
-		int buttonPosH = buttonY + buttonH;
+        for (int i = 0; i < 5; i++)
+            window.draw(text[i]);
 
-        switch (event.type)
-        {
-        case sf::Event::Closed:
-            window.close();
-            break;
-        case sf::Event::MouseMoved:
-            
-		if (mouseX < buttonPosW && mouseX > buttonX&& mouseY < buttonPosH && mouseY > buttonY)
-		{
-			button.setOutlineThickness(2);
-			button.setOutlineColor(sf::Color::Red);
-		}
-		else {
-			button.setOutlineThickness(2);
-			button.setOutlineColor(sf::Color::Green);
-		}
-            break;
-        case sf::Event::MouseButtonPressed:
-             
-			if (mouseX < buttonPosW && mouseX > buttonX&& mouseY < buttonPosH && mouseY > buttonY)
-			{
-				button.setOutlineThickness(2);
-				button.setOutlineColor(sf::Color::Red);
-				exit = true;
-			}
-			else {
-				button.setOutlineThickness(2);
-				button.setOutlineColor(sf::Color::Green);
-			}
-            break;
-        }
+        window.draw(button);
+        window.draw(back);
+
+        window.display();
+
+
+        sf::Event event;
+        while (window.pollEvent(event))
+            switch (event.type)
+            {
+            case sf::Event::Closed:
+                window.close();
+                exit = true;
+                break;
+            case sf::Event::MouseButtonPressed:
+                if (event.mouseButton.button == sf::Mouse::Left)
+                    if (button.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                        exit = true;
+                break;
+            case sf::Event::MouseMoved:
+                if (button.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                    button.setOutlineColor(sf::Color::Red);
+                else
+                    button.setOutlineColor(sf::Color::Green);
+                break;
+            }
     }
-
-    window.draw(text[5]);
-	window.draw(button);
-	window.draw(back);
-
-
-    return exit;
 }
 
 void Menu::play_game(sf::RenderWindow& window)
@@ -264,7 +243,10 @@ void Menu::play_game(sf::RenderWindow& window)
     game.run();
 
     if (window.isOpen())
+    {
+        Utility::delay(2);
         game.display_results();
+    }
 }
 
 bool button::is_over(sf::RenderWindow& window)

@@ -3,6 +3,8 @@
 #include "Towers.h"
 #include "Player.h"
 
+#include <string>
+
 class Display
 {
 protected:

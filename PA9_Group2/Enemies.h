@@ -10,15 +10,14 @@ class Basic : public Enemy
 public:
     Basic(void)
     {
-        shape.setRadius(8);
-        shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
-        shape.setFillColor(sf::Color::Blue);
 
-        health = 50;
+        setRadius(8);
+        //shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
+        setFillColor(sf::Color::Blue);
+
+        health = initHealth = 50;
         reward = 8;
-        speed  = 14;
-
-        set_health_scale();
+        speed = 14;
     }
 };
 
@@ -27,15 +26,13 @@ class BigBoi : public Enemy
 public:
     BigBoi(void)
     {
-        shape.setRadius(12);
-        shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
-        shape.setFillColor(sf::Color::Red);
+        setRadius(12);
+        //shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
+        setFillColor(sf::Color::Red);
 
-        health = 250;
+        health = initHealth = 250;
         reward = 25;
-        speed  = 10;
-
-        set_health_scale();
+        speed = 10;
     }
 };
 
@@ -44,15 +41,13 @@ class SpeedyBoi : public Enemy
 public:
     SpeedyBoi(void)
     {
-        shape.setRadius(6);
-        shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
-        shape.setFillColor(sf::Color::Yellow);
+        setRadius(6);
+        //shape.move(sf::Vector2f((-1) * shape.getRadius(), 0));
+        setFillColor(sf::Color::Yellow);
 
-        health = 45;
+        health = initHealth = 45;
         reward = 15;
         speed = 27;
-
-        set_health_scale();
     }
 };
 

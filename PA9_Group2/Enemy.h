@@ -9,31 +9,24 @@
 //Included SFML Libraries
 #include <SFML/Graphics.hpp>
 
-#include <cstdint>
-
 #define SPEED_SCALE 0.05
-#define MIN_OPACITY 120
+#define MAX_OPACITY 255
+#define MIN_OPACITY 100
 
 
-class Enemy
+class Enemy : public sf::CircleShape
 {
 protected:
-    sf::CircleShape shape;
-
+    int initHealth;
     int health;
     int reward;
     int speed;
 
-    double healthScale;
-
-    void set_health_scale(void)
-        { healthScale = (health == 0) ? 0 : ((255 - MIN_OPACITY) / health); }
-
     void update_color(void)
     {
-        sf::Color color = shape.getFillColor();
-        color.a = (health * healthScale) + MIN_OPACITY; //Opacity decreases with health
-        shape.setFillColor(color);
+        sf::Color color = getFillColor();
+        color.a = (MAX_OPACITY - MIN_OPACITY) * ((double)health / (double)initHealth) + MIN_OPACITY; //Opacity decreases with health
+        setFillColor(color);
     }
 
 public:
@@ -43,8 +36,9 @@ public:
     Enemy(void)
     {
         isEnemy = true;
-        shape.setPosition(Board::getStartingPosition()); //Gets the position of the start of the path
+        setPosition(Board::getStartingPosition()); //Gets the position of the start of the path
 
+        initHealth = 0;
         health = 0;
         reward = 0;
         speed  = 0;
@@ -75,7 +69,7 @@ public:
         dx *= SPEED_SCALE;
         dy *= SPEED_SCALE;
 
-        shape.move(dx, dy);
+        sf::CircleShape::move(dx, dy);
     }
 
     bool is_alive(void)
@@ -89,22 +83,16 @@ public:
     void draw(sf::RenderWindow& window)
     {
         update_color();
-        window.draw(shape);
+        window.draw(*this);
     }
 
     sf::Vector2f get_center_position(void)
     {
         sf::Vector2f center;
-        center.x = shape.getPosition().x + shape.getRadius();
-        center.y = shape.getPosition().y + shape.getRadius();
+        center.x = getPosition().x + getRadius();
+        center.y = getPosition().y + getRadius();
         return center;
     }
-
-    sf::Vector2f get_position(void)
-        { return shape.getPosition(); }
-
-    sf::FloatRect get_bounds(void)
-        { return shape.getGlobalBounds(); }
 
     void damage(int amount)
         { health -= amount; }
