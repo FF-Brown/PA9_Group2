@@ -21,7 +21,7 @@ Game::Game(sf::RenderWindow& window) : gameWindow(window)
 
 void Game::run(void)
 {
-    while (player.is_alive() && gameWindow.isOpen())
+    while (player.is_alive() && !player.check_won() && gameWindow.isOpen())
     {
         user_input_handler();
 
@@ -48,10 +48,8 @@ void Game::run(void)
                 player.add_XP(rounds[currentRound - 1].get_reward());
 
                 if (currentRound == NUM_ROUNDS) //If the highest round was beaten
-                {
                     player.set_won();
-                    break;
-                }
+                
                 roundStarted = false;
                 lastRoundEndTime = clock.getElapsedTime();
             }
