@@ -47,7 +47,7 @@ void Game::run(void)
             {
                 player.add_XP(rounds[currentRound - 1].get_reward());
 
-                if (currentRound == NUM_ROUNDS) //If the highest round was beat
+                if (currentRound == NUM_ROUNDS) //If the highest round was beaten
                 {
                     player.set_won();
                     break;
@@ -269,7 +269,6 @@ void Game::display_results(void)
         //Event handling: highlight button, leave screen, close window
         sf::Event event;
         while (gameWindow.pollEvent(event))
-        {
             switch (event.type)
             {
             case sf::Event::Closed:
@@ -277,10 +276,8 @@ void Game::display_results(void)
                 break;
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left)
-                {
                     if (button.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                         exit = true;
-                }
                 break;
             case sf::Event::MouseMoved:
                 if (button.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
@@ -289,6 +286,5 @@ void Game::display_results(void)
                     button.setOutlineColor(sf::Color::Green);
                 break;
             }
-        }
     }
 }

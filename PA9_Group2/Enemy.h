@@ -12,7 +12,8 @@
 #include <cstdint>
 
 #define SPEED_SCALE 0.05
-#define MIN_OPACITY 120
+#define MAX_OPACITY 255
+#define MIN_OPACITY 100
 
 
 class Enemy
@@ -20,19 +21,17 @@ class Enemy
 protected:
     sf::CircleShape shape;
 
+    int initHealth;
     int health;
     int reward;
     int speed;
 
     double healthScale;
 
-    void set_health_scale(void)
-        { healthScale = (health == 0) ? 0 : ((255 - MIN_OPACITY) / health); }
-
     void update_color(void)
     {
         sf::Color color = shape.getFillColor();
-        color.a = (health * healthScale) + MIN_OPACITY; //Opacity decreases with health
+        color.a = (MAX_OPACITY - MIN_OPACITY) * ((double)health / (double)initHealth) + MIN_OPACITY; //Opacity decreases with health
         shape.setFillColor(color);
     }
 
@@ -45,6 +44,7 @@ public:
         isEnemy = true;
         shape.setPosition(Board::getStartingPosition()); //Gets the position of the start of the path
 
+        initHealth = 0;
         health = 0;
         reward = 0;
         speed  = 0;
