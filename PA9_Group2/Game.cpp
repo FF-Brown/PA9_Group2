@@ -21,7 +21,7 @@ Game::Game(sf::RenderWindow& window) : gameWindow(window)
 
 void Game::run(void)
 {
-    while (player.is_alive() && gameWindow.isOpen())
+    while (player.is_alive() && !player.check_won() && gameWindow.isOpen())
     {
         user_input_handler();
 
@@ -43,15 +43,13 @@ void Game::run(void)
             spawn_enemy();
             spawn_projectiles();
 
-            if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0) //If user passed the current round
+            if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0) //If current round was passed
             {
-                player.add_XP(rounds[currentRound - 1].get_reward()); //Add XP reward for the round
+                player.add_XP(rounds[currentRound - 1].get_reward());
 
                 if (currentRound == NUM_ROUNDS) //If the highest round was beaten
-                {
                     player.set_won();
-                    break;
-                }
+                
                 roundStarted = false;
                 lastRoundEndTime = clock.getElapsedTime();
             }
@@ -92,7 +90,6 @@ void Game::add_tower(sf::Event& event)
     {
         player.remove_XP(towerRef[selectedTower].get_price()); //Take tower price out of player's XP balance
         selectedTower = NONE; //Reset selected tower
-        gui.highlight_button(selectedTower); //Update highlighted button
     }
 }
 
