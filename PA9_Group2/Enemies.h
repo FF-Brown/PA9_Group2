@@ -10,7 +10,6 @@ class Basic : public Enemy
 public:
     Basic(void)
     {
-
         setRadius(8);
         CircleShape::move(sf::Vector2f(-8, 0));
         setFillColor(sf::Color::Blue); 
