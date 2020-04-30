@@ -30,7 +30,7 @@ protected:
     }
 
 public:
-    bool isEnemy; //true if the object is an Enemy, false if an Empty
+    bool isEnemy; //true if the object is an Enemy, false if an Empty object
 
     //Constructor
     Enemy(void)

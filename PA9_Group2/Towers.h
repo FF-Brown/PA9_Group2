@@ -53,7 +53,7 @@ public:
     {
         name = "Rapid";
         type  = RAPID;
-        price = 200;
+        price = 175;
 
         range     = SQUARE_SIZE * 5;
         attSpeed  = 180; //3 shots/second
