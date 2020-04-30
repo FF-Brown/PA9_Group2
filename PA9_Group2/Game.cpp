@@ -43,7 +43,7 @@ void Game::run(void)
             spawn_enemy();
             spawn_projectiles();
 
-            if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0)
+            if (player.is_alive() && rounds[currentRound - 1].is_spawning_complete() && enemies.size() == 0) //If current round was passed
             {
                 player.add_XP(rounds[currentRound - 1].get_reward());
 
