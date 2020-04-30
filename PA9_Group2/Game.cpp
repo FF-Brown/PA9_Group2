@@ -112,7 +112,7 @@ void Game::move_enemies(void)
     for (auto it = enemies.begin(); it != enemies.end(); it++) //Iterate through all enemies
     {
         it->move(board);
-        if (board.isAtEnd(it->get_position())) //If the enemy reached the end of the path
+        if (board.isAtEnd(it->getPosition())) //If the enemy reached the end of the path
         {
             player.damage(1);
             enemies.erase(it);
@@ -175,7 +175,7 @@ void Game::despawn_projectiles(void)
     for (auto projectileIt = projectiles.begin(); projectileIt != projectiles.end(); projectileIt++) //Iterate through all projectiles
         for (auto enemyIt = enemies.begin(); enemyIt != enemies.end(); enemyIt++) //Iterate through all enemies
         {
-            if (projectileIt->get_bounds().intersects(enemyIt->get_bounds())) //If projectile hit an enemy
+            if (projectileIt->getGlobalBounds().intersects(enemyIt->getGlobalBounds())) //If projectile hit an enemy
             {
                 enemyIt->damage(projectileIt->get_damage()); //Damage enemy
                 projectiles.erase(projectileIt);
@@ -186,7 +186,7 @@ void Game::despawn_projectiles(void)
                 projectiles.erase(projectileIt);
                 return;
             }
-            sf::Vector2f projPos = projectileIt->get_position();
+            sf::Vector2f projPos = projectileIt->getPosition();
             if (!(0 <= projPos.x && projPos.x <= GRID_WIDTH
                && 0 <= projPos.y && projPos.y <= GRID_HEIGHT)) //If the projectile has left the board
             {
@@ -209,10 +209,11 @@ void Game::render(void)
 
     //Draw all projectiles
     for (auto it = projectiles.begin(); it != projectiles.end(); it++)
-        it->draw(gameWindow);
+        gameWindow.draw(*it);
 
     gameWindow.display();
 }
+
 
 void Game::display_results(void)
 {

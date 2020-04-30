@@ -10,8 +10,8 @@ class Basic : public Enemy
 public:
     Basic(void)
     {
-        shape.setRadius(8);
-        shape.setFillColor(sf::Color::Blue);
+        setRadius(8);
+        setFillColor(sf::Color::Blue);
 
         health = initHealth = 50;
         reward = 8;
@@ -24,8 +24,8 @@ class BigBoi : public Enemy
 public:
     BigBoi(void)
     {
-        shape.setRadius(12);
-        shape.setFillColor(sf::Color::Red);
+        setRadius(12);
+        setFillColor(sf::Color::Red);
 
         health = initHealth = 250;
         reward = 25;
@@ -38,8 +38,8 @@ class SpeedyBoi : public Enemy
 public:
     SpeedyBoi(void)
     {
-        shape.setRadius(6);
-        shape.setFillColor(sf::Color::Yellow);
+        setRadius(6);
+        setFillColor(sf::Color::Yellow);
 
         health = initHealth = 45;
         reward = 15;

@@ -7,10 +7,9 @@
 #include <SFML/Graphics.hpp>
 
 
-class Projectile
+class Projectile : public sf::CircleShape
 {
 private:
-    sf::CircleShape shape;
     sf::Vector2f velocity;
     sf::Vector2f startPos;
     int maxDistance;
@@ -20,8 +19,8 @@ private:
     sf::Vector2f center_to_origin(sf::Vector2f centerPos)
     {
         sf::Vector2f originPos;
-        originPos.x = centerPos.x - shape.getRadius();
-        originPos.y = centerPos.y - shape.getRadius();
+        originPos.x = centerPos.x - getRadius();
+        originPos.y = centerPos.y - getRadius();
         return originPos;
     }
 
@@ -29,9 +28,9 @@ public:
     Projectile(sf::Vector2f startPoint, sf::Vector2f endPoint, int initDamage, int range, int setSpeed)
     {
         startPos = startPoint;
-        shape.setPosition(center_to_origin(startPoint));
-        shape.setRadius(4);
-        shape.setFillColor(sf::Color::Black);
+        setPosition(center_to_origin(startPoint));
+        setRadius(4);
+        setFillColor(sf::Color::Black);
 
         sf::Vector2f aimDir = endPoint - startPoint;
         sf::Vector2f aimDirNorm = aimDir / sqrt(pow(aimDir.x, 2) + pow(aimDir.y, 2));
@@ -42,27 +41,15 @@ public:
         damage = initDamage;
     }
 
-    void draw(sf::RenderWindow& window)
-    {
-        if (active)
-            window.draw(shape);
-    }
-
     void move(void)
     {
-        shape.move(velocity);
-        if (Utility::calculate_distance(startPos, get_position()) > maxDistance)
+        sf::CircleShape::move(velocity);
+        if (Utility::calculate_distance(startPos, getPosition()) > maxDistance)
             active = false;
     }
 
     bool is_active(void)
         { return active; }
-
-    sf::FloatRect get_bounds(void)
-        { return shape.getGlobalBounds(); }
-
-    sf::Vector2f get_position(void)
-        { return shape.getPosition(); }
 
     int get_damage(void)
         { return damage; }
