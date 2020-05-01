@@ -103,6 +103,9 @@
     <Image Include="Resources\sniperTowerWithGrass.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\rapidTowerWithGrass.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\path.csv">

@@ -66,6 +66,9 @@ Board::Board()
 		cout << "Error: Castle texture file not loaded.\n";
 	if (!sniperTower.loadFromFile("Resources/sniperTowerWithGrass.png"))
 		cout << "Error: Sniper tower texture file not loaded.\n";
+	if (!rapidTower.loadFromFile("Resources/rapidTowerWithGrass.jpg"))
+		cout << "Error : Rapid Tower Texture file not loaded\n";
+
 	createSpriteGrid(gridWidth, gridHeight, cellSize);
 	drawTextures();
 }
@@ -195,7 +198,7 @@ bool Board::addTower(sf::Vector2f position, TowerType nTowerType)
                          spriteGrid[cell].setTexture(sniperTower); 
                          break;
             case RAPID:  towers[towerCount] = Rapid(position);
-                         spriteGrid[cell].setTexture(tower); //Change this to sniper texture
+                         spriteGrid[cell].setTexture(rapidTower); //Change this to sniper texture
                          break;
             }
 			++towerCount;
