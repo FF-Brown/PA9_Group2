@@ -14,6 +14,7 @@ Menu::Menu(float width, float height)
 		return;
 	}
 
+	//set up for eack menu item
 	text[0].setFont(font);
 	text[0].setFillColor(sf::Color::White);
 	text[0].setString("Play Game");
@@ -43,6 +44,7 @@ Menu::Menu(float width, float height)
 	menu_buttons[2].Shape.setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 3));
 	menu_buttons[2].Shape.setFillColor(sf::Color::Black);
 
+	//gets bounds of eack item for later use in mouse_place
 	for (int i = 0; i < MAX_NUMBER_OF_ITEMS; i++)
 	{
 		menu_buttons[i].buttonW = menu_buttons[i].Shape.getGlobalBounds().width;
@@ -116,12 +118,12 @@ void Menu::mousePlace(sf::RenderWindow& mainMenuWindow)
 				text[0].setFillColor(sf::Color::White);
 				text[1].setFillColor(sf::Color::White);
 			}
-		}
+		}//changes color of text based on which one mouse is near
 	}
 
 }
 
-void Menu::get_main_menu_option(sf::RenderWindow& window)
+void Menu::get_main_menu_option(sf::RenderWindow& window)//called when clicked return choice mouse is near
 {
 	int mouseX = sf::Mouse::getPosition(window).x;
 	int mouseY = sf::Mouse::getPosition(window).y;
@@ -164,7 +166,7 @@ void Menu::set_Selected_Index(MainMenuOption option)
 
 void Menu::display_instructions(sf::RenderWindow& window)
 {
-    sf::Text text[5];
+    sf::Text text[5];	//a paragraph of text
 
     text[0].setString("How to play the Epic Tower Defense Game:");
     text[1].setString("Prevent Monsters from reaching your castle by placing");
@@ -180,7 +182,7 @@ void Menu::display_instructions(sf::RenderWindow& window)
         text[i].setFillColor(sf::Color::White);
         text[i].setCharacterSize(25);
         text[i].setPosition(sf::Vector2f(50, h));
-        h = h + 50;
+        h = h + 50;	//increments y value
     }
 
 	sf::RectangleShape button;
@@ -191,7 +193,7 @@ void Menu::display_instructions(sf::RenderWindow& window)
     button.setOutlineColor(sf::Color::Green);
     button.setOutlineThickness(2);
 
-    back.setString("BACK");
+    back.setString("BACK");	//back button set up 
 	back.setCharacterSize(25);
 	back.setFont(font);
 	back.setFillColor(sf::Color::White);
@@ -200,7 +202,7 @@ void Menu::display_instructions(sf::RenderWindow& window)
 	back.setOutlineThickness(2);
 
     bool exit = false;
-    while (!exit && window.isOpen())
+    while (!exit && window.isOpen())	// when back is pressed it returns to menu, else displays instructions
     {
         window.clear();
 
@@ -249,30 +251,4 @@ void Menu::play_game(sf::RenderWindow& window)
     }
 }
 
-bool button::is_over(sf::RenderWindow& window)
-{
-    int mouseX = sf::Mouse::getPosition().x;
-    int mouseY = sf::Mouse::getPosition().y;
 
-    sf::Event event;
-
-    int buttonX = Shape.getPosition().x;
-    int buttonY = Shape.getPosition().y;
-
-    int buttonPosW = buttonX + buttonW;
-    int buttonPosH = buttonY + buttonH;		//finds the position in the window
-
-    if (mouseX < buttonPosW && mouseX > buttonX && mouseY < buttonPosH && mouseY > buttonY)
-    {
-        Shape.setOutlineThickness(2);
-        Shape.setOutlineColor(sf::Color::Blue);
-        return true;
-    }
-    else {
-        Shape.setOutlineThickness(2);
-        Shape.setOutlineColor(sf::Color::Green);
-        return false;
-    }
-
-
-}

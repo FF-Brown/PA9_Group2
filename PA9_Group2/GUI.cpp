@@ -29,12 +29,12 @@ void Display::set_size(int w, int h)
 {
 	buttonH = w;
 	buttonW = h;						//width and height save for display
-	Shape.setSize(sf::Vector2f(buttonW, buttonH));
+	Shape.setSize(sf::Vector2f(buttonW, buttonH));	
 }
 
 void Display::set_position(int x, int y)
 {
-	if (x != 0 && y != 0)
+	if (x != 0 && y != 0)	//position on the board found by place given - size of button
 	{
 		Shape.setPosition(sf::Vector2f(x - buttonH, y - buttonW));
 		text.setPosition(sf::Vector2f(x - buttonH, y - buttonW));
@@ -54,19 +54,19 @@ void Display::set_position(int x, int y)
 void Display::set_text(string t, int size)
 {
 	text.setCharacterSize(size);
-	text.setString(t);
+	text.setString(t);	//setters
 }
 
 void Display::draw_display(sf::RenderWindow& window)
 {
     if (highlighted)
-        Shape.setOutlineColor(sf::Color::Red);
+        Shape.setOutlineColor(sf::Color::Red);	//highlight button base on click status
     else
         Shape.setOutlineColor(sf::Color::Transparent);
 
 	window.draw(Shape);
 	window.draw(text);
-} //Exception thrown sometimes when Play Game is clicked from main menu (std::length_error)
+}
 
 void Display::set_data(int i)
 {
@@ -96,13 +96,9 @@ bool Button::is_over(int mouseX, int mouseY)
 
 	if (mouseX < buttonPosW && mouseX > buttonX&& mouseY < buttonPosH && mouseY > buttonY)
 	{
-		Shape.setOutlineThickness(2);
-		Shape.setOutlineColor(sf::Color::Blue);
 		return true;
 	}
 	else {
-		Shape.setOutlineThickness(2);
-		Shape.setOutlineColor(sf::Color::Green);
 		return false;
 	}
 }
@@ -116,7 +112,7 @@ GUI::GUI()
     for (int i = 0; i < 3; i++)
 	    buttons[i].set_text(towers[i].get_name() + " - cost: " + to_string(towers[i].get_price()), 15);
 
-	for (int i = 250, h = 0; h < 3; h++)
+	for (int i = 250, h = 0; h < 3; h++)	//set up for three tower buttons
 	{
 		buttons[h].set_size(60, 150);
 		buttons[h].set_position(600, i);
@@ -126,7 +122,7 @@ GUI::GUI()
 		i += 100;
 	}
 
-	for (int i = 550, h = 0; h < 3; h++)
+	for (int i = 550, h = 0; h < 3; h++)	//set up for the three displays(hp, exp, and round num)
 	{
 		display[h].set_size(30, 150);
 		display[h].set_position(i, 580);	
@@ -138,7 +134,7 @@ GUI::GUI()
 
 void GUI::draw(sf::RenderWindow& window, int hp, int ex, int round)
 {
-	string str = "Health: " + to_string(hp) + "/ " + to_string(INIT_HEALTH);
+	string str = "Health: " + to_string(hp) + "/ " + to_string(INIT_HEALTH);	//gets info from game and gives it to the displays
 	display[0].set_text(str, 15);
 
 	str = "Exp: " + to_string(ex);

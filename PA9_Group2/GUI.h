@@ -21,7 +21,7 @@ public:
 	void set_size(int w, int h);
 	void set_position(int x, int y);
 	void set_text(std::string, int size);
-	void draw_display(sf::RenderWindow& window);
+	void draw_display(sf::RenderWindow& window);	//draws diplays to the window
 	void set_data(int);
 	int get_data();
     void highlight(bool set);
@@ -43,7 +43,7 @@ class GUI : public Button
 	TowerType choice;
 public:
 	GUI();		//initates all the buttons
-	void draw(sf::RenderWindow& window, int hp, int xp, int round);
-	TowerType get_tower_choice(int mouseX, int mouseY, Player& player);
-    void highlight_button(TowerType towerType);
+	void draw(sf::RenderWindow& window, int hp, int xp, int round);	//draw GUI during rounds
+	TowerType get_tower_choice(int mouseX, int mouseY, Player& player);	//return tower clicked on by player
+    void highlight_button(TowerType towerType);	
 };
