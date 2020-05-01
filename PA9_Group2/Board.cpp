@@ -198,7 +198,7 @@ bool Board::addTower(sf::Vector2f position, TowerType nTowerType)
                          spriteGrid[cell].setTexture(sniperTower); 
                          break;
             case RAPID:  towers[towerCount] = Rapid(position);
-                         spriteGrid[cell].setTexture(rapidTower); //Change this to sniper texture
+                         spriteGrid[cell].setTexture(rapidTower);
                          break;
             }
 			++towerCount;

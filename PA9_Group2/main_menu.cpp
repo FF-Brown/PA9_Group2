@@ -212,7 +212,7 @@ void Menu::display_instructions(sf::RenderWindow& window)
 
         window.display();
 
-
+        //Event handling
         sf::Event event;
         while (window.pollEvent(event))
             switch (event.type)
@@ -236,6 +236,7 @@ void Menu::display_instructions(sf::RenderWindow& window)
     }
 }
 
+//Creates the game object and runs it
 void Menu::play_game(sf::RenderWindow& window)
 {
     Game game(window); //Create the game

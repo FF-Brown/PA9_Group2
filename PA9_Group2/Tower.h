@@ -30,7 +30,6 @@ class Tower
 {
 protected:
     sf::Vector2f position;
-
     std::string name;
     TowerType type;
     int price;

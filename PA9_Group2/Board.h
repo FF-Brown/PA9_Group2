@@ -67,7 +67,7 @@ protected:
 	int squareCount, columns, rows;
 	int* path;
 	int pathLength;
-	Tower towers[500];
+	Tower towers[400];
 	int towerCount;
 };
 

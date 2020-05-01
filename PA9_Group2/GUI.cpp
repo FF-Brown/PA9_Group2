@@ -179,6 +179,7 @@ TowerType GUI::get_tower_choice(int mouseX, int mouseY, Player& player)
         return NONE;
 }
 
+//Highlights the button for towerType and unhighlights the others
 void GUI::highlight_button(TowerType towerType)
 {
     for (int i = 0; i < NUM_TOWERS - 1; i++)
