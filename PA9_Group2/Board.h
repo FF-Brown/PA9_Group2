@@ -60,14 +60,14 @@ protected:
 	sf::Texture grass;
 	sf::Texture castle;
 	sf::Texture rapidTower;
-	sf::Texture tower;
+	sf::Texture turretTower;
 	sf::Texture sniperTower;
 
 	double gridWidth, gridHeight, cellSize;
 	int squareCount, columns, rows;
 	int* path;
 	int pathLength;
-	Tower towers[500];
+	Tower towers[400];
 	int towerCount;
 };
 

@@ -27,10 +27,7 @@ struct button {
 class Menu
 {
 private:
-    sf::RenderWindow MenuWindow; //Could use this instead of pass sf::RenderWindow as parameter in all functions | use initializer list
-
-
-	MainMenuOption selectedItemIndex;
+    MainMenuOption selectedItemIndex;
 	sf::Font font;
 	sf::Text text[MAX_NUMBER_OF_ITEMS];
 	button menu_buttons[3];
