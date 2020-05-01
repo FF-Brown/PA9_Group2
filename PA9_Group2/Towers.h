@@ -21,7 +21,7 @@ public:
         range     = SQUARE_SIZE * 5;
         coolDownTime = 0;
         attSpeed  = 45; //0.75 shots/second
-        damage    = 18;
+        damage    = 17;
         projSpeed = 10;
 
         set_cool_down();
@@ -40,7 +40,7 @@ public:
 
         range     = SQUARE_SIZE * 9;
         attSpeed  = 30; //0.5 shots/second
-        damage    = 35;
+        damage    = 36;
         projSpeed = 13;
 
         set_cool_down();
@@ -59,7 +59,7 @@ public:
 
         range     = SQUARE_SIZE * 5;
         attSpeed  = 240; //4 shots/second
-        damage    = 2;
+        damage    = 3;
         projSpeed = 12;
 
         set_cool_down();

@@ -60,7 +60,7 @@ protected:
 	sf::Texture grass;
 	sf::Texture castle;
 	sf::Texture rapidTower;
-	sf::Texture tower;
+	sf::Texture turretTower;
 	sf::Texture sniperTower;
 
 	double gridWidth, gridHeight, cellSize;

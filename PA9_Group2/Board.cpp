@@ -56,7 +56,7 @@ Board::Board()
 	readPath("Resources/path.csv");
 
 	//Load textures
-	if (!tower.loadFromFile("Resources/towerWithGrass.png"))
+	if (!turretTower.loadFromFile("Resources/towerWithGrass.png"))
 		cout << "Error: Tower texture file not loaded.\n";
 	if (!dirt.loadFromFile("Resources/dirtSquareResized.png"))
 		cout << "Error: Dirt texture file not loaded.\n";
@@ -192,7 +192,7 @@ bool Board::addTower(sf::Vector2f position, TowerType nTowerType)
             switch (nTowerType)
             {
             case TURRET: towers[towerCount] = Turret(position);
-                         spriteGrid[cell].setTexture(tower); 
+                         spriteGrid[cell].setTexture(turretTower);
                          break;
             case SNIPER: towers[towerCount] = Sniper(position);
                          spriteGrid[cell].setTexture(sniperTower); 
